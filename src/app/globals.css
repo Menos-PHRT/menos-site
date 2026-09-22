@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+:root {
+  --background: #FCFCFA;
+  --foreground: #1E293B;
+  --primary: #0F172A;
+  --accent: #2563EB;
+  --muted: #64748B;
+  --border: #E2E8F0;
+  --card-bg: #FFFFFF;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-card-bg: var(--card-bg);
+  --font-sans: var(--font-outfit), var(--font-geist-sans), sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
+}
+
+/* Base Body Styles */
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FCFCFA;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Graphic Patterns */
+.bg-dot-grid {
+  background-image: radial-gradient(rgba(148, 163, 184, 0.15) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+}
+
+.bg-dot-grid-dense {
+  background-image: radial-gradient(rgba(148, 163, 184, 0.2) 1px, transparent 1px);
+  background-size: 12px 12px;
+}
+
+/* Linear animations */
+@keyframes drawLine {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes drawLineVertical {
+  from { height: 0; }
+  to { height: 100%; }
+}
+
+.animate-draw-horizontal {
+  animation: drawLine 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-draw-vertical {
+  animation: drawLineVertical 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Marquee continuous scroll */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Focus styles for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
