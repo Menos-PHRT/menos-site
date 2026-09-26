@@ -98,7 +98,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 // ... dentro da função POST:
 await resend.emails.send({
   from: 'MENOS Leads <leads@menos.studio>',
-  to: 'contato@menos.studio',
+  to: 'menos.lab@gmail.com',
   subject: `Novo diagnóstico de: ${name} (${company})`,
   html: `<p><strong>Nome:</strong> ${name}</p><p><strong>Problema:</strong> ${problemDescription}</p>`
 });

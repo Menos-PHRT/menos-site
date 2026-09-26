@@ -17,7 +17,6 @@ export default function ProjectsPage() {
     { id: "eventos", name: "Eventos" },
     { id: "terceiro-setor", name: "Terceiro Setor" },
     { id: "pequenos-negocios", name: "Pequenos Negócios" },
-    { id: "projetos-autorais", name: "Projetos Autorais" },
     { id: "integracoes", name: "Integrações" }
   ];
 
@@ -27,8 +26,7 @@ export default function ProjectsPage() {
     "sistema-de-credenciamento": ["sistemas", "eventos"],
     "plataforma-de-certificacao": ["sistemas", "terceiro-setor"],
     "integracao-coentro-erp": ["automacoes", "integracoes", "pequenos-negocios"],
-    "reformulacao-paginas-institucionais": ["sites", "pequenos-negocios"],
-    "simples-foco-no-que-importa": ["projetos-autorais"]
+    "reformulacao-paginas-institucionais": ["sites", "terceiro-setor"]
   };
 
   const filteredProjects = projects.filter((project) => {
@@ -85,36 +83,65 @@ export default function ProjectsPage() {
               className="group flex flex-col gap-6"
             >
               {/* Graphic Mockup Area */}
-              <div className="bg-slate-50 border border-slate-100/60 rounded-3xl p-8 flex flex-col justify-between h-[250px] relative overflow-hidden bg-dot-grid group-hover:border-slate-200 transition duration-300">
-                <div className="flex justify-between items-start">
-                  <span className="text-[10px] font-mono text-slate-400 tracking-wider uppercase">
-                    CASE_0{i + 1}
-                  </span>
-                  <span className="text-[10px] font-semibold text-blue-600 uppercase px-2 py-0.5 bg-blue-50 border border-blue-100/30 rounded-full">
-                    {project.category}
-                  </span>
-                </div>
-
-                <div className="my-auto">
-                  <h3 className="font-bold text-xl text-slate-900 group-hover:text-blue-600 transition tracking-tight">
-                    {project.name}
-                  </h3>
-                  <span className="text-xs text-slate-400 font-medium">
-                    {project.client}
-                  </span>
-                </div>
-
-                <div className="flex flex-wrap gap-1.5 mt-2">
-                  {project.techStack.map((tech) => (
-                    <span
-                      key={tech}
-                      className="text-[9px] font-mono text-slate-500 bg-white border border-slate-100 px-2 py-0.5 rounded-full"
-                    >
-                      {tech}
+              {project.image ? (
+                <Link
+                  href={`/projetos/${project.slug}`}
+                  className="block relative rounded-2xl md:rounded-3xl overflow-hidden border border-slate-200/90 bg-slate-900 shadow-sm group-hover:shadow-xl transition-all duration-300"
+                >
+                  <div className="bg-slate-900 px-4 py-2.5 border-b border-slate-800 flex items-center justify-between">
+                    <div className="flex items-center gap-1.5">
+                      <div className="w-2 h-2 rounded-full bg-[#ff5f56]"></div>
+                      <div className="w-2 h-2 rounded-full bg-[#ffbd2e]"></div>
+                      <div className="w-2 h-2 rounded-full bg-[#27c93f]"></div>
+                      <span className="text-[10px] font-mono text-slate-400 ml-2">
+                        Ambiente Protegido
+                      </span>
+                    </div>
+                    <span className="text-[9px] font-semibold text-blue-400 uppercase px-2 py-0.5 bg-blue-950/60 border border-blue-800/40 rounded-full">
+                      {project.category}
                     </span>
-                  ))}
+                  </div>
+                  <div className="relative aspect-[16/10] bg-slate-950 flex items-center justify-center overflow-hidden">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={project.image}
+                      alt={project.name}
+                      className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                </Link>
+              ) : (
+                <div className="bg-slate-50 border border-slate-100/60 rounded-3xl p-8 flex flex-col justify-between h-[250px] relative overflow-hidden bg-dot-grid group-hover:border-slate-200 transition duration-300">
+                  <div className="flex justify-between items-start">
+                    <span className="text-[10px] font-mono text-slate-400 tracking-wider uppercase">
+                      CASE_0{i + 1}
+                    </span>
+                    <span className="text-[10px] font-semibold text-blue-600 uppercase px-2 py-0.5 bg-blue-50 border border-blue-100/30 rounded-full">
+                      {project.category}
+                    </span>
+                  </div>
+
+                  <div className="my-auto">
+                    <h3 className="font-bold text-xl text-slate-900 group-hover:text-blue-600 transition tracking-tight">
+                      {project.name}
+                    </h3>
+                    <span className="text-xs text-slate-400 font-medium">
+                      {project.client}
+                    </span>
+                  </div>
+
+                  <div className="flex flex-wrap gap-1.5 mt-2">
+                    {project.techStack.map((tech) => (
+                      <span
+                        key={tech}
+                        className="text-[9px] font-mono text-slate-500 bg-white border border-slate-100 px-2 py-0.5 rounded-full"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
 
               {/* Case Info Details */}
               <div className="flex flex-col gap-4 px-2">

@@ -34,7 +34,7 @@ export default function HomePage() {
   // Problemas catalogados
   const problems = [
     {
-      title: "Planilhas desorganizadas"
+      title: "Planilhas desorganizadas",
       act: "Estruturamos seus dados em bancos de dados relacionais seguros com interfaces intuitivas.",
       icon: Table
     },
@@ -331,34 +331,77 @@ export default function HomePage() {
                 className={`grid grid-cols-1 lg:grid-cols-12 gap-8 items-center ${i % 2 === 1 ? "lg:flex-row-reverse" : ""
                   }`}
               >
-                {/* Mockup visual estilizado */}
+                {/* Mockup visual do sistema */}
                 <div className={`lg:col-span-5 ${i % 2 === 1 ? "lg:order-2" : ""}`}>
-                  <div className="bg-slate-50 border border-slate-100/60 rounded-3xl p-6 md:p-8 flex flex-col justify-between h-[300px] md:h-[350px] relative overflow-hidden bg-dot-grid">
-                    <span className="text-[10px] font-mono text-slate-400 tracking-wider uppercase">
-                      PROJETO_CASE_0{i + 1}
-                    </span>
-
-                    {/* Elementos geométricos representando simplificação do projeto */}
-                    <div className="my-auto flex flex-col gap-3">
-                      <div className="font-bold text-2xl text-slate-800 tracking-tight">
-                        {project.name}
-                      </div>
-                      <div className="text-sm text-slate-400 uppercase font-semibold tracking-wider">
-                        {project.client}
-                      </div>
-                      <div className="flex flex-wrap gap-2 mt-2">
-                        {project.techStack.slice(0, 3).map((tech) => (
-                          <span key={tech} className="text-[10px] font-mono text-slate-500 bg-white border border-slate-100 px-2 py-0.5 rounded-full">
-                            {tech}
+                  {project.image ? (
+                    <Link
+                      href={`/projetos/${project.slug}`}
+                      className="group block relative rounded-2xl md:rounded-3xl overflow-hidden border border-slate-200/90 bg-slate-900 shadow-md hover:shadow-2xl transition-all duration-300"
+                    >
+                      {/* Browser Window Bar */}
+                      <div className="bg-slate-900 px-4 py-2.5 border-b border-slate-800 flex items-center justify-between">
+                        <div className="flex items-center gap-1.5">
+                          <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]"></div>
+                          <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]"></div>
+                          <div className="w-2.5 h-2.5 rounded-full bg-[#27c93f]"></div>
+                          <span className="text-[11px] font-mono text-slate-400 ml-2.5">
+                            Ambiente Protegido
                           </span>
-                        ))}
+                        </div>
+                        <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest hidden sm:inline-block">
+                          {project.gallery ? `${project.gallery.length} Telas` : "Sistema"}
+                        </span>
+                      </div>
+
+                      {/* Image container */}
+                      <div className="relative aspect-[16/10] bg-slate-950 flex items-center justify-center overflow-hidden">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={project.image}
+                          alt={project.name}
+                          className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                        />
+                        {project.gallery && project.gallery.length > 0 && (
+                          <div className="absolute bottom-3 right-3 px-2.5 py-1 rounded-full bg-slate-900/85 backdrop-blur-md border border-slate-700/60 text-[10px] font-mono text-slate-200 flex items-center gap-1.5 shadow-lg group-hover:opacity-0 transition-opacity">
+                            <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
+                            <span>{project.gallery.length} telas</span>
+                          </div>
+                        )}
+                        <div className="absolute inset-0 bg-slate-950/0 group-hover:bg-slate-950/30 transition-colors duration-300 flex items-center justify-center">
+                          <span className="opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 text-xs font-semibold px-3.5 py-1.5 bg-slate-900/90 text-white rounded-full shadow-lg backdrop-blur-sm border border-slate-700/60">
+                            Ver estudo de caso →
+                          </span>
+                        </div>
+                      </div>
+                    </Link>
+                  ) : (
+                    <div className="bg-slate-50 border border-slate-100/60 rounded-3xl p-6 md:p-8 flex flex-col justify-between h-[300px] md:h-[350px] relative overflow-hidden bg-dot-grid">
+                      <span className="text-[10px] font-mono text-slate-400 tracking-wider uppercase">
+                        PROJETO_CASE_0{i + 1}
+                      </span>
+
+                      {/* Elementos geométricos representando simplificação do projeto */}
+                      <div className="my-auto flex flex-col gap-3">
+                        <div className="font-bold text-2xl text-slate-800 tracking-tight">
+                          {project.name}
+                        </div>
+                        <div className="text-sm text-slate-400 uppercase font-semibold tracking-wider">
+                          {project.client}
+                        </div>
+                        <div className="flex flex-wrap gap-2 mt-2">
+                          {project.techStack.slice(0, 3).map((tech) => (
+                            <span key={tech} className="text-[10px] font-mono text-slate-500 bg-white border border-slate-100 px-2 py-0.5 rounded-full">
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-1 text-xs text-blue-600 font-semibold uppercase tracking-wider">
+                        <span>Resultado Mensurável</span>
                       </div>
                     </div>
-
-                    <div className="flex items-center gap-1 text-xs text-blue-600 font-semibold uppercase tracking-wider">
-                      <span>Resultado Mensurável</span>
-                    </div>
-                  </div>
+                  )}
                 </div>
 
                 {/* Conteúdo do Projeto */}

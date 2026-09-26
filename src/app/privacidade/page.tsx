@@ -63,7 +63,7 @@ export default function PrivacyPolicyPage() {
             <li>Solicitar a eliminação (exclusão) dos seus dados pessoais de nossa base ativa.</li>
           </ul>
           <p>
-            Para exercer qualquer um destes direitos, basta nos enviar um e-mail em <a href="mailto:contato@menos.studio" className="text-blue-600 underline">contato@menos.studio</a>.
+            Para exercer qualquer um destes direitos, basta nos enviar um e-mail em <a href="mailto:menos.lab@gmail.com" className="text-blue-600 underline">menos.lab@gmail.com</a>.
           </p>
 
           <h2 className="text-lg font-bold text-slate-900 mt-4">6. Alterações nesta Política</h2>

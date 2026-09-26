@@ -2,12 +2,12 @@ import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import React from "react";
-import { ArrowLeft, ArrowRight, CheckCircle2, ChevronRight, Cpu, User, HelpCircle, MessageSquare } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle2, ChevronRight, Cpu, User, HelpCircle, MessageSquare, GraduationCap, Compass, Users, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { projects } from "@/data/projects";
 import { services } from "@/data/services";
+import { ProjectGallery } from "@/components/ProjectGallery";
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;
@@ -76,71 +76,103 @@ export default async function ProjectSlugPage({ params }: ProjectPageProps) {
           </p>
         </div>
 
-        {/* Mockup Esquemático e Tecnologias */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-16 items-start">
-          {/* Mockup / Image */}
-          {project.image ? (
-            <div className="md:col-span-8 bg-slate-900 border border-slate-200/80 rounded-2xl overflow-hidden shadow-xl">
-              <div className="bg-slate-900 px-4 py-2.5 border-b border-slate-800 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <div className="w-2.5 h-2.5 rounded-full bg-slate-700"></div>
-                  <div className="w-2.5 h-2.5 rounded-full bg-slate-700"></div>
-                  <div className="w-2.5 h-2.5 rounded-full bg-slate-700"></div>
-                  <span className="text-[11px] font-mono text-slate-400 ml-2">coentro-erp.app</span>
-                </div>
-                <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest">Painel do Sistema</span>
-              </div>
-              <div className="w-full bg-slate-950 flex items-center justify-center">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={project.image}
-                  alt={project.name}
-                  className="w-full h-auto object-contain block"
-                />
-              </div>
-            </div>
-          ) : (
-            <div className="md:col-span-8 bg-slate-50 border border-slate-100 rounded-2xl p-6 md:p-8 h-[220px] flex flex-col justify-between bg-dot-grid relative overflow-hidden">
-              <div className="flex justify-between items-center text-[10px] font-mono text-slate-400 uppercase tracking-widest">
-                <span>{project.category}</span>
-                <span className="text-blue-600 font-semibold">● EM OPERAÇÃO</span>
-              </div>
-              
-              <div className="my-auto flex flex-col items-center justify-center text-center gap-1.5">
-                <div className="font-mono font-bold text-xl md:text-2xl text-slate-900 tracking-wider">
-                  [ {project.slug === "integracao-coentro-erp" ? "COENTRO ERP" : project.name.toUpperCase()} ]
-                </div>
-                <p className="text-xs font-mono text-slate-500 tracking-widest uppercase font-medium">
-                  {project.slug === "integracao-coentro-erp" 
-                    ? "GESTÃO, COMANDAS E IMPRESSÃO INTEGRADAS" 
-                    : project.category}
-                </p>
-              </div>
-
-              <div className="flex justify-between items-center text-[10px] font-mono text-slate-400 uppercase tracking-wider border-t border-slate-100/60 pt-3">
-                <span>STATUS: EM OPERAÇÃO</span>
-                <span>REF: {project.slug === "integracao-coentro-erp" ? "COENTRO-ERP" : project.slug.toUpperCase()}</span>
-              </div>
-            </div>
-          )}
-
-          {/* Tech Stack */}
-          <div className="md:col-span-4 p-6 rounded-2xl bg-slate-50/50 border border-slate-100 flex flex-col gap-4">
-            <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2">
-              <Cpu className="h-4 w-4 text-blue-600" /> Tecnologias
-            </h4>
-            <div className="flex flex-wrap gap-2">
-              {project.techStack.map((tech) => (
-                <span
-                  key={tech}
-                  className="text-xs font-mono text-slate-600 bg-white border border-slate-100 px-3 py-1 rounded-full"
-                >
-                  {tech}
+        {/* Mockup Esquemático e Tecnologias / Galeria Interativa */}
+        {project.gallery && project.gallery.length > 0 ? (
+          <div className="mb-16 flex flex-col gap-6">
+            {/* Tech Stack Banner */}
+            <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-200/70">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-xs font-mono font-semibold text-slate-500 uppercase tracking-wider mr-1 flex items-center gap-1.5">
+                  <Cpu className="h-3.5 w-3.5 text-blue-600" /> Tecnologias:
                 </span>
-              ))}
+                {project.techStack.map((tech) => (
+                  <span
+                    key={tech}
+                    className="text-xs font-mono text-slate-700 bg-white border border-slate-200/80 px-3 py-1 rounded-full shadow-2xs font-medium"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+              <div className="flex items-center gap-2 text-xs font-mono text-slate-400">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>{project.gallery.length} telas capturadas da plataforma</span>
+              </div>
+            </div>
+
+            {/* Galeria Completa */}
+            <ProjectGallery
+              items={project.gallery}
+              projectSlug={project.slug}
+              projectName={project.name}
+            />
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-16 items-start">
+            {/* Mockup / Image */}
+            {project.image ? (
+              <div className="md:col-span-8 bg-slate-900 border border-slate-200/80 rounded-2xl overflow-hidden shadow-xl">
+                <div className="bg-slate-900 px-4 py-2.5 border-b border-slate-800 flex items-center justify-between">
+                  <div className="flex items-center gap-1.5">
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]"></div>
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]"></div>
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#27c93f]"></div>
+                    <span className="text-[11px] font-mono text-slate-400 ml-2.5">Ambiente Protegido</span>
+                  </div>
+                  <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest">Interface</span>
+                </div>
+                <div className="w-full bg-slate-950 flex items-center justify-center">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={project.image}
+                    alt={project.name}
+                    className="w-full h-auto object-contain block"
+                  />
+                </div>
+              </div>
+            ) : (
+              <div className="md:col-span-8 bg-slate-50 border border-slate-100 rounded-2xl p-6 md:p-8 h-[220px] flex flex-col justify-between bg-dot-grid relative overflow-hidden">
+                <div className="flex justify-between items-center text-[10px] font-mono text-slate-400 uppercase tracking-widest">
+                  <span>{project.category}</span>
+                  <span className="text-blue-600 font-semibold">● EM OPERAÇÃO</span>
+                </div>
+                
+                <div className="my-auto flex flex-col items-center justify-center text-center gap-1.5">
+                  <div className="font-mono font-bold text-xl md:text-2xl text-slate-900 tracking-wider">
+                    [ {project.slug === "integracao-coentro-erp" ? "COENTRO ERP" : project.name.toUpperCase()} ]
+                  </div>
+                  <p className="text-xs font-mono text-slate-500 tracking-widest uppercase font-medium">
+                    {project.slug === "integracao-coentro-erp" 
+                      ? "GESTÃO, COMANDAS E IMPRESSÃO INTEGRADAS" 
+                      : project.category}
+                  </p>
+                </div>
+
+                <div className="flex justify-between items-center text-[10px] font-mono text-slate-400 uppercase tracking-wider border-t border-slate-100/60 pt-3">
+                  <span>STATUS: EM OPERAÇÃO</span>
+                  <span>REF: {project.slug === "integracao-coentro-erp" ? "COENTRO-ERP" : project.slug.toUpperCase()}</span>
+                </div>
+              </div>
+            )}
+
+            {/* Tech Stack */}
+            <div className="md:col-span-4 p-6 rounded-2xl bg-slate-50/50 border border-slate-100 flex flex-col gap-4">
+              <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2">
+                <Cpu className="h-4 w-4 text-blue-600" /> Tecnologias
+              </h4>
+              <div className="flex flex-wrap gap-2">
+                {project.techStack.map((tech) => (
+                  <span
+                    key={tech}
+                    className="text-xs font-mono text-slate-600 bg-white border border-slate-100 px-3 py-1 rounded-full"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* Diagnóstico e Processo */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
@@ -148,7 +180,7 @@ export default async function ProjectSlugPage({ params }: ProjectPageProps) {
             <h3 className="text-base font-bold text-slate-900 uppercase tracking-wider border-l-2 border-blue-600 pl-3">
               O Desafio e Contexto
             </h3>
-            <p className="text-sm text-slate-600 leading-relaxed font-light">
+            <p className="text-sm text-slate-600 leading-relaxed font-light whitespace-pre-line">
               {project.challenge}
             </p>
           </div>
@@ -156,11 +188,71 @@ export default async function ProjectSlugPage({ params }: ProjectPageProps) {
             <h3 className="text-base font-bold text-slate-900 uppercase tracking-wider border-l-2 border-blue-600 pl-3">
               A Solução Projetada
             </h3>
-            <p className="text-sm text-slate-600 leading-relaxed font-light">
+            <p className="text-sm text-slate-600 leading-relaxed font-light whitespace-pre-line">
               {project.solution}
             </p>
           </div>
         </div>
+
+        {/* Perfis e Papéis Integrados */}
+        {project.roles && project.roles.length > 0 && (
+          <div className="mb-16 border-t border-slate-100 pt-12">
+            <div className="max-w-3xl mb-8">
+              <span className="text-xs font-mono font-semibold text-blue-600 uppercase tracking-widest block mb-2">
+                Estrutura do Programa
+              </span>
+              <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-slate-900 mb-3">
+                Quatro perfis integrados em uma mesma estrutura
+              </h2>
+              <p className="text-sm text-slate-600 leading-relaxed font-light">
+                O acompanhamento do Programa Melhores Cabeças envolve diferentes atores que atuam de forma coordenada e não hierárquica. Cada perfil conta com recursos e visões específicas para o seu papel:
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+              {project.roles.map((role, idx) => {
+                const roleIcons = [GraduationCap, Compass, Users, ShieldCheck];
+                const IconComponent = roleIcons[idx % roleIcons.length];
+
+                return (
+                  <div
+                    key={idx}
+                    className="bg-slate-50/70 border border-slate-200/80 rounded-2xl p-5 flex flex-col justify-between hover:border-blue-300 hover:shadow-md hover:bg-white transition-all duration-300 group"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100/60 flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                          <IconComponent className="h-5 w-5" />
+                        </div>
+                        {role.roleTag && (
+                          <span className="text-[10px] font-mono uppercase px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-medium border border-slate-200/50">
+                            {role.roleTag}
+                          </span>
+                        )}
+                      </div>
+                      <h3 className="font-bold text-base text-slate-900 mb-2">
+                        {role.title}
+                      </h3>
+                      <p className="text-xs text-slate-600 leading-relaxed font-light">
+                        {role.description}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Conceito Central */}
+            <div className="mt-6 p-6 rounded-2xl bg-gradient-to-r from-blue-50/60 via-slate-50 to-blue-50/40 border border-blue-100/70 text-center">
+              <span className="text-[10px] font-mono uppercase tracking-widest text-blue-600 font-semibold block mb-1">
+                Conceito Central
+              </span>
+              <p className="text-base md:text-lg font-semibold text-slate-800 italic">
+                &ldquo;Uma plataforma para gerir toda a jornada de acompanhamento dos bolsistas da FLUPP.&rdquo;
+              </p>
+            </div>
+          </div>
+        )}
 
         {/* Funcionalidades principais */}
         <div className="mb-16">
@@ -205,7 +297,7 @@ export default async function ProjectSlugPage({ params }: ProjectPageProps) {
               Aprendizados e Evolução
             </h4>
             <p className="text-sm text-slate-600 leading-relaxed font-light bg-slate-50/50 border border-slate-100 p-5 rounded-2xl">
-              A arquitetura foi planejada para ser modular. A simplificação do código nos permitiu implementar novas melhorias sem quebrar fluxos antigos, e o suporte contínuo foca em refinar e otimizar processos conforme a operação do cliente expande.
+              {project.learnings || "A arquitetura foi planejada para ser modular. A simplificação do código nos permitiu implementar novas melhorias sem quebrar fluxos antigos, e o suporte contínuo foca em refinar e otimizar processos conforme a operação do cliente expande."}
             </p>
           </div>
         </div>

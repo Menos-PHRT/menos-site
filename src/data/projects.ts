@@ -1,3 +1,10 @@
+export interface ProjectGalleryItem {
+  title: string;
+  category?: string;
+  caption: string;
+  image: string;
+}
+
 export interface Project {
   slug: string;
   name: string;
@@ -17,99 +24,249 @@ export interface Project {
     company: string;
   };
   image?: string;
+  gallery?: ProjectGalleryItem[];
+  learnings?: string;
   relatedServices: string[]; // slugs de serviços relacionados
+  roles?: {
+    title: string;
+    roleTag?: string;
+    description: string;
+  }[];
 }
 
 export const projects: Project[] = [
   {
     slug: "plataforma-melhores-cabecas",
     name: "Plataforma Melhores Cabeças",
-    client: "Instituto Melhores Cabeças",
+    client: "Fundação Lucia e Pelerson Penido — FLUPP",
     category: "Plataformas Digitais",
-    challenge: "Conectar e gerenciar uma rede nacional de pesquisadores e mentores que operava de forma fragmentada por e-mails e planilhas.",
-    solution: "Criação de um portal unificado com perfis dinâmicos, repositório de pesquisas categorizado, e sistema interno para agendamento de mentorias sem atrito.",
-    impact: "Centralização completa da comunicação da rede, reduzindo em 70% o tempo administrativo necessário para conectar mentores e pesquisadores.",
-    description: "O Instituto Melhores Cabeças precisava consolidar sua rede de alto impacto de mentores e pesquisadores. A operação dependia de fluxos manuais pesados no WhatsApp e planilhas instáveis. Desenvolvemos uma plataforma digital sob medida que serve como área de colaboração, permitindo busca filtrada de especialistas, agendamento direto de mentorias com envio de alertas automáticos e um repositório centralizado para compartilhamento de publicações científicas.",
+    challenge: "O programa era gerenciado por planilhas e registros descentralizados, o que dificultava o fluxo de informações e o acompanhamento de bolsistas, mentorias e tutorias.",
+    solution: "Criamos uma plataforma para centralizar toda a gestão do programa, com ambientes e acessos específicos para bolsistas, mentores, tutores e administração.",
+    impact: "As informações passaram a ficar organizadas em um único lugar, facilitando o acompanhamento dos bolsistas, dos encontros e do histórico de cada participante.",
+    description: "A Plataforma Melhores Cabeças foi desenvolvida para apoiar a gestão do programa de bolsas de estudo da Fundação Lucia e Pelerson Penido — FLUPP. A Fundação oferece bolsas de estudo para estudantes do ensino superior e, além do apoio financeiro para a formação universitária, mantém uma estrutura de acompanhamento e desenvolvimento dos bolsistas ao longo de sua trajetória acadêmica.\n\nComo um sistema integrado de gestão e acompanhamento do programa, a plataforma conecta administração, mentores, tutores e bolsistas dentro de uma mesma estrutura digital. Ela centraliza informações que antes poderiam ficar dispersas entre planilhas, formulários, documentos e diferentes controles internos, criando um histórico organizado da trajetória de cada bolsista.",
+    roles: [
+      {
+        title: "Bolsistas",
+        roleTag: "Estudantes Apoiados",
+        description: "São os estudantes apoiados financeiramente pela Fundação. Cada bolsista possui seu próprio acompanhamento dentro do programa, com histórico de participação, mentorias, tutorias, avaliações e demais informações relacionadas à sua trajetória acadêmica."
+      },
+      {
+        title: "Mentores",
+        roleTag: "Mentorias Individuais",
+        description: "Cada bolsista participa de mentorias individuais mensais, realizadas com um mentor. Esses encontros permitem um acompanhamento próximo do estudante, abordando desenvolvimento acadêmico, profissional e pessoal. A plataforma organiza os vínculos e permite registrar e acompanhar esses encontros."
+      },
+      {
+        title: "Tutores",
+        roleTag: "Tutorias Coletivas",
+        description: "Além das mentorias individuais, os bolsistas participam de tutorias coletivas conduzidas por tutores. Esses encontros trabalham questões de desenvolvimento, formação, troca de experiências e acompanhamento coletivo dos estudantes."
+      },
+      {
+        title: "Administração (FLUPP)",
+        roleTag: "Gestão Integrada",
+        description: "A equipe administrativa precisa acompanhar toda a operação do programa: bolsistas, mentores, tutores, encontros, avaliações, relatórios e evolução dos participantes, reunindo essas informações em um ambiente centralizado."
+      }
+    ],
     keyFeatures: [
-      "Área de membros restrita com autenticação segura.",
-      "Busca avançada de especialistas por áreas de atuação e tags de pesquisa.",
-      "Agenda integrada para solicitação e aprovação de horários de mentoria.",
-      "Painel administrativo para moderação de conteúdos e relatórios de uso."
+      "Ambiente digital integrado para os quatro perfis (Bolsistas, Mentores, Tutores e Administração).",
+      "Organização de vínculos e agenda de mentorias individuais mensais entre mentores e bolsistas.",
+      "Acompanhamento e registro de presença em encontros de tutorias coletivas.",
+      "Módulo para envio de avaliações, relatórios periódicos de acompanhamento e feedback.",
+      "Histórico centralizado e organizado da trajetória de cada bolsista ao longo do programa.",
+      "Painel administrativo para a equipe da FLUPP com visão consolidada da operação."
     ],
     process: [
-      "Alinhamento estratégico com a diretoria do Instituto para desenhar a taxonomia da rede.",
-      "Protótipos interativos para teste de usabilidade com pesquisadores seniores.",
-      "Desenvolvimento em blocos com Next.js e banco de dados relacional.",
-      "Importação segura de mais de 500 perfis cadastrados anteriormente."
+      "Imersão nos processos e fluxos de acompanhamento do programa de bolsas com a equipe da FLUPP.",
+      "Mapeamento das necessidades e interações entre os 4 perfis: bolsistas, mentores, tutores e administração.",
+      "Desenho de fluxos intuitivos para registro de mentorias, avaliações e relatórios sem atrito.",
+      "Desenvolvimento de arquitetura de permissões específicas para cada tipo de participante.",
+      "Centralização de dados históricos, eliminando a dispersão em planilhas e formulários avulsos."
     ],
-    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "PostgreSQL", "Supabase"],
+    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "PostgreSQL", "Node.js"],
     testimonial: {
-      text: "A MENOS conseguiu transformar nossa operação confusa em uma interface limpa e intuitiva. O que antes levava dias de troca de e-mails agora acontece em poucos cliques.",
-      author: "Ana Souza",
-      role: "Diretora de Operações",
-      company: "Instituto Melhores Cabeças"
+      text: "A plataforma transformou uma rotina antes dispersa em planilhas e e-mails em uma estrutura organizada. Hoje temos clareza sobre cada bolsista e o histórico de cada mentoria e tutoria.",
+      author: "Lorrane de Paula",
+      role: "Coordenadora do Programa Melhores Cabeças",
+      company: "Fundação Lucia e Pelerson Penido — FLUPP"
     },
-    relatedServices: ["plataformas-digitais", "design-e-melhoria-de-interfaces"]
+    image: "/images/plataforma-melhores-cabecas.png",
+    gallery: [
+      {
+        title: "Tela de Acesso à Plataforma",
+        category: "Portal de Entrada",
+        caption: "Interface de autenticação com identidade visual personalizada para o programa Melhores Cabeças.",
+        image: "/images/plataforma-melhores-cabecas.png"
+      },
+      {
+        title: "Dashboard Administrativo",
+        category: "Visão Geral & Indicadores",
+        caption: "Acompanhamento em tempo real da operação, contagem de educadores e bolsistas por status de contrato, aniversariantes da semana e ações rápidas.",
+        image: "/images/melhores-cabecas/dashboard-admin.png"
+      },
+      {
+        title: "Painel de Encontros de Mentoria",
+        category: "Gestão de Mentorias",
+        caption: "Central de monitoramento das mentorias individuais com taxas de realização (99.6%), filtros avançados por mentor/mentorando, controle de faltas e pendências de relatórios.",
+        image: "/images/melhores-cabecas/painel-encontros.png"
+      },
+      {
+        title: "Gestão de Turmas da Tutoria Coletiva",
+        category: "Tutorias Coletivas",
+        caption: "Organização estruturada dos públicos-alvo por ano de graduação (1º ao 4º ano e Formados), vinculação de tutoras responsáveis e acompanhamento de sessões.",
+        image: "/images/melhores-cabecas/gestao-turmas.png"
+      },
+      {
+        title: "Planejamento e Pautas da Tutoria",
+        category: "Acompanhamento Pedagógico",
+        caption: "Histórico centralizado de temas, pautas pré-encontro e relatórios pós-encontro com status de finalização e exportação para planilhas.",
+        image: "/images/melhores-cabecas/planejamento-tutoria.png"
+      },
+      {
+        title: "Controle de Presenças e Assiduidade",
+        category: "Frequência e Faltas",
+        caption: "Registro nominal e consolidado de estudantes presentes, ausentes e justificativas de ausência por turma e data de encontro.",
+        image: "/images/melhores-cabecas/presencas-tutoria.png"
+      },
+      {
+        title: "Painel de Estatísticas e Cruzamentos",
+        category: "Inteligência de Dados",
+        caption: "Análises desagregadas e gráficos interativos de idade, gênero, raça/cor, município de origem e cursos universitários atendidos pelo programa.",
+        image: "/images/melhores-cabecas/estatisticas-graficos.png"
+      }
+    ],
+    relatedServices: ["plataformas-digitais"]
   },
   {
     slug: "sistema-de-credenciamento",
     name: "Sistema de Credenciamento",
-    client: "Festival Conexão Criativa",
+    client: "Fundação Lucia e Pelerson Penido — FLUPP",
     category: "Credenciamento e Eventos",
-    challenge: "Gerenciar a entrada e presença de 2.500 participantes espalhados por 12 oficinas simultâneas sem gerar filas na recepção.",
-    solution: "Desenvolvimento de um sistema de check-in web ultra-rápido por QR Code, integrado à emissão automatizada de certificados baseada em presença real.",
-    impact: "Tempo médio de credenciamento reduzido para menos de 4 segundos por pessoa, com zero filas na recepção do evento físico.",
-    description: "Eventos criativos de grande porte costumam sofrer na recepção. O Festival Conexão Criativa operava com checagem de listas de papel que atrasavam a abertura. A MENOS desenhou um sistema web leve no qual cada participante recebia um passe digital com QR Code. Os credenciadores puderam utilizar a própria câmera do celular para ler o código instantaneamente, alimentando um painel de lotação de salas em tempo real e permitindo o disparo de certificados personalizados no encerramento.",
+    challenge: "Gerenciar a entrada e presença de 570 participantes espalhados por 11 oficinas simultâneas sem gerar filas na recepção.",
+    solution: "Desenvolvimento de um sistema de check-in web ultra-rápido por QR Code, integrado à emissão automatizada de certificados baseada na contagem de presença real.",
+    impact: "Tempo médio de credenciamento reduzido de 1 minuto para menos de 5 segundos por pessoa, com zero filas na recepção do evento físico.",
+    description: "Eventos criativos de grande porte, como o Seminário de Educação Infantil do Vale do Paraíba realizado pela FLUPP com apoio da prefeitura de Jacareí, costumam sofrer na recepção. A FLUPP operava com checagem de listas de papel que poderiam ser modernizadas com processos de automação e informatização. A MENOS desenhou um sistema web leve no qual cada participante recebia um passe digital com QR Code. Os credenciadores puderam utilizar a própria câmera do celular para ler o código instantaneamente, alimentando um painel de lotação de salas em tempo real e permitindo o disparo de certificados personalizados no encerramento.",
     keyFeatures: [
-      "Leitor de QR Code integrado no navegador (sem necessidade de app).",
-      "Disparo automático de ingressos por e-mail e integração com Apple Wallet.",
-      "Controle de presença automático por oficina com limites de lotação em tempo real.",
-      "Painel de fechamento estatístico de presença com relatórios para patrocinadores."
+      "Leitor de QR Code integrado no navegador do celular (sem necessidade de instalar aplicativo).",
+      "Disparo automático de ingressos e passes digitais por e-mail com QR Code individual.",
+      "Controle de presença automático em 11 oficinas simultâneas com limites de lotação em tempo real.",
+      "Emissão automatizada de certificados personalizados com base na contagem de presença real.",
+      "Painel administrativo em tempo real para a coordenação acompanhar fluxo de entrada e salas."
     ],
     process: [
-      "Desenho da arquitetura de dados e otimização do leitor de QR Code para funcionar em ambientes com baixa conectividade.",
-      "Desenvolvimento do gerador automático de PDF para crachás e certificados em lote.",
-      "Simulação de estresse simulando 100 leituras simultâneas.",
-      "Acompanhamento presencial no primeiro dia de evento para garantir estabilidade."
+      "Mapeamento do fluxo de recepção do Seminário de Educação Infantil e da dinâmica das 11 oficinas simultâneas.",
+      "Desenho de arquitetura web leve e rápida, permitindo leitura veloz mesmo com oscilações de sinal.",
+      "Integração do motor de validação instantânea de QR Code com prevenção contra duplicidade.",
+      "Desenvolvimento do gerador automático de PDF para crachás e disparador de certificados em lote.",
+      "Acompanhamento presencial no evento em Jacareí para garantir operação fluida e sem filas."
     ],
-    techStack: ["React", "TypeScript", "Tailwind CSS", "Node.js", "MongoDB", "SendGrid"],
+    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Node.js", "PostgreSQL", "SendGrid"],
     testimonial: {
       text: "Foi o primeiro ano em que não tivemos fila na porta e nem reclamações de certificados que não chegaram no e-mail. A solução funcionou de forma impecável.",
-      author: "Rodrigo Mota",
-      role: "Coordenador Geral",
-      company: "Conexão Criativa"
+      author: "Natalia Vieira",
+      role: "Coordenadora Geral de Eventos da FLUPP",
+      company: "Fundação Lucia e Pelerson Penido — FLUPP"
     },
-    relatedServices: ["credenciamento-e-eventos", "formularios-inteligentes"]
+    image: "/images/sistema-de-credenciamento/dashboard-metricas.png",
+    gallery: [
+      {
+        title: "Dashboard de Métricas & Analytics",
+        category: "Inteligência & Presença",
+        caption: "Controle em tempo real de inscritos (574), autoridades presentes, perfil por gênero e taxa de presença na plenária.",
+        image: "/images/sistema-de-credenciamento/dashboard-metricas.png"
+      },
+      {
+        title: "Portal de Inscrições do Evento",
+        category: "Inscrição Online",
+        caption: "Interface pública do 15º Seminário de Educação Infantil, com informações de data, local e integração com mapa e agenda.",
+        image: "/images/sistema-de-credenciamento/portal-inscricoes.png"
+      },
+      {
+        title: "Formulário Inteligente de Dados",
+        category: "Cadastro Individual",
+        caption: "Coleta organizada de dados pessoais, validação de CPF, cargo e município de atuação sem fricção.",
+        image: "/images/sistema-de-credenciamento/formulario-dados.png"
+      },
+      {
+        title: "Confirmação e Passe Digital",
+        category: "Comprovante & QR Code",
+        caption: "Tela de confirmação imediata da inscrição com resumo do evento e detalhes da oficina reservada.",
+        image: "/images/sistema-de-credenciamento/confirmacao-passe.png"
+      },
+      {
+        title: "Painel de Alocação de Oficinas",
+        category: "Gestão Operacional",
+        caption: "Busca instantânea por nome ou CPF para remanejamento de participantes e controle de vagas por sala em tempo real.",
+        image: "/images/sistema-de-credenciamento/alocacao-oficinas.png"
+      },
+      {
+        title: "Frequência por Município e Oficina",
+        category: "Relatórios & Fechamento",
+        caption: "Tabela analítica detalhada com presença na plenária da manhã e oficinas da tarde, subsidiando a emissão precisa de certificados.",
+        image: "/images/sistema-de-credenciamento/frequencia-oficinas.png"
+      }
+    ],
+    relatedServices: ["credenciamento-e-eventos"]
   },
   {
     slug: "plataforma-de-certificacao",
-    name: "Plataforma de Certificação",
-    client: "Certificadora Verde",
+    name: "Plataforma de Certificados FLUPP",
+    client: "Fundação Lucia e Pelerson Penido — FLUPP",
     category: "Plataformas Digitais",
-    challenge: "Processar o envio de evidências ambientais complexas e automatizar a auditoria de conformidade de empresas parceiras.",
-    solution: "Uma plataforma de submissão documental lógica que orienta o usuário no envio de arquivos e gera relatórios consolidados para os auditores.",
-    impact: "Redução de 45% no tempo de tramitação dos processos de certificação socioambiental e melhora na qualidade dos documentos enviados.",
-    description: "A Certificadora Verde gerenciava o processo de auditoria de selos ecológicos através do envio de anexos pesados por e-mail e formulários estáticos sem validação. Criamos uma plataforma digital moderna que guia os clientes passo a passo, aceitando uploads apenas nos formatos e tamanhos corretos, organizando as evidências por critérios técnicos e notificando os auditores quando um processo está pronto para revisão.",
+    challenge: "A geração e o envio de certificados eram feitos manualmente, um a um, consumindo muito tempo da equipe e tornando o processo pouco escalável.",
+    solution: "Uma plataforma que gera certificados em lote a partir de planilhas vinculadas aos eventos e permite que cada participante consulte seus documentos usando o CPF.",
+    impact: "Um processo que antes exigia geração e envio individual passou a ser praticamente automático, reduzindo drasticamente o trabalho operacional da equipe.",
+    description: "A emissão de certificados da FLUPP antes era feita manualmente pelo Canva, com mala direta e envio individual por e-mail e WhatsApp. Criamos uma plataforma que automatiza esse processo: a equipe vincula uma planilha ao evento, gera os certificados em lote e disponibiliza tudo em um único link. Cada participante informa seu CPF e acessa automaticamente os certificados disponíveis em seu nome.",
     keyFeatures: [
-      "Upload inteligente de arquivos grandes em nuvem com validação de tipo de documento.",
-      "Fluxo passo a passo (stepper) com salvamento automático de progresso.",
-      "Painel de controle para auditores avaliarem, comentarem e aprovarem requisitos.",
-      "Geração automatizada do selo digital e certificado de conformidade autenticado."
+      "Criação e gerenciamento de eventos.",
+      "Importação de planilhas com dados dos participantes.",
+      "Geração automática de certificados a partir de uma arte-base.",
+      "Campos dinâmicos como nome, cargo, horário e CPF.",
+      "Consulta individual dos certificados por CPF.",
+      "Um único link de acesso para todos os participantes.",
+      "Histórico de certificados emitidos por pessoa e por evento.",
+      "Validação e autenticação de certificado."
     ],
     process: [
-      "Mapeamento do fluxo de auditoria para traduzi-lo em etapas visuais intuitivas.",
-      "Criação de um sistema de upload de arquivos direto para o storage da nuvem para evitar sobrecarga no servidor.",
-      "Desenvolvimento da lógica de notificações por e-mail baseada em mudanças de status do processo.",
-      "Ajustes de segurança para garantir a confidencialidade dos arquivos confidenciais das empresas."
+      "Mapeamento do fluxo manual de criação e envio dos certificados.",
+      "Desenvolvimento da geração automática a partir de uma planilha vinculada ao evento.",
+      "Criação do sistema de identificação por CPF para localizar os certificados de cada participante.",
+      "Centralização do acesso em um único link, eliminando o envio individual de arquivos."
     ],
-    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "AWS S3", "PostgreSQL", "Prisma"],
-    testimonial: {
-      text: "A plataforma removeu o atrito das submissões. Nossos clientes agora entendem exatamente o que precisam enviar, e nosso time ganha horas que antes eram gastas cobrando arquivos certos.",
-      author: "Carlos Pimentel",
-      role: "CEO",
-      company: "Certificadora Verde"
-    },
-    relatedServices: ["plataformas-digitais", "formularios-inteligentes", "dashboards"]
+    learnings: "A solução foi construída para permitir novos eventos, modelos de certificados e campos personalizados sem a necessidade de recriar todo o processo.",
+    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Node.js", "PostgreSQL", "Prisma"],
+    image: "/images/certificacao-flupp/editor-visual.png",
+    gallery: [
+      {
+        title: "Editor Visual de Certificados",
+        category: "Personalização & Layout",
+        caption: "Interface interativa para posicionar campos dinâmicos (Nome, CPF, Carga Horária e Código de Validação) sobre a arte-base com prévia em tempo real.",
+        image: "/images/certificacao-flupp/editor-visual.png"
+      },
+      {
+        title: "Portal de Acesso Administrativo",
+        category: "Autenticação & Gestão",
+        caption: "Painel exclusivo para a equipe da FLUPP gerenciar eventos, modelos visuais e certificados em um único ambiente.",
+        image: "/images/certificacao-flupp/login-portal.png"
+      },
+      {
+        title: "Dashboard de Visão Geral",
+        category: "Indicadores em Tempo Real",
+        caption: "Métricas consolidadas de eventos ativos, certificados gerados, participantes cadastrados e monitoramento de downloads.",
+        image: "/images/certificacao-flupp/dashboard-visao-geral.png"
+      },
+      {
+        title: "Cadastro de Eventos e Modelos",
+        category: "Configuração do Evento",
+        caption: "Configuração de parâmetros como carga horária, data do evento e upload de arquivos base em alta resolução.",
+        image: "/images/certificacao-flupp/cadastro-eventos.png"
+      },
+      {
+        title: "Importação e Geração em Lote",
+        category: "Automação por Planilha",
+        caption: "Upload de planilhas CSV ou XLSX com reconhecimento inteligente de colunas e processamento de centenas de certificados em instantes.",
+        image: "/images/certificacao-flupp/importacao-planilhas.png"
+      }
+    ],
+    relatedServices: ["plataformas-digitais"]
   },
   {
     slug: "integracao-coentro-erp",
@@ -141,71 +298,71 @@ export const projects: Project[] = [
     techStack: ["HTML/CSS/JS", "Firebase Auth", "Firebase Firestore", "Node.js", "Coentro Print Agent", "Epson TM-T20X"],
     testimonial: {
       text: "O Coentro ERP transforma processos dispersos em uma operação integrada: o pedido é registrado, o estoque é atualizado, o faturamento é monitorado no dashboard e a impressão acontece no mesmo fluxo.",
-      author: "Proprietária",
-      role: "Gestão Operacional",
+      author: "Andresa Alcântara",
+      role: "Proprietária",
       company: "Coentro"
     },
     image: "/images/coentro-erp.png",
-    relatedServices: ["sistemas-internos", "automacoes", "dashboards"]
+    relatedServices: ["sistemas-internos", "automacoes"]
   },
   {
     slug: "reformulacao-paginas-institucionais",
-    name: "Reformulação de Páginas Institucionais",
-    client: "Consultoria Estratégica Apex",
+    name: "Reformulação da Página: Prêmio FLUPP de Educação",
+    client: "Fundação Lucia e Pelerson Penido — FLUPP",
     category: "Sites Institucionais",
-    challenge: "Transformar um site corporativo lento e poluído em uma experiência moderna de alta velocidade que converta visitantes em reuniões agendadas.",
-    solution: "Desenvolvimento de um site institucional minimalista com foco em copywriting estratégico, tipografia contemporânea e carregamento instantâneo.",
-    impact: "Aumento de 110% no número de formulários de contato recebidos nas primeiras 4 semanas após o lançamento.",
-    description: "A Apex possuía um site institucional baseado em templates pesados, que demorava mais de 6 segundos para abrir no celular e afastava possíveis clientes de alto padrão. Redesenhamos a experiência completa, adotando uma abordagem leve, limpa e sofisticada. O novo site foi desenvolvido focando na pontuação máxima do Google Lighthouse, carregando de forma instantânea e integrando-se a um fluxo limpo de agendamento de reuniões.",
+    challenge: "A página anterior do prêmio precisava de uma renovação visual e estrutural para organizar melhor as regras, categorias e cronograma do edital, além de oferecer um fluxo de inscrição mais atrativo e com confirmação visual clara para os educadores.",
+    solution: "Reformulação completa da página com novo layout, blocos visuais e cards explicativos (Quem Pode Participar, Como Participar e Etapas de Avaliação), integração com as playlists das edições anteriores e uma experiência de inscrição enriquecida com animação de confetes coloridos para celebrar o sucesso da submissão.",
+    impact: "Maior clareza para os professores e estudantes sobre os critérios de participação, navegação mais fluida pelo regulamento e feedback imediato e engajador na confirmação da inscrição.",
+    description: "O Prêmio FLUPP de Educação é a principal iniciativa de reconhecimento e valorização dos educadores e coordenadores da rede pública de Educação Básica do Vale do Paraíba, contando também com categoria para estudantes de licenciatura.\n\nA página do prêmio passou por uma reformulação completa de design e usabilidade conduzida pela MENOS. Reestruturamos toda a hierarquia de conteúdo: criamos seções claras para o público-alvo, detalhes do regulamento, premiações, etapas de avaliação e uma galeria integrada com as playlists das edições passadas.\n\nNo fluxo de submissão, aprimoramos o formulário tornando-o mais ágil e adicionamos uma celebração visual com confetes coloridos ao concluir a inscrição, garantindo que o educador tenha clareza imediata e entusiasmo ao enviar seu relato de prática pedagógica.",
     keyFeatures: [
-      "Design baseado em respiro visual (white space) e tipografia Outfit sofisticada.",
-      "Carregamento de imagens otimizado e código Next.js estático de alta velocidade.",
-      "Formulário de conversão minimalista e integrado a ferramentas de agendamento online.",
-      "Otimização avançada de SEO on-page (metatags, headings e sitemap)."
+      "Novo layout institucional com tipografia editorial elegante e contrastes acolhedores.",
+      "Cards visuais informativos: Quem Pode Participar, Como Participar e Nova Categoria (Estudantes de Licenciatura).",
+      "Seção explicativa das 3 etapas de avaliação (Adequação ao edital, Revisão por Especialista e Revisão de Vídeo).",
+      "Seção integrada com playlists em vídeo das edições anteriores do prêmio (2023, 2024 e 2025).",
+      "Formulário de inscrição otimizado com validações e animação comemorativa de confetes coloridos ao submeter.",
+      "Destaque claro para o regulamento oficial e prazos do edital."
     ],
     process: [
-      "Revisão completa da arquitetura do site antigo e eliminação de 60% dos textos redundantes.",
-      "Redação estratégica (copywriting) com foco em clareza e autoridade.",
-      "Protótipos focados no minimalismo e na hierarquia de informações.",
-      "Desenvolvimento e deploy em CDN global de alta performance."
+      "Alinhamento das diretrizes da nova edição do Prêmio FLUPP de Educação com a coordenação.",
+      "Revisão e síntese dos textos, eliminando ambiguidades no regulamento e critérios de elegibilidade.",
+      "Criação de novos componentes visuais (cards com selos, grids de etapas e embeds das edições passadas).",
+      "Desenvolvimento da experiência do formulário de submissão com validações dinâmicas.",
+      "Implementação de microinteração com confetes coloridos na confirmação de envio para reforçar o sucesso da inscrição."
     ],
-    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Vercel CDN"],
+    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Canvas Confetti"],
     testimonial: {
-      text: "Nosso novo site agora reflete a qualidade dos serviços que entregamos. A velocidade e a elegância visual do projeto impressionaram nossos clientes.",
-      author: "Renato Ramos",
-      role: "Sócio-Diretor",
-      company: "Apex Consultoria"
+      text: "A reformulação da página do Prêmio trouxe uma apresentação muito mais convidativa e clara para os professores e estudantes. O fluxo de inscrição ficou simples, visualmente acolhedor e com feedback imediato.",
+      author: "Natália Vieira",
+      role: "Coordenadora do Projeto",
+      company: "Fundação Lucia e Pelerson Penido — FLUPP"
     },
-    relatedServices: ["sites-institucionais", "design-e-melhoria-de-interfaces"]
-  },
-  {
-    slug: "simples-foco-no-que-importa",
-    name: "Simples: Foco no que importa",
-    client: "Projeto Autoral MENOS",
-    category: "Projetos Autorais",
-    challenge: "Provar que gerenciadores de tarefas comuns são excessivamente burocráticos, criando estresse com prazos e tags desnecessárias.",
-    solution: "Criação de um aplicativo minimalista de notas e afazeres que organiza o dia com base em foco único, limitando as tarefas ativas diárias.",
-    impact: "Projeto de código aberto adotado por mais de 1.200 profissionais como ferramenta diária de organização pessoal.",
-    description: "O Simples é um projeto autoral concebido e desenvolvido pela MENOS para materializar nosso manifesto de simplificação. Trata-se de uma ferramenta digital de produtividade humana que recusa a estética de sobrecarga de softwares corporativos. Em vez de centenas de prioridades, cores e tags, o Simples incentiva o usuário a selecionar no máximo 3 metas por dia e focar nelas até a conclusão. Sem lembretes estridentes, sem ansiedade digital.",
-    keyFeatures: [
-      "Interface baseada puramente em texto com excelente tipografia e contraste.",
-      "Limitação nativa de tarefas diárias ativas (regra de 3 tarefas).",
-      "Banco de dados local (privacidade total para o usuário, sem rastreadores).",
-      "Animações sutis e interações suaves por teclado."
+    image: "/images/site-premio-flupp/Captura de tela 2026-09-25 233007.png",
+    gallery: [
+      {
+        title: "Página Principal do Prêmio",
+        category: "Hero & Apresentação",
+        caption: "Capa de abertura com tipografia refinada e apresentação do propósito de valorização dos educadores do Vale do Paraíba.",
+        image: "/images/site-premio-flupp/Captura de tela 2026-09-25 233007.png"
+      },
+      {
+        title: "Elegibilidade e Categorias",
+        category: "Quem Pode Participar",
+        caption: "Destaque para educadores da rede pública e inclusão da nova categoria para estudantes de licenciatura.",
+        image: "/images/site-premio-flupp/Captura de tela 2026-09-25 232509.png"
+      },
+      {
+        title: "Etapas de Avaliação e Regulamento",
+        category: "Critérios & Formulário",
+        caption: "Cards das 3 etapas avaliativas (Adequação, Especialista e Vídeo) e chamada para o formulário de inscrição.",
+        image: "/images/site-premio-flupp/Captura de tela 2026-09-25 232516.png"
+      },
+      {
+        title: "Histórico e Premiados Anteriores",
+        category: "Edições Anteriores",
+        caption: "Seção com playlists de vídeos dos projetos vencedores das edições de 2023, 2024 e 2025.",
+        image: "/images/site-premio-flupp/Captura de tela 2026-09-25 232534.png"
+      }
     ],
-    process: [
-      "Discussão interna sobre os principais vilões da ansiedade na produtividade moderna.",
-      "Desenho de uma interface baseada em linhas finas e tipografia limpa.",
-      "Desenvolvimento de uma aplicação web offline-first usando localStorage e criptografia básica local.",
-      "Publicação do código-fonte livre como forma de apoiar a comunidade de tecnologia minimalista."
-    ],
-    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "PWA (Progressive Web App)"],
-    testimonial: {
-      text: "O Simples faz jus ao nome. É o único organizador de tarefas que realmente me acalma em vez de me dar ansiedade pelo que sobrou para amanhã.",
-      author: "Lucas Ferreira",
-      role: "Designer Independente",
-      company: "Usuário do Simples"
-    },
-    relatedServices: ["design-e-melhoria-de-interfaces", "plataformas-digitais"]
+    relatedServices: ["design-e-melhoria-de-interfaces"]
   }
 ];

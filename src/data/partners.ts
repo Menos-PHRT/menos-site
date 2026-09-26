@@ -7,59 +7,31 @@ export interface Partner {
   relation: string;
   externalLink: string;
   period: string;
+  image?: string;
 }
 
 export const partners: Partner[] = [
   {
-    id: "melhores-cabecas",
-    name: "Instituto Melhores Cabeças",
-    logo: "Melhores Cabeças",
+    id: "flupp",
+    name: "Fundação Lucia e Pelerson Penido — FLUPP",
+    logo: "FLUPP",
     category: "client",
-    description: "Organização do terceiro setor focada em conectar mentes brilhantes e financiar pesquisas científicas no Brasil.",
-    relation: "Desenvolvimento de Plataforma Digital e Área Logada de Pesquisadores.",
-    externalLink: "https://example.com/melhores-cabecas",
-    period: "Desde 2024"
-  },
-  {
-    id: "conexao-criativa",
-    name: "Conexão Criativa",
-    logo: "Conexão Criativa",
-    category: "client",
-    description: "Festival cultural independente de grande impacto nacional focado em economia criativa e novas tecnologias.",
-    relation: "Criação de Sistema de Credenciamento rápido por QR Code e portal de inscrições.",
-    externalLink: "https://example.com/conexao-criativa",
-    period: "2023 - 2024"
-  },
-  {
-    id: "certificadora-verde",
-    name: "Certificadora Verde",
-    logo: "Certificadora Verde",
-    category: "client",
-    description: "Instituição independente de fomento à conformidade socioambiental e emissão de selos verdes.",
-    relation: "Desenvolvimento de Plataforma de Submissão e Auditoria Ecológica.",
-    externalLink: "https://example.com/certificadora-verde",
-    period: "Desde 2024"
-  },
-  {
-    id: "coentro",
-    name: "Coentro",
-    logo: "Coentro",
-    category: "client",
-    description: "Restaurante focado em gestão integrada e eficiência operacional de comandas.",
-    relation: "Desenvolvimento do Coentro ERP e automação de impressão térmica local.",
-    externalLink: "https://example.com/coentro",
+    description: "Uma fundação familiar cuja missão é colaborar na construção de uma sociedade mais justa, apoiando projetos de educação no Vale do Paraíba.",
+    relation: "Desenvolvimento da Plataforma ERP Melhores Cabeças, do Sistema de Credenciamento por QR Code, da Plataforma de Certificados e da reformulação da página do Prêmio FLUPP de Educação.",
+    externalLink: "https://flupp.org.br/",
     period: "Desde 2025"
   },
   {
-    id: "apex-consultoria",
-    name: "Apex Consultoria",
-    logo: "Apex Consultoria",
+    id: "coentro",
+    name: "Coentro Restaurante",
+    logo: "Coentro",
     category: "client",
-    description: "Consultoria de negócios de alto padrão focada em reestruturação corporativa e otimização financeira.",
-    relation: "Criação de site institucional moderno focado em conversão de leads qualificados.",
-    externalLink: "https://example.com/apex-consultoria",
-    period: "2024"
+    description: "Restaurante de comida caseira focado em acolhimento, sabor autêntico e eficiência no atendimento.",
+    relation: "Desenvolvimento de plataforma de gestão para o restaurante, centralizando controle de comandas, frente de caixa, fluxo operacional e impressão integrada.",
+    externalLink: "https://example.com/coentro",
+    period: "Desde 2026"
   },
+
   {
     id: "design-coletivo",
     name: "Design Coletivo",
@@ -81,23 +53,47 @@ export const partners: Partner[] = [
     period: "Desde 2024"
   },
   {
-    id: "mariana-lima",
-    name: "Mariana Lima",
-    logo: "Mariana Lima",
+    id: "andre-sobrinho",
+    name: "André Sobrinho",
+    logo: "André Sobrinho",
     category: "collaborator",
-    description: "Desenvolvedora sênior especialista em integrações complexas de hardware e middlewares de comunicação física.",
-    relation: "Desenvolvimento Back-End & Conexão de Hardware.",
-    externalLink: "https://github.com/mariana-lima-dev",
-    period: "Colaboradora recorrente"
+    description: "Consultor técnico na Oracle com foco em Oracle Retail Merchandising, projetos internacionais LATAM e soluções Oracle Cloud, formado pela FIAP.",
+    relation: "Technical Consultant na Oracle",
+    externalLink: "https://www.linkedin.com/in/andr%C3%A9-sobrinho-321312235/",
+    period: "Apoiador do projeto",
+    image: "/images/apoiadores/André Sobrinho.png"
   },
   {
-    id: "thiago-reis",
-    name: "Thiago Reis",
-    logo: "Thiago Reis",
+    id: "john-wesley",
+    name: "John Wesley",
+    logo: "John Wesley",
     category: "collaborator",
-    description: "Designer de produto (UX/UI) com foco em minimalismo digital, especializado no desenho de painéis e sistemas internos.",
-    relation: "Pesquisa de Usuário e Desenho de Interfaces Customizadas.",
-    externalLink: "https://dribbble.com/thiago-reis-design",
-    period: "Colaborador recorrente"
+    description: "Consultor associado na Oracle com atuação em Oracle Fusion Apps e formação em desenvolvimento web full stack moderno (React, C#, JavaScript).",
+    relation: "Associate Consultant na Oracle",
+    externalLink: "https://www.linkedin.com/in/john-wesley-a82636288/",
+    period: "Apoiador do projeto",
+    image: "/images/apoiadores/John Weslay.jpeg"
+  },
+  {
+    id: "lucas-derico",
+    name: "Lucas Derico Pomerancblum",
+    logo: "Lucas Derico Pomerancblum",
+    category: "collaborator",
+    description: "Especialista em Sistemas de Informação pela ESPM com atuação em infraestrutura em nuvem, consultoria e soluções Oracle e Cloud na IT Convergence.",
+    relation: "Consultor Cloud & Sistemas de Informação",
+    externalLink: "https://www.linkedin.com/in/lucas-derico/",
+    period: "Apoiador do projeto",
+    image: "/images/apoiadores/Lucas Derico.jpeg"
+  },
+  {
+    id: "stefani-vasconcellos",
+    name: "Stefani Vasconcellos",
+    logo: "Stefani Vasconcellos",
+    category: "collaborator",
+    description: "Engenheira de software na Oracle especialista em Cloud, Inteligência Artificial Generativa e ERP Fusion Cloud, com certificações OCI e AWS e atuação em Java e Python.",
+    relation: "Applications Software Engineer na Oracle",
+    externalLink: "https://www.linkedin.com/in/stefani-beatriz-carvalho-vasconcellos/",
+    period: "Apoiadora do projeto",
+    image: "/images/apoiadores/Stefani Vasconcellos.png"
   }
 ];

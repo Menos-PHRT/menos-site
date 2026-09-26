@@ -23,12 +23,12 @@ export const Footer: React.FC = () => {
             <div className="flex flex-col gap-2 text-sm text-slate-600">
               <p>
                 <strong>Contato:</strong>{" "}
-                <a href="mailto:contato@menos.studio" className="hover:text-blue-600 transition">
-                  contato@menos.studio
+                <a href="mailto:menos.lab@gmail.com" className="hover:text-blue-600 transition">
+                  menos.lab@gmail.com
                 </a>
               </p>
               <p>
-                <strong>Resposta média:</strong> em até 24 horas úteis
+                <strong>Resposta média:</strong> Em até 1 hora
               </p>
             </div>
           </div>

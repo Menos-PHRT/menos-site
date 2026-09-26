@@ -43,7 +43,7 @@ export default function TermsOfUsePage() {
 
           <h2 className="text-lg font-bold text-slate-900 mt-4">5. Legislação e Foro</h2>
           <p>
-            Estes termos de uso são regidos pelas leis da República Federativa do Brasil. Fica eleito o foro da comarca da capital do estado do cliente ou da comarca sede do estúdio MENOS para dirimir eventuais controvérsias decorrentes da utilização deste site.
+            Estes termos de uso são regidos pelas leis da República Federativa do Brasil. Fica eleito o foro da comarca da capital do estado de São Paulo, sede do estúdio MENOS, para dirimir eventuais controvérsias decorrentes da utilização deste site.
           </p>
         </div>
       </div>

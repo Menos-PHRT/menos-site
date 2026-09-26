@@ -7,11 +7,19 @@ import React from "react";
 import { Button } from "@/components/ui/Button";
 
 export default function AboutPage() {
-  const values = [
-    { title: "Intenção", desc: "Não escrevemos uma linha de código sem entender o porquê. Cada recurso deve servir a um propósito real." },
-    { title: "Clareza", desc: "Sem jargões complicados. Nos comunicamos de forma transparente e projetamos sistemas fáceis de compreender." },
-    { title: "Respeito ao Tempo", desc: "Bons sistemas reduzem o esforço operacional. Tecnologia deve economizar seu tempo, não consumi-lo." },
-    { title: "Artesanato Digital", desc: "Código limpo, design refinado e interfaces de alta performance que parecem feitas sob medida." }
+  const pillars = [
+    {
+      title: "Missão",
+      desc: "Simplificar a rotina de organizações e empresas através de tecnologia sob medida, eliminando o caos operacional, processos manuais e burocracias para que as equipes foquem no que realmente importa."
+    },
+    {
+      title: "Visão",
+      desc: "Ser a principal referência em tecnologia simples e humana, transformando a relação das pessoas com seus sistemas e provando que a verdadeira eficiência nasce da clareza e da eliminação de excessos."
+    },
+    {
+      title: "Valores",
+      desc: "Clareza absoluta e comunicação sem jargões; respeito ao tempo das pessoas; foco em utilidade real em cada linha de código; e autonomia completa para o cliente."
+    }
   ];
 
   const whatWeAre = [
@@ -34,7 +42,7 @@ export default function AboutPage() {
     <div className="w-full py-16 md:py-24 bg-white relative">
       <div className="absolute inset-0 bg-dot-grid pointer-events-none opacity-40"></div>
 
-      <div className="max-w-4xl mx-auto px-6 relative z-10">
+      <div className="max-w-5xl mx-auto px-6 relative z-10">
         {/* Header */}
         <div className="mb-16">
           <motion.div
@@ -68,7 +76,7 @@ export default function AboutPage() {
             A MENOS nasceu de uma frustração comum: por que a tecnologia corporativa parece estar ficando cada vez mais complexa, lenta e burocrática? Na pressa de adicionar novos recursos, a maioria das empresas de software esquece que o verdadeiro valor de um sistema está em <strong>liberar espaço mental e operacional</strong>.
           </p>
           <p>
-            Escolhemos o nome <strong>MENOS</strong> como um lembrete e um compromisso. Menos cliques para completar um cadastro. Menos planilhas soltas para gerenciar estoques. Menos reuniões de alinhamento para entender dados confusos. 
+            Escolhemos o nome <strong>MENOS</strong> como um lembrete e um compromisso. Menos cliques para completar um cadastro. Menos planilhas soltas para gerenciar estoques. Menos reuniões de alinhamento para entender dados confusos.
           </p>
           <p className="font-medium text-slate-900">
             Acreditamos que, no mundo digital, subtrair o que é desnecessário é a forma mais refinada de multiplicar a produtividade.
@@ -118,23 +126,23 @@ export default function AboutPage() {
           </motion.div>
         </section>
 
-        {/* 3. Valores e Manifesto */}
+        {/* 3. Missão, Visão e Valores */}
         <section className="mb-20">
-          <h2 className="text-xl font-bold text-slate-900 mb-8">Nossos Pilares</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {values.map((val, idx) => (
+          <h2 className="text-xl font-bold text-slate-900 mb-8">Missão, Visão e Valores</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {pillars.map((pillar, idx) => (
               <motion.div
-                key={val.title}
+                key={pillar.title}
                 initial={false}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.05 }}
                 className="flex flex-col gap-2"
               >
-                <h4 className="font-bold text-slate-900 text-base flex items-center gap-2">
-                  <span className="text-xs font-mono text-blue-600">0{idx + 1}</span> {val.title}
+                <h4 className="font-bold text-slate-900 text-base">
+                  {pillar.title}
                 </h4>
-                <p className="text-sm text-slate-500 leading-relaxed">{val.desc}</p>
+                <p className="text-sm text-slate-500 leading-relaxed">{pillar.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -149,57 +157,56 @@ export default function AboutPage() {
           className="border-t border-slate-100 pt-16 mb-20"
         >
           <h2 className="text-xl font-bold text-slate-900 mb-8">Quem Conduz</h2>
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
-            {/* Foto Avatar */}
-            <div className="md:col-span-4 flex justify-center pt-2">
-              <div className="relative h-40 w-40 md:h-48 md:w-48 rounded-full overflow-hidden border-2 border-slate-200 shadow-md bg-slate-900">
-                <Image
-                  src="/images/robert-alcantara-v3.jpg"
-                  alt="Robert Alcântara — Presidente, Fundador e Desenvolvedor da MENOS"
-                  fill
-                  className="object-cover object-[center_25%]"
-                  priority
-                />
-              </div>
-            </div>
-            {/* Texto Descritivo */}
-            <div className="md:col-span-8 flex flex-col gap-4 text-slate-600 leading-relaxed text-sm">
-              <div>
-                <h3 className="text-lg font-bold text-slate-900">Robert Alcântara</h3>
-                <p className="text-xs font-mono text-blue-600 font-semibold uppercase tracking-wider mt-0.5">
-                  Presidente, Fundador e Desenvolvedor da MENOS
-                </p>
-              </div>
-              <p>
-                Formado em Gestão de Políticas Públicas pela Universidade de São Paulo, Robert Alcântara iniciou sua trajetória profissional como estagiário na Fundação Lúcia e Pelerson Penido (FLUPP), cuidando da comunicação midiática e institucional da Fundação. Durante essa experiência, percebeu como processos burocráticos, tarefas repetitivas e informações dispersas podiam consumir tempo e reduzir a eficiência de projetos com grande impacto social.
-              </p>
-              <p>
-                Foi a partir dessas dificuldades concretas que começou a desenvolver sistemas, automações e soluções digitais para simplificar rotinas e tornar o trabalho das equipes mais organizado, ágil e seguro. O que surgiu como uma resposta às necessidades do cotidiano transformou-se em interesse pela programação e, depois, em uma nova direção profissional.
-              </p>
-              <p>
-                Assim nasceu a MENOS: um estúdio voltado à criação de tecnologias simples, funcionais e humanas, desenvolvidas a partir da realidade de cada organização. Robert une sua formação em políticas públicas, sua experiência no terceiro setor e sua sensibilidade criativa para construir soluções que reduzam excessos e devolvam às pessoas tempo para o que realmente importa.
-              </p>
-            </div>
-          </div>
-
-          {/* Paulo Henrique */}
-          <div className="pt-12 border-t border-slate-100/80 mt-12">
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
-              {/* Foto / Placeholder Avatar Paulo Henrique */}
-              <div className="md:col-span-4 flex justify-center pt-2">
-                <div className="h-40 w-40 md:h-48 md:w-48 rounded-full bg-slate-900 text-white font-bold flex flex-col items-center justify-center border-2 border-slate-200 shadow-md">
-                  <span className="text-3xl font-mono tracking-widest">P.H.</span>
-                  <span className="text-[10px] text-blue-400 uppercase tracking-widest font-semibold mt-1">MENOS</span>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-12 items-start">
+            {/* Robert Alcântara */}
+            <div className="flex flex-col gap-6">
+              <div className="flex items-center gap-4">
+                <div className="relative h-20 w-20 md:h-24 md:w-24 rounded-full overflow-hidden border-2 border-slate-200 shadow-sm bg-slate-900 shrink-0">
+                  <Image
+                    src="/images/robert-alcantara-v3.jpg"
+                    alt="Robert Alcântara — Presidente, Fundador e Desenvolvedor da MENOS"
+                    fill
+                    className="object-cover object-[center_25%]"
+                    priority
+                  />
+                </div>
+                <div>
+                  <h3 className="text-lg md:text-xl font-bold text-slate-900">Robert Alcântara</h3>
+                  <p className="text-xs font-mono text-blue-600 font-semibold uppercase tracking-wider mt-0.5">
+                    Fundador e Desenvolvedor da MENOS
+                  </p>
                 </div>
               </div>
-              {/* Texto Descritivo */}
-              <div className="md:col-span-8 flex flex-col gap-4 text-slate-600 leading-relaxed text-sm">
+
+              <div className="flex flex-col gap-3 text-slate-600 leading-relaxed text-sm">
+                <p>
+                  Formado em Gestão de Políticas Públicas pela Universidade de São Paulo (USP), iniciou sua trajetória na Fundação Lucia e Perlerson Penido (FLUPP), onde identificou como processos manuais, repetitivos e planilhas desorganizadas sobrecarregavam a rotina da Fundação.
+                </p>
+                <p>
+                  Buscando soluções concretas na tecnologia, realizou sua formação em programação no Facebook, em programa desenvolvido em parceria com a MadCode.
+                </p>
+                <p>
+                  Fundou a MENOS para construir sistemas funcionais e descomplicados, combinando sensibilidade institucional e desenvolvimento sob medida para eliminar o caos operacional das organizações.
+                </p>
+              </div>
+            </div>
+
+            {/* Paulo Henrique */}
+            <div className="flex flex-col gap-6">
+              <div className="flex items-center gap-4">
+                <div className="h-20 w-20 md:h-24 md:w-24 rounded-full bg-slate-900 text-white font-bold flex flex-col items-center justify-center border-2 border-slate-200 shadow-sm shrink-0">
+                  <span className="text-2xl font-mono tracking-widest">P.H.</span>
+                  <span className="text-[9px] text-blue-400 uppercase tracking-widest font-semibold mt-0.5">MENOS</span>
+                </div>
                 <div>
-                  <h3 className="text-lg font-bold text-slate-900">Paulo Henrique</h3>
+                  <h3 className="text-lg md:text-xl font-bold text-slate-900">Paulo Henrique</h3>
                   <p className="text-xs font-mono text-blue-600 font-semibold uppercase tracking-wider mt-0.5">
                     Cofundador e desenvolvedor da MENOS
                   </p>
                 </div>
+              </div>
+
+              <div className="flex flex-col gap-3 text-slate-600 leading-relaxed text-sm">
                 <p>
                   Formado em Sistemas de Informação pela Universidade de São Paulo, Paulo Henrique construiu sua trajetória profissional a partir do desenvolvimento de software e da participação em diferentes projetos de tecnologia. Sua experiência inclui a atuação em software houses, ambientes marcados pela criação de soluções sob medida, integração de sistemas e resolução de desafios técnicos diversos.
                 </p>

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import React from "react";
 import { ArrowUpRight, CheckCircle2, User, Globe, Briefcase } from "lucide-react";
 import { Button } from "@/components/ui/Button";
@@ -49,7 +50,9 @@ export default function PartnersPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {clients.map((client, idx) => {
               // Buscar projeto relacionado
-              const relatedProject = projects.find((proj) => proj.client === client.name);
+              const relatedProject = projects.find(
+                (proj) => proj.client === client.name || client.name.includes(proj.client) || proj.client.includes(client.name)
+              );
 
               return (
                 <motion.div
@@ -82,9 +85,9 @@ export default function PartnersPage() {
                       <p className="text-xs text-slate-500 leading-relaxed mb-4">
                         {client.description}
                       </p>
-                      
+
                       <div className="h-[1px] bg-slate-50 my-4"></div>
-                      
+
                       <p className="text-xs text-slate-600 leading-relaxed mb-4">
                         <strong>Atuação:</strong> {client.relation}
                       </p>
@@ -136,7 +139,7 @@ export default function PartnersPage() {
         {/* 3. Colaboradores */}
         <section className="mb-20">
           <h2 className="text-xl font-bold text-slate-900 mb-8 pb-3 border-b border-slate-100 flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-blue-600"></span> Profissionais Colaboradores
+            <span className="h-2 w-2 rounded-full bg-blue-600"></span> Apoiadores do Projeto
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {collaborators.map((collab, idx) => (
@@ -148,8 +151,20 @@ export default function PartnersPage() {
                 transition={{ duration: 0.5, delay: idx * 0.05 }}
                 className="p-6 border border-slate-100 rounded-2xl flex items-start gap-4"
               >
-                <div className="h-10 w-10 rounded-full bg-slate-100 flex items-center justify-center shrink-0 border border-slate-200">
-                  <User className="h-5 w-5 text-slate-500" />
+                <div className="h-12 w-12 rounded-full overflow-hidden shrink-0 border border-slate-200 bg-slate-100 relative">
+                  {collab.image ? (
+                    <Image
+                      src={collab.image}
+                      alt={collab.name}
+                      width={48}
+                      height={48}
+                      className="h-full w-full object-cover"
+                    />
+                  ) : (
+                    <div className="h-full w-full flex items-center justify-center">
+                      <User className="h-5 w-5 text-slate-500" />
+                    </div>
+                  )}
                 </div>
                 <div className="flex flex-col gap-1 text-xs">
                   <div className="flex items-center justify-between gap-4">
@@ -196,12 +211,14 @@ export default function PartnersPage() {
           viewport={{ once: true }}
           className="p-8 md:p-12 rounded-3xl bg-slate-50 border border-slate-100 text-center flex flex-col items-center gap-6"
         >
-          <h3 className="text-2xl font-bold text-slate-900">Quer construir algo com a MENOS?</h3>
-          <p className="text-slate-500 max-w-md text-sm leading-relaxed">
-            Seja você um cliente procurando simplificar processos ou um designer/desenvolvedor independente querendo colaborar em nossos projetos.
+          <h3 className="text-2xl md:text-3xl font-bold text-slate-900">
+            Pronto para simplificar a operação da sua empresa?
+          </h3>
+          <p className="text-slate-500 max-w-xl text-sm md:text-base leading-relaxed">
+            Elimine tarefas manuais e planilhas confusas. Desenvolvemos sistemas sob medida para a sua operação rodar com máxima eficiência e clareza.
           </p>
           <Button href="/contato" variant="primary">
-            Entre em contato <ArrowUpRight className="h-4 w-4 ml-1" />
+            Solicitar diagnóstico gratuito <ArrowUpRight className="h-4 w-4 ml-1" />
           </Button>
         </motion.div>
       </div>

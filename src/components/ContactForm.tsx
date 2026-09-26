@@ -25,6 +25,7 @@ export const ContactForm: React.FC = () => {
     city: "",
     solutionType: "",
     referredBy: "",
+    referredByOther: "",
     problemDescription: "",
     deadline: "",
     budget: "",
@@ -98,10 +99,18 @@ export const ContactForm: React.FC = () => {
 
     setIsSubmitting(true);
     try {
+      const finalReferredBy =
+        formData.referredBy === "Outros" && formData.referredByOther.trim()
+          ? `Outros: ${formData.referredByOther.trim()}`
+          : formData.referredBy;
+
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({
+          ...formData,
+          referredBy: finalReferredBy
+        })
       });
 
       if (response.ok) {
@@ -247,15 +256,45 @@ export const ContactForm: React.FC = () => {
           <label htmlFor="referredBy" className="text-xs font-semibold uppercase tracking-wider text-slate-600">
             Como conheceu a MENOS?
           </label>
-          <input
-            type="text"
-            id="referredBy"
-            name="referredBy"
-            value={formData.referredBy}
-            onChange={handleChange}
-            placeholder="Ex: Indicação, Google..."
-            className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-600 bg-white focus:outline-none transition-colors text-sm"
-          />
+          <div className="relative">
+            <select
+              id="referredBy"
+              name="referredBy"
+              value={formData.referredBy}
+              onChange={handleChange}
+              className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-600 bg-white focus:outline-none transition-colors text-sm appearance-none cursor-pointer"
+            >
+              <option value="">Selecione uma opção...</option>
+              <option value="Redes sociais">Redes sociais</option>
+              <option value="Pesquisa na internet">Pesquisa na internet</option>
+              <option value="Anúncio online">Anúncio online</option>
+              <option value="Amigos">Amigos</option>
+              <option value="Outros">Outros</option>
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </div>
+
+          {formData.referredBy === "Outros" && (
+            <div className="mt-2 flex flex-col gap-1">
+              <label htmlFor="referredByOther" className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">
+                Especifique como nos conheceu:
+              </label>
+              <input
+                type="text"
+                id="referredByOther"
+                name="referredByOther"
+                value={formData.referredByOther}
+                onChange={handleChange}
+                placeholder="Conte-nos como chegou até nós..."
+                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:border-blue-600 bg-slate-50/50 focus:bg-white focus:outline-none transition-colors text-sm"
+                autoFocus
+              />
+            </div>
+          )}
         </div>
 
         {/* Prazo */}

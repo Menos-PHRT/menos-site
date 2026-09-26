@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Link from "next/link";
 import React, { useState } from "react";
 import { ArrowRight, CheckCircle2, ChevronRight } from "lucide-react";
@@ -56,38 +55,34 @@ export default function ServicesPage() {
 
         {/* Filters */}
         <div className="flex flex-wrap gap-2 mb-12 border-b border-slate-100 pb-6">
-          {categories.map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => setActiveCategory(cat.id)}
-              className={`px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase transition-all duration-300 ${
-                activeCategory === cat.id
-                  ? "bg-slate-900 text-white shadow-sm"
-                  : "bg-slate-50 border border-slate-100 text-slate-600 hover:bg-slate-100"
-              }`}
-            >
-              {cat.name}
-            </button>
-          ))}
+          {categories.map((cat) => {
+            const isActive = activeCategory === cat.id;
+            return (
+              <button
+                key={cat.id}
+                type="button"
+                onClick={() => setActiveCategory(cat.id)}
+                className={`cursor-pointer px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase transition-all duration-200 outline-none select-none ${
+                  isActive
+                    ? "bg-slate-900 text-white shadow-sm ring-2 ring-slate-900 ring-offset-2"
+                    : "bg-slate-50 border border-slate-100 text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+                }`}
+              >
+                {cat.name}
+              </button>
+            );
+          })}
         </div>
 
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {filteredServices.map((service, i) => (
-            <motion.div
+          {filteredServices.map((service) => (
+            <div
               key={service.slug}
-              layout
-              initial={false}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.4 }}
               className="bg-white border border-slate-100 p-8 rounded-3xl flex flex-col justify-between hover:shadow-lg hover:shadow-slate-100 hover:border-slate-200 transition duration-300"
             >
               <div>
-                <div className="flex justify-between items-start mb-6">
-                  <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest">
-                    SOLUÇÃO_0{i + 1}
-                  </span>
+                <div className="flex justify-end items-start mb-6">
                   <span className="text-xs text-slate-500 bg-slate-50 border border-slate-100 px-3 py-1 rounded-full font-medium">
                     {categories.find((c) => c.id === serviceCategories[service.slug])?.name}
                   </span>
@@ -133,7 +128,7 @@ export default function ServicesPage() {
                   Solicitar orçamento &rarr;
                 </Link>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

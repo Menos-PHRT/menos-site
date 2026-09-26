@@ -10,7 +10,7 @@ export default function HowWeWorkPage() {
     {
       num: "01",
       title: "Conversa Inicial",
-      desc: "Conversamos para entender qual é a sua dor operacional, quem são as pessoas envolvidas e o que você espera que funcione melhor na sua rotina."
+      desc: "Conversamos para entender qual é o ponto crítico operacional da sua organização, quem são as pessoas envolvidas e o que você espera que funcione melhor na sua rotina."
     },
     {
       num: "02",
@@ -55,7 +55,7 @@ export default function HowWeWorkPage() {
     },
     {
       q: "Como funciona a segurança e hospedagem?",
-      a: "Seguimos as melhores práticas da LGPD. Os dados críticos são criptografados em trânsito e em repouso. Hospedamos em nuvens globais (como AWS, Vercel ou Supabase) estruturadas para ter custo mínimo e alta estabilidade."
+      a: "Seguimos as melhores práticas da LGPD. Os dados críticos são criptografados em trânsito e em repouso. Hospedamos em nuvens globais (como AWS, Firebase Hosting, Vercel ou Supabase) estruturadas para ter custo mínimo e alta estabilidade."
     },
     {
       q: "Como funciona o suporte e a manutenção?",
@@ -101,7 +101,7 @@ export default function HowWeWorkPage() {
                 <div className="absolute -left-[45px] top-1 h-8 w-8 rounded-full bg-slate-900 text-white font-mono text-[10px] font-bold flex items-center justify-center border-4 border-white shadow-sm z-10">
                   {step.num}
                 </div>
-                
+
                 <h3 className="text-base font-bold text-slate-900 leading-snug">
                   {step.title}
                 </h3>
