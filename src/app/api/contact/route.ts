@@ -2,8 +2,6 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { getDb } from "@/lib/firebaseAdmin";
 
-const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
-
 export async function POST(request: Request) {
   try {
     const body = await request.json();
@@ -58,20 +56,21 @@ export async function POST(request: Request) {
         console.log("✅ Lead salvo no Firestore com ID:", docRef.id);
         savedToFirestore = true;
       } else {
-        console.warn("⚠️ Firebase Admin não configurado no .env.local. Registro pulado no Firestore.");
+        console.warn("⚠️ Firebase Admin não configurado ou credenciais inválidas no .env.local. Registro pulado.");
       }
     } catch (firestoreError) {
       console.error("❌ Erro ao salvar no Firebase Firestore:", firestoreError);
-      // Não interrompe o fluxo para tentar enviar o e-mail mesmo se o banco oscilar
     }
 
     // 2. Disparar notificação por E-mail via Resend
     let emailSent = false;
+    const resendApiKey = process.env.RESEND_API_KEY;
     const recipientEmail = process.env.NOTIFICATION_EMAIL || "menos.lab@gmail.com";
     const senderEmail = process.env.EMAIL_FROM || "MENOS Contato <onboarding@resend.dev>";
 
-    if (resend) {
+    if (resendApiKey && !resendApiKey.includes("123456789")) {
       try {
+        const resend = new Resend(resendApiKey);
         const emailHtml = `
           <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; color: #1e293b; background-color: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0;">
             <div style="border-bottom: 2px solid #2563eb; padding-bottom: 16px; margin-bottom: 20px;">
@@ -140,7 +139,7 @@ export async function POST(request: Request) {
         console.error("❌ Erro ao enviar e-mail via Resend:", emailError);
       }
     } else {
-      console.warn("⚠️ RESEND_API_KEY não configurada no .env.local. Envio de e-mail pulado.");
+      console.warn("⚠️ RESEND_API_KEY não configurada ou está com chave de exemplo. Envio de e-mail pulado.");
     }
 
     return NextResponse.json({
