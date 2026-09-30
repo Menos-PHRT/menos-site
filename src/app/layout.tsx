@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import React from "react";
-import BrandIntro from "@/components/BrandIntro";
+import BrandIntro from "@/components/brand/BrandIntro";
 import CookieBanner from "@/components/CookieBanner";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";

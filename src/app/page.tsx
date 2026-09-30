@@ -111,8 +111,11 @@ export default function HomePage() {
   return (
     <div className="w-full flex flex-col overflow-x-hidden">
       {/* 1. HERO SECTION — a rede cobre o hero inteiro; aproximar-se dos botões
-          aproxima o cursor daquela região da rede, que se organiza ao redor. */}
-      <section className="relative min-h-[calc(100vh-120px)] flex items-center py-16 md:py-24 bg-white overflow-hidden">
+          aproxima o cursor daquela região da rede, que se organiza ao redor.
+          -mt cancela o pt-24/pt-28 do <main> do layout (o hero já tem seu
+          próprio respiro de 128px no padding-top; sem isso, os dois somavam
+          e sobrava espaço extra no topo da página). */}
+      <section className="relative -mt-24 md:-mt-28 pt-32 pb-[72px] min-h-[78vh] flex items-center bg-white overflow-hidden">
         <div className="absolute inset-0 bg-dot-grid pointer-events-none opacity-60"></div>
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0 }}
@@ -130,7 +133,7 @@ export default function HomePage() {
               initial="hidden"
               animate="visible"
               variants={fadeUp(0.05)}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-brand-950 leading-[1.1]"
+              className="text-[clamp(38px,5.2vw,62px)] font-bold tracking-[-0.025em] text-brand-950 leading-[1.08]"
             >
               Menos complexidade.<br />
               <span className="text-brand-600 font-light">Mais espaço e tempo para o que realmente importa.</span>
@@ -140,7 +143,7 @@ export default function HomePage() {
               initial="hidden"
               animate="visible"
               variants={fadeUp(0.15)}
-              className="text-lg text-slate-600 leading-relaxed max-w-xl"
+              className="text-[18px] leading-[1.65] text-slate-600 max-w-xl"
             >
               Desenvolvemos sistemas, automações e experiências digitais unindo IA e curadoria técnica especializada, para transformar processos manuais e dispersos em operações simples, rápidas de construir e fáceis de manter.
             </motion.p>
@@ -168,7 +171,7 @@ export default function HomePage() {
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
             <div className="max-w-xl">
               <h2 className="text-xs font-semibold text-brand-600 uppercase tracking-widest mb-3">Nossas Soluções</h2>
-              <h3 className="text-3xl md:text-4xl font-bold tracking-tight text-brand-950 leading-tight">
+              <h3 className="text-[clamp(28px,3.2vw,36px)] font-bold tracking-[-0.025em] text-brand-950 leading-[1.2]">
                 Soluções criadas a partir do problema, não da tecnologia.
               </h3>
             </div>
@@ -225,7 +228,7 @@ export default function HomePage() {
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
             <div className="max-w-xl">
               <h2 className="text-xs font-semibold text-brand-600 uppercase tracking-widest mb-3">Nossos cases</h2>
-              <h3 className="text-3xl md:text-4xl font-bold tracking-tight text-brand-950 leading-tight">
+              <h3 className="text-[clamp(28px,3.2vw,36px)] font-bold tracking-[-0.025em] text-brand-950 leading-[1.2]">
                 Soluções que já tiraram ideias do improviso.
               </h3>
             </div>
@@ -243,7 +246,7 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-dot-grid-dense opacity-30 pointer-events-none"></div>
         <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
           <h2 className="text-xs font-semibold text-brand-600 uppercase tracking-widest mb-6">Nosso Posicionamento</h2>
-          <h3 className="text-3xl md:text-5xl font-bold tracking-tight text-brand-950 mb-8 leading-tight">
+          <h3 className="text-[clamp(30px,4.2vw,48px)] font-bold tracking-[-0.025em] text-brand-950 mb-8 leading-[1.15]">
             Tecnologia não precisa aumentar a complexidade.
           </h3>
           <ScrollRevealText
@@ -261,7 +264,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="max-w-xl mb-16">
             <h2 className="text-xs font-semibold text-brand-600 uppercase tracking-widest mb-3">Como agimos</h2>
-            <h3 className="text-3xl md:text-4xl font-bold tracking-tight text-brand-950 leading-tight">
+            <h3 className="text-[clamp(28px,3.2vw,36px)] font-bold tracking-[-0.025em] text-brand-950 leading-[1.2]">
               Simplificar também exige método.
             </h3>
           </div>
@@ -301,7 +304,7 @@ export default function HomePage() {
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
             <div>
               <h2 className="text-xs font-semibold text-brand-600 uppercase tracking-widest mb-3">Ecossistema</h2>
-              <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-brand-950 leading-tight">
+              <h3 className="text-[clamp(24px,2.6vw,30px)] font-bold tracking-[-0.025em] text-brand-950 leading-[1.2]">
                 Tecnologia é construção conjunta.
               </h3>
             </div>
@@ -394,7 +397,7 @@ export default function HomePage() {
         <div className="max-w-4xl mx-auto px-6 text-center relative z-10 flex flex-col items-center gap-8">
           <ScrollMark />
           <h2 className="text-xs font-semibold text-brand-600 uppercase tracking-widest">Simplifique hoje</h2>
-          <h3 className="text-3xl md:text-5xl font-bold tracking-tight text-brand-950 leading-tight">
+          <h3 className="text-[clamp(30px,4.2vw,48px)] font-bold tracking-[-0.025em] text-brand-950 leading-[1.15]">
             O que está tomando mais tempo do que deveria?
           </h3>
           <p className="text-base md:text-lg text-slate-500 leading-relaxed max-w-xl">
