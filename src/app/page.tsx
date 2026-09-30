@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   ArrowRight,
   ChevronLeft,
@@ -11,31 +11,68 @@ import {
 } from "lucide-react";
 import AINetworkVisual from "@/components/AINetworkVisual";
 import CaseCarousel from "@/components/CaseCarousel";
-import PartnerCarousel from "@/components/PartnerCarousel";
+import ScrollMark from "@/components/ScrollMark";
+import ScrollRevealText from "@/components/ScrollRevealText";
 import { Button } from "@/components/ui/Button";
-import { Card } from "@/components/ui/Card";
 import { partners } from "@/data/partners";
 import { projects } from "@/data/projects";
 import { services } from "@/data/services";
 import { testimonials } from "@/data/testimonials";
 
+const MANIFESTO_TEXT = "A MENOS nasce da ideia de que bons sistemas não são aqueles que exibem mais recursos, mas aqueles que tornam a vida mais simples. Antes de desenvolver, buscamos entender. Antes de automatizar, organizamos. Antes de acrescentar, perguntamos o que pode ser retirado. Unimos IA ao desenvolvimento com curadoria técnica especializada, decidindo arquitetura, segurança e adequação ao problema em times pequenos e próximos do cliente, para que pessoas e organizações dediquem menos tempo ao processo e mais tempo ao que realmente importa.";
+
 export default function HomePage() {
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const shouldReduceMotion = useReducedMotion();
+  const methodRef = useRef<HTMLDivElement>(null);
+  const methodLineRef = useRef<HTMLDivElement>(null);
 
-  // Entrada padrão (Jakub Krehel): opacidade + leve subida, spring sem bounce.
-  // Com prefers-reduced-motion, o elemento aparece direto no estado final.
+  // Entrada padrão do handoff de design: opacidade + leve subida, 0.9s,
+  // cubic-bezier(.16,1,.3,1). Com prefers-reduced-motion, aparece direto.
   const fadeUp = (delay = 0): Variants =>
     shouldReduceMotion
       ? { hidden: { opacity: 1, y: 0 }, visible: { opacity: 1, y: 0 } }
       : {
-          hidden: { opacity: 0, y: 20 },
+          hidden: { opacity: 0, y: 24 },
           visible: {
             opacity: 1,
             y: 0,
-            transition: { type: "spring", duration: 0.5, bounce: 0, delay }
+            transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1], delay }
           }
         };
+
+  // Linha do tempo do método: preenche e acende as bolinhas conforme o scroll
+  // passa pela seção (mesma lógica de progresso do handoff de design).
+  useEffect(() => {
+    if (shouldReduceMotion) return;
+    const onScroll = () => {
+      const el = methodRef.current;
+      const line = methodLineRef.current;
+      if (!el || !line) return;
+      const rect = el.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const p = Math.max(0, Math.min(1, (vh * 0.7 - rect.top) / (rect.height * 0.6)));
+      line.style.width = `${p * 100}%`;
+      const dots = el.querySelectorAll<HTMLElement>("[data-step]");
+      const cards = el.querySelectorAll<HTMLElement>("[data-stepcard]");
+      dots.forEach((d, i) => {
+        const on = p >= i / (dots.length - 1) - 0.02;
+        d.style.background = on ? "#143C3C" : "#C9D6D2";
+        d.style.transform = on ? "scale(1.08)" : "scale(1)";
+        if (cards[i]) {
+          cards[i].style.opacity = on ? "1" : "0.5";
+          cards[i].style.transform = on ? "none" : "translateY(8px)";
+        }
+      });
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, [shouldReduceMotion]);
 
   // 6 Serviços em Destaque
   const featuredServices = services.slice(0, 6);
@@ -52,11 +89,22 @@ export default function HomePage() {
     { num: "06", name: "Acompanhar", desc: "Implantamos o sistema, treinamos a equipe e monitoramos a operação para garantir sucesso." }
   ];
 
+  // Troca automática a cada 7s (para de vez ao usar as setas manualmente).
+  const testimonialTimer = useRef<ReturnType<typeof setInterval> | undefined>(undefined);
+  useEffect(() => {
+    testimonialTimer.current = setInterval(() => {
+      setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
+    }, 7000);
+    return () => clearInterval(testimonialTimer.current);
+  }, []);
+
   const nextTestimonial = () => {
+    clearInterval(testimonialTimer.current);
     setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
   };
 
   const prevTestimonial = () => {
+    clearInterval(testimonialTimer.current);
     setActiveTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
 
@@ -94,7 +142,7 @@ export default function HomePage() {
               variants={fadeUp(0.15)}
               className="text-lg text-slate-600 leading-relaxed max-w-xl"
             >
-              Desenvolvemos sistemas, automações e experiências digitais unindo IA e curadoria técnica especializada — para transformar processos manuais e dispersos em operações simples, rápidas de construir e fáceis de manter.
+              Desenvolvemos sistemas, automações e experiências digitais unindo IA e curadoria técnica especializada, para transformar processos manuais e dispersos em operações simples, rápidas de construir e fáceis de manter.
             </motion.p>
 
             <motion.div
@@ -129,39 +177,42 @@ export default function HomePage() {
             </Button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid gap-6" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))" }}>
             {featuredServices.map((service, i) => (
               <motion.div
                 key={service.slug}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-80px" }}
-                variants={fadeUp(i * 0.05)}
+                variants={fadeUp(i * 0.06)}
               >
-                <Card className="h-full flex flex-col justify-between group p-8">
+                <Link
+                  href={`/servicos/${service.slug}`}
+                  className="flex flex-col justify-between gap-6 h-full transition-all duration-300"
+                  style={{ padding: 32, borderRadius: 16, border: "1px solid #EEF2F1", background: "#fff" }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = "#BEE9E9";
+                    e.currentTarget.style.boxShadow = "0 12px 32px rgba(20,60,60,.08)";
+                    e.currentTarget.style.transform = "translateY(-3px)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = "#EEF2F1";
+                    e.currentTarget.style.boxShadow = "none";
+                    e.currentTarget.style.transform = "none";
+                  }}
+                >
                   <div>
-                    <div className="mb-6">
-                      <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest">
-                        Solução #{i + 1}
-                      </span>
-                    </div>
-                    <h4 className="text-lg font-bold text-brand-950 mb-2 group-hover:text-brand-600 transition">
+                    <h4 className="text-lg font-bold mb-3" style={{ color: "#0C2424" }}>
                       {service.name}
                     </h4>
-                    <p className="text-xs text-slate-400 font-medium italic mb-4">
-                      Resolve: {service.problemsSolved[0]}
-                    </p>
-                    <p className="text-sm text-slate-500 leading-relaxed mb-6">
+                    <p className="text-sm leading-relaxed" style={{ color: "#5B6B69" }}>
                       {service.shortDescription}
                     </p>
                   </div>
-                  <Link
-                    href={`/servicos/${service.slug}`}
-                    className="inline-flex items-center gap-1 text-xs font-semibold text-brand-950 group-hover:text-brand-600 transition"
-                  >
+                  <span className="inline-flex items-center gap-1.5 text-xs font-semibold" style={{ color: "#0C2424" }}>
                     Entenda a solução <ArrowRight className="h-3.5 w-3.5" />
-                  </Link>
-                </Card>
+                  </span>
+                </Link>
               </motion.div>
             ))}
           </div>
@@ -195,16 +246,17 @@ export default function HomePage() {
           <h3 className="text-3xl md:text-5xl font-bold tracking-tight text-brand-950 mb-8 leading-tight">
             Tecnologia não precisa aumentar a complexidade.
           </h3>
-          <p className="text-lg md:text-xl text-slate-600 font-light leading-relaxed mb-10 max-w-3xl mx-auto">
-            A MENOS nasce da ideia de que bons sistemas não são aqueles que exibem mais recursos, mas aqueles que tornam a vida mais simples. Antes de desenvolver, buscamos entender. Antes de automatizar, organizamos. Antes de acrescentar, perguntamos o que pode ser retirado. Unimos IA ao desenvolvimento com curadoria técnica especializada — decidindo arquitetura, segurança e adequação ao problema em times pequenos e próximos do cliente — para que pessoas e organizações dediquem menos tempo ao processo e mais tempo ao que realmente importa.
-          </p>
+          <ScrollRevealText
+            text={MANIFESTO_TEXT}
+            className="mx-auto mb-10 max-w-3xl font-light flex flex-wrap justify-center text-[clamp(18px,1.6vw,20px)] text-[#143C3C] leading-[1.7] gap-x-[0.28em] gap-y-1"
+          />
           <Button href="/a-menos" variant="outline" size="lg">
             Conheça nossa história
           </Button>
         </div>
       </section>
 
-      {/* 7. MÉTODO DE TRABALHO */}
+      {/* 7. MÉTODO DE TRABALHO — a linha e as bolinhas acendem conforme o scroll */}
       <section className="py-20 md:py-28 bg-[#FAF9F6]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="max-w-xl mb-16">
@@ -214,61 +266,36 @@ export default function HomePage() {
             </h3>
           </div>
 
-          {/* Versão Desktop (Linha Horizontal conectando cards) */}
-          <div className="relative hidden lg:block py-6">
-            {/* Linha Horizontal de Fundo */}
-            <div className="absolute top-1/2 left-0 right-0 h-[2px] bg-slate-200 -translate-y-1/2 z-0"></div>
+          <div ref={methodRef} className="relative py-6">
+            <div className="absolute top-11 left-0 right-0 h-[2px]" style={{ background: "#D6E0DD" }}></div>
+            <div ref={methodLineRef} className="absolute top-11 left-0 h-[2px]" style={{ width: 0, background: "#143C3C", transition: shouldReduceMotion ? "none" : "width .1s linear" }}></div>
 
-            <div className="grid grid-cols-6 gap-6 relative z-10">
-              {methodSteps.map((step, idx) => (
-                <motion.div
-                  key={step.num}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: "-80px" }}
-                  variants={fadeUp(idx * 0.08)}
-                  className="flex flex-col gap-6"
-                >
-                  {/* Círculo do Conector */}
-                  <div className="h-10 w-10 rounded-full bg-brand-950 border-4 border-[#FAF9F6] text-white font-mono text-xs font-bold flex items-center justify-center self-center shadow-md">
+            <div className="grid gap-6 relative z-10" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))" }}>
+              {methodSteps.map((step) => (
+                <div key={step.num} className="flex flex-col gap-6">
+                  <div
+                    data-step=""
+                    className="h-10 w-10 rounded-full border-4 text-white font-mono text-xs font-bold flex items-center justify-center self-center shadow-md"
+                    style={{ background: shouldReduceMotion ? "#143C3C" : "#C9D6D2", borderColor: "#F6F8F7", transition: "background .4s, transform .4s" }}
+                  >
                     {step.num}
                   </div>
-                  <div className="bg-white border border-slate-100 p-6 rounded-2xl text-center flex-grow flex flex-col gap-2 min-h-[160px] shadow-sm">
-                    <h4 className="font-bold text-brand-950 text-sm">{step.name}</h4>
-                    <p className="text-xs text-slate-500 leading-relaxed">{step.desc}</p>
+                  <div
+                    data-stepcard=""
+                    className="bg-white p-6 rounded-2xl text-center flex-grow flex flex-col gap-2 min-h-[160px]"
+                    style={{ border: "1px solid #E3EAE8", opacity: shouldReduceMotion ? 1 : 0.5, transition: "opacity .4s, transform .4s" }}
+                  >
+                    <h4 className="font-bold text-sm" style={{ color: "#0C2424" }}>{step.name}</h4>
+                    <p className="text-xs leading-relaxed" style={{ color: "#5B6B69" }}>{step.desc}</p>
                   </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          {/* Versão Mobile (Linha Vertical) */}
-          <div className="relative lg:hidden pl-8">
-            <div className="absolute top-0 bottom-0 left-[15px] w-[2px] bg-slate-200 z-0"></div>
-
-            <div className="flex flex-col gap-8">
-              {methodSteps.map((step, idx) => (
-                <motion.div
-                  key={step.num}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: "-80px" }}
-                  variants={fadeUp(idx * 0.06)}
-                  className="relative flex flex-col gap-2"
-                >
-                  <div className="absolute -left-[33px] top-1.5 h-6 w-6 rounded-full bg-brand-950 border-2 border-[#FAF9F6] text-white font-mono text-[10px] font-bold flex items-center justify-center shadow-sm">
-                    {step.num}
-                  </div>
-                  <h4 className="font-bold text-brand-950 text-base">{step.name}</h4>
-                  <p className="text-sm text-slate-500 leading-relaxed">{step.desc}</p>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* 8. PARCEIROS E CLIENTES */}
+      {/* 8. PARCEIROS E CLIENTES — grade estática, sem carrossel */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
@@ -282,10 +309,26 @@ export default function HomePage() {
               Conheça nossos parceiros
             </Button>
           </div>
+          <div
+            className="grid"
+            style={{ gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", borderTop: "1px solid #EEF2F1", borderLeft: "1px solid #EEF2F1" }}
+          >
+            {partners.map((partner) => (
+              <div
+                key={partner.id}
+                className="flex flex-col gap-2 transition-colors duration-300"
+                style={{ padding: 24, borderRight: "1px solid #EEF2F1", borderBottom: "1px solid #EEF2F1" }}
+                onMouseEnter={(e) => { e.currentTarget.style.background = "#F4FBFB"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; }}
+              >
+                <span className="text-[10px] uppercase tracking-widest" style={{ fontFamily: "ui-monospace, monospace", color: "#8A9A97" }}>
+                  {partner.category === "client" ? "Cliente" : partner.category === "institutional" ? "Parceiro institucional" : partner.category === "collaborator" ? "Colaborador(a)" : "Fornecedor"}
+                </span>
+                <span className="text-sm font-semibold uppercase tracking-wider" style={{ color: "#1F2E2E" }}>{partner.name}</span>
+              </div>
+            ))}
+          </div>
         </div>
-
-        {/* Carrossel Deslizante Contínuo */}
-        <PartnerCarousel />
       </section>
 
       {/* 9. DEPOIMENTOS */}
@@ -349,6 +392,7 @@ export default function HomePage() {
       <section className="py-24 bg-white relative">
         <div className="absolute inset-0 bg-dot-grid pointer-events-none opacity-50"></div>
         <div className="max-w-4xl mx-auto px-6 text-center relative z-10 flex flex-col items-center gap-8">
+          <ScrollMark />
           <h2 className="text-xs font-semibold text-brand-600 uppercase tracking-widest">Simplifique hoje</h2>
           <h3 className="text-3xl md:text-5xl font-bold tracking-tight text-brand-950 leading-tight">
             O que está tomando mais tempo do que deveria?

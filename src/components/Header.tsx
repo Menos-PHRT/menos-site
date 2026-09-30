@@ -2,24 +2,41 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { MenosWordmark } from "./MenosWordmark";
 import { Button } from "./ui/Button";
+
+const clamp = (v: number, a: number, b: number) => Math.max(a, Math.min(b, v));
 
 export const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
+  // Progresso do logotipo: 0 = só o símbolo fechado, 1 = "MENOS" completo.
+  // Avança/recua suavemente (não instantâneo) ao passar/tirar o mouse,
+  // aproximadamente 1.2s para o percurso inteiro, como no handoff de design.
+  const [logoProgress, setLogoProgress] = useState(0);
+  const logoTarget = useRef(0);
+  const logoP = useRef(0);
+  const rafId = useRef<number | undefined>(undefined);
+  const reduceMotionRef = useRef(false);
 
+  useEffect(() => {
+    reduceMotionRef.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const step = reduceMotionRef.current ? 1 : 1 / 72;
+    const loop = () => {
+      const delta = clamp(logoTarget.current - logoP.current, -step, step);
+      logoP.current += delta;
+      setLogoProgress(logoP.current);
+      rafId.current = requestAnimationFrame(loop);
+    };
+    rafId.current = requestAnimationFrame(loop);
+    return () => { if (rafId.current) cancelAnimationFrame(rafId.current); };
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -41,63 +58,60 @@ export const Header: React.FC = () => {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 bg-white/90 backdrop-blur-md border-b border-slate-100/60 ${
-          isScrolled ? "py-3 shadow-xs" : "py-4 md:py-5"
-        }`}
+        className="fixed top-0 left-0 right-0 z-40 transition-[padding,box-shadow] duration-300 bg-white/90 backdrop-blur-md"
+        style={{
+          borderBottom: "1px solid rgba(20,60,60,.07)",
+          padding: isScrolled ? "12px 0" : "20px 0",
+          boxShadow: isScrolled ? "0 1px 2px rgba(12,36,36,.06)" : "none"
+        }}
       >
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-          {/* Logo */}
+        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between gap-6">
+          {/* Logo: só o símbolo em repouso, expande para "MENOS" no hover/foco */}
           <Link
             href="/"
-            className="group font-semibold text-xl tracking-wider text-brand-950 uppercase focus:outline-none transition-colors duration-300 hover:text-brand-600"
-            aria-label="Ir para página inicial MENOS"
+            className="flex items-center h-8 w-[150px] cursor-pointer focus:outline-none"
+            aria-label="MENOS, página inicial"
+            onMouseEnter={() => { logoTarget.current = 1; }}
+            onMouseLeave={() => { logoTarget.current = 0; }}
+            onFocus={() => { logoTarget.current = 1; }}
+            onBlur={() => { logoTarget.current = 0; }}
           >
-            <MenosWordmark animateIntro />
+            <MenosWordmark progress={logoProgress} className="h-[26px] w-auto" />
           </Link>
 
-          {/* Desktop Nav */}
+          {/* Desktop Nav — sem botão de CTA aqui, por desenho */}
           <nav className="hidden lg:flex items-center gap-8">
-            {navLinks.map((link) => {
-              const isActive = pathname === link.href;
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`text-sm font-medium transition-colors hover:text-brand-600 ${isActive ? "text-brand-600" : "text-slate-600"
-                    }`}
-                >
-                  {link.name}
-                </Link>
-              );
-            })}
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-sm font-medium transition-colors"
+                style={{ color: pathname === link.href ? "#287777" : "#4E5F5D" }}
+              >
+                {link.name}
+              </Link>
+            ))}
           </nav>
-
-          {/* CTA Button */}
-          <div className="hidden lg:block">
-            <Button variant="primary" size="sm" href="/contato">
-              Vamos simplificar
-            </Button>
-          </div>
 
           {/* Burger Button (Mobile) */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden p-2 text-brand-950 focus:outline-none"
+            className="lg:hidden p-2 focus:outline-none relative z-10"
             aria-label="Abrir menu de navegação"
             aria-expanded={isMenuOpen}
           >
             <div className="w-6 h-5 flex flex-col justify-between relative">
               <span
-                className={`w-6 h-[2px] bg-brand-950 rounded transition-all duration-300 origin-left ${isMenuOpen ? "rotate-45 translate-x-1" : ""
-                  }`}
+                className="w-6 h-[2px] rounded transition-all duration-300 origin-left"
+                style={{ background: "#0C2424", transform: isMenuOpen ? "rotate(45deg) translateX(4px)" : "none" }}
               ></span>
               <span
-                className={`w-6 h-[2px] bg-brand-950 rounded transition-all duration-300 ${isMenuOpen ? "opacity-0" : ""
-                  }`}
+                className="w-6 h-[2px] rounded transition-all duration-300"
+                style={{ background: "#0C2424", opacity: isMenuOpen ? 0 : 1 }}
               ></span>
               <span
-                className={`w-6 h-[2px] bg-brand-950 rounded transition-all duration-300 origin-left ${isMenuOpen ? "-rotate-45 translate-x-1" : ""
-                  }`}
+                className="w-6 h-[2px] rounded transition-all duration-300 origin-left"
+                style={{ background: "#0C2424", transform: isMenuOpen ? "rotate(-45deg) translateX(4px)" : "none" }}
               ></span>
             </div>
           </button>
@@ -105,44 +119,41 @@ export const Header: React.FC = () => {
       </header>
 
       {/* Mobile Drawer Menu */}
-      <div
-        className={`fixed inset-0 z-30 lg:hidden transition-all duration-500 ${isMenuOpen ? "pointer-events-auto" : "pointer-events-none"
-          }`}
-      >
-        {/* Backdrop */}
+      <div className="fixed inset-0 z-30 lg:hidden" style={{ pointerEvents: isMenuOpen ? "auto" : "none" }}>
         <div
           onClick={() => setIsMenuOpen(false)}
-          className={`absolute inset-0 bg-brand-950/10 backdrop-blur-sm transition-opacity duration-500 ${isMenuOpen ? "opacity-100" : "opacity-0"
-            }`}
+          className="absolute inset-0 transition-opacity duration-500"
+          style={{ background: "rgba(12,36,36,.1)", backdropFilter: "blur(4px)", opacity: isMenuOpen ? 1 : 0 }}
         ></div>
 
-        {/* Panel */}
         <div
-          className={`absolute top-0 right-0 bottom-0 w-full max-w-sm bg-white border-l border-slate-100 p-8 pt-28 flex flex-col justify-between shadow-xl transition-transform duration-500 ease-out ${isMenuOpen ? "translate-x-0" : "translate-x-full"
-            }`}
+          className="absolute top-0 right-0 bottom-0 w-full max-w-sm bg-white flex flex-col justify-between transition-transform duration-500 ease-out"
+          style={{
+            borderLeft: "1px solid #EEF2F1",
+            padding: "112px 32px 32px",
+            boxShadow: "0 20px 40px rgba(12,36,36,.12)",
+            transform: isMenuOpen ? "translateX(0)" : "translateX(100%)"
+          }}
         >
           <nav className="flex flex-col gap-6">
-            {navLinks.map((link) => {
-              const isActive = pathname === link.href;
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`text-lg font-medium transition-colors hover:text-brand-600 ${isActive ? "text-brand-600" : "text-slate-800"
-                    }`}
-                >
-                  {link.name}
-                </Link>
-              );
-            })}
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-lg font-medium transition-colors"
+                style={{ color: pathname === link.href ? "#287777" : "#1F2E2E" }}
+              >
+                {link.name}
+              </Link>
+            ))}
           </nav>
 
           <div className="flex flex-col gap-6">
-            <div className="h-[1px] bg-slate-100"></div>
+            <div className="h-px" style={{ background: "#EEF2F1" }}></div>
             <Button variant="primary" size="md" href="/contato" className="w-full">
               Vamos simplificar
             </Button>
-            <p className="text-center text-xs text-slate-400">
+            <p className="text-center text-xs" style={{ color: "#8A9A97" }}>
               Menos complexidade. Mais espaço e tempo para o que realmente importa.
             </p>
           </div>

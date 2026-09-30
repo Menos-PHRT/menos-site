@@ -164,7 +164,7 @@ export default function AboutPage() {
                 <div className="relative h-20 w-20 md:h-24 md:w-24 rounded-full overflow-hidden border-2 border-slate-200 shadow-sm bg-brand-950 shrink-0">
                   <Image
                     src="/images/robert-alcantara-v3.jpg"
-                    alt="Robert Alcântara — Presidente, Fundador e Desenvolvedor da MENOS"
+                    alt="Robert Alcântara, Presidente, Fundador e Desenvolvedor da MENOS"
                     fill
                     className="object-cover object-[center_25%]"
                     priority

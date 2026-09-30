@@ -13,7 +13,7 @@ export interface Partner {
 export const partners: Partner[] = [
   {
     id: "flupp",
-    name: "Fundação Lucia e Pelerson Penido — FLUPP",
+    name: "Fundação Lucia e Pelerson Penido (FLUPP)",
     logo: "FLUPP",
     category: "client",
     description: "Uma fundação familiar cuja missão é colaborar na construção de uma sociedade mais justa, apoiando projetos de educação no Vale do Paraíba.",

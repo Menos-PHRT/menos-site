@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import React from "react";
+import BrandIntro from "@/components/BrandIntro";
 import CookieBanner from "@/components/CookieBanner";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
@@ -16,7 +17,7 @@ const outfit = Outfit({
 
 export const metadata: Metadata = {
   title: {
-    default: "MENOS — Software e Automação com IA",
+    default: "MENOS | Software e Automação com IA",
     template: "%s | MENOS"
   },
   description: "Desenvolvemos sistemas, automações e experiências digitais unindo IA e curadoria técnica especializada, para reduzir burocracia, retrabalho e complexidade operacional.",
@@ -27,7 +28,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pt_BR",
     url: "https://menos.studio",
-    title: "MENOS — Software e Automação com IA",
+    title: "MENOS | Software e Automação com IA",
     description: "Desenvolvemos sistemas, automações e experiências digitais unindo IA e curadoria técnica especializada, para reduzir burocracia e complexidade operacional.",
     siteName: "MENOS"
   },
@@ -55,6 +56,7 @@ export default function RootLayout({
       className={`${outfit.variable} h-full antialiased scroll-smooth`}
     >
       <body className="min-h-full flex flex-col font-sans bg-background text-foreground antialiased selection:bg-brand-100 selection:text-brand-900">
+        <BrandIntro />
         <Header />
         {/* Espaçamento para o Header flutuante */}
         <main className="flex-grow pt-24 md:pt-28">

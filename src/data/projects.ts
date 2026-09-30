@@ -8,6 +8,8 @@ export interface ProjectGalleryItem {
 export interface Project {
   slug: string;
   name: string;
+  /** Nome curto para rótulos de aba/navegação (carrossel de cases). */
+  shortName?: string;
   client: string;
   category: string;
   challenge: string;
@@ -27,6 +29,12 @@ export interface Project {
   gallery?: ProjectGalleryItem[];
   learnings?: string;
   relatedServices: string[]; // slugs de serviços relacionados
+  /**
+   * Números de destaque para os cards de case (carrossel da home).
+   * Regra: só números medidos/relatados, nunca estimativa. Ver DOCUMENTACAO.md
+   * (seção "Regras de apresentação") para o histórico completo dessa política.
+   */
+  keyMetrics?: { label: string; value: string }[];
   roles?: {
     title: string;
     roleTag?: string;
@@ -38,12 +46,16 @@ export const projects: Project[] = [
   {
     slug: "plataforma-melhores-cabecas",
     name: "Plataforma Melhores Cabeças",
-    client: "Fundação Lucia e Pelerson Penido — FLUPP",
+    shortName: "Melhores Cabeças",
+    client: "Fundação Lucia e Pelerson Penido (FLUPP)",
     category: "Plataformas Digitais",
     challenge: "O programa era gerenciado por planilhas e registros descentralizados, o que dificultava o fluxo de informações e o acompanhamento de bolsistas, mentorias e tutorias.",
     solution: "Criamos uma plataforma para centralizar toda a gestão do programa, com ambientes e acessos específicos para bolsistas, mentores, tutores e administração.",
-    impact: "As informações passaram a ficar organizadas em um único lugar, facilitando o acompanhamento dos bolsistas, dos encontros e do histórico de cada participante.",
-    description: "A Plataforma Melhores Cabeças foi desenvolvida para apoiar a gestão do programa de bolsas de estudo da Fundação Lucia e Pelerson Penido — FLUPP. A Fundação oferece bolsas de estudo para estudantes do ensino superior e, além do apoio financeiro para a formação universitária, mantém uma estrutura de acompanhamento e desenvolvimento dos bolsistas ao longo de sua trajetória acadêmica.\n\nComo um sistema integrado de gestão e acompanhamento do programa, a plataforma conecta administração, mentores, tutores e bolsistas dentro de uma mesma estrutura digital. Ela centraliza informações que antes poderiam ficar dispersas entre planilhas, formulários, documentos e diferentes controles internos, criando um histórico organizado da trajetória de cada bolsista.",
+    impact: "A rotina de acompanhamento ficou mais simples e personalizada: mentores passam a consultar histórico e desempenho acadêmico, a coordenação ganha mais visibilidade sobre presença e avaliações, e o programa passa a ter continuidade no acompanhamento de cerca de 200 estudantes ao longo do tempo, informação antes dispersa em cerca de 30 pastas.",
+    keyMetrics: [
+      { value: "~200", label: "estudantes atendidos" }
+    ],
+    description: "A Plataforma Melhores Cabeças foi desenvolvida para apoiar a gestão do programa de bolsas de estudo da Fundação Lucia e Pelerson Penido (FLUPP). A Fundação oferece bolsas de estudo para estudantes do ensino superior e, além do apoio financeiro para a formação universitária, mantém uma estrutura de acompanhamento e desenvolvimento dos bolsistas ao longo de sua trajetória acadêmica.\n\nComo um sistema integrado de gestão e acompanhamento do programa, a plataforma conecta administração, mentores, tutores e bolsistas dentro de uma mesma estrutura digital. Ela centraliza informações que antes poderiam ficar dispersas entre planilhas, formulários, documentos e diferentes controles internos, criando um histórico organizado da trajetória de cada bolsista.",
     roles: [
       {
         title: "Bolsistas",
@@ -86,7 +98,7 @@ export const projects: Project[] = [
       text: "A plataforma transformou uma rotina antes dispersa em planilhas e e-mails em uma estrutura organizada. Hoje temos clareza sobre cada bolsista e o histórico de cada mentoria e tutoria.",
       author: "Lorrane de Paula",
       role: "Coordenadora do Programa Melhores Cabeças",
-      company: "Fundação Lucia e Pelerson Penido — FLUPP"
+      company: "Fundação Lucia e Pelerson Penido (FLUPP)"
     },
     image: "/images/plataforma-melhores-cabecas.png",
     gallery: [
@@ -138,7 +150,8 @@ export const projects: Project[] = [
   {
     slug: "sistema-de-credenciamento",
     name: "Sistema de Credenciamento",
-    client: "Fundação Lucia e Pelerson Penido — FLUPP",
+    shortName: "Credenciamento",
+    client: "Fundação Lucia e Pelerson Penido (FLUPP)",
     category: "Credenciamento e Eventos",
     challenge: "Gerenciar a entrada e presença de 570 participantes espalhados por 11 oficinas simultâneas sem gerar filas na recepção.",
     solution: "Desenvolvimento de um sistema de check-in web ultra-rápido por QR Code, integrado à emissão automatizada de certificados baseada na contagem de presença real.",
@@ -163,7 +176,7 @@ export const projects: Project[] = [
       text: "Foi o primeiro ano em que não tivemos fila na porta e nem reclamações de certificados que não chegaram no e-mail. A solução funcionou de forma impecável.",
       author: "Natalia Vieira",
       role: "Coordenadora Geral de Eventos da FLUPP",
-      company: "Fundação Lucia e Pelerson Penido — FLUPP"
+      company: "Fundação Lucia e Pelerson Penido (FLUPP)"
     },
     image: "/images/sistema-de-credenciamento/dashboard-metricas.png",
     gallery: [
@@ -209,11 +222,17 @@ export const projects: Project[] = [
   {
     slug: "plataforma-de-certificacao",
     name: "Plataforma de Certificados FLUPP",
-    client: "Fundação Lucia e Pelerson Penido — FLUPP",
+    shortName: "Certificados",
+    client: "Fundação Lucia e Pelerson Penido (FLUPP)",
     category: "Plataformas Digitais",
     challenge: "A geração e o envio de certificados eram feitos manualmente, um a um, consumindo muito tempo da equipe e tornando o processo pouco escalável.",
     solution: "Uma plataforma que gera certificados em lote a partir de planilhas vinculadas aos eventos e permite que cada participante consulte seus documentos usando o CPF.",
-    impact: "Um processo que antes exigia geração e envio individual passou a ser praticamente automático, reduzindo drasticamente o trabalho operacional da equipe.",
+    impact: "Reduzimos pela metade a equipe necessária para operar o credenciamento e o controle de presença das oficinas, automatizamos ou simplificamos cerca de 85% das atividades de um fluxo mapeado e reduzimos a certificação e o envio de três semanas para menos de uma hora. A disponibilidade das oficinas passou a ser calculada instantaneamente e cada participante consulta seus certificados sem depender do atendimento da equipe.",
+    keyMetrics: [
+      { value: "50%", label: "menos pessoas no credenciamento" },
+      { value: "< 1h", label: "certificação e envio (antes: 3 semanas)" },
+      { value: "85%", label: "atividades automatizadas ou simplificadas" }
+    ],
     description: "A emissão de certificados da FLUPP antes era feita manualmente pelo Canva, com mala direta e envio individual por e-mail e WhatsApp. Criamos uma plataforma que automatiza esse processo: a equipe vincula uma planilha ao evento, gera os certificados em lote e disponibiliza tudo em um único link. Cada participante informa seu CPF e acessa automaticamente os certificados disponíveis em seu nome.",
     keyFeatures: [
       "Criação e gerenciamento de eventos.",
@@ -271,6 +290,7 @@ export const projects: Project[] = [
   {
     slug: "integracao-coentro-erp",
     name: "Coentro ERP: gestão e automação para restaurantes",
+    shortName: "Coentro ERP",
     client: "Coentro",
     category: "Sistema de Gestão e Automação",
     challenge: "A operação de um restaurante envolve múltiplos pilares ao mesmo tempo: controle de estoque de insumos, abertura e fechamento de comandas, análise de vendas diárias e comunicação com a cozinha/caixa. Quando essas informações são registradas de forma manual ou isolada, ocorrem perdas de estoque, divergências financeiras e atrasos no atendimento.",
@@ -308,7 +328,8 @@ export const projects: Project[] = [
   {
     slug: "reformulacao-paginas-institucionais",
     name: "Reformulação da Página: Prêmio FLUPP de Educação",
-    client: "Fundação Lucia e Pelerson Penido — FLUPP",
+    shortName: "Prêmio FLUPP",
+    client: "Fundação Lucia e Pelerson Penido (FLUPP)",
     category: "Sites Institucionais",
     challenge: "A página anterior do prêmio precisava de uma renovação visual e estrutural para organizar melhor as regras, categorias e cronograma do edital, além de oferecer um fluxo de inscrição mais atrativo e com confirmação visual clara para os educadores.",
     solution: "Reformulação completa da página com novo layout, blocos visuais e cards explicativos (Quem Pode Participar, Como Participar e Etapas de Avaliação), integração com as playlists das edições anteriores e uma experiência de inscrição enriquecida com animação de confetes coloridos para celebrar o sucesso da submissão.",
@@ -334,7 +355,7 @@ export const projects: Project[] = [
       text: "A reformulação da página do Prêmio trouxe uma apresentação muito mais convidativa e clara para os professores e estudantes. O fluxo de inscrição ficou simples, visualmente acolhedor e com feedback imediato.",
       author: "Natália Vieira",
       role: "Coordenadora do Projeto",
-      company: "Fundação Lucia e Pelerson Penido — FLUPP"
+      company: "Fundação Lucia e Pelerson Penido (FLUPP)"
     },
     image: "/images/site-premio-flupp/Captura de tela 2026-09-25 233007.png",
     gallery: [

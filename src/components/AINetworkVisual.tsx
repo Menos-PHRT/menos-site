@@ -1,7 +1,7 @@
 "use client";
 
 import { useReducedMotion } from "framer-motion";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 
 // Posições fixas (não Math.random() — evita mismatch de hidratação SSR/cliente).
 const NODES_BOXED: { x: number; y: number }[] = [
@@ -29,6 +29,12 @@ const NODES_FULLBLEED: { x: number; y: number }[] = [
 function dist(a: { x: number; y: number }, b: { x: number; y: number }) {
   return Math.hypot(a.x - b.x, a.y - b.y);
 }
+const clamp = (v: number, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const hexToRgb = (h: string) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
+const mix = (a: string, b: string, t: number) => {
+  const A = hexToRgb(a), B = hexToRgb(b);
+  return `rgb(${A.map((v, i) => Math.round(v + (B[i] - v) * t)).join(",")})`;
+};
 
 interface AINetworkVisualProps {
   /** Modo de fundo cheio: preenche o container pai (ex.: atrás do hero inteiro),
@@ -37,89 +43,104 @@ interface AINetworkVisualProps {
 }
 
 // Visual do hero: uma rede de pontos dispersos que se conecta e escurece perto
-// do cursor — a ideia de "quanto mais perto do seu problema/proposta, mais a
-// rede se organiza". Em modo fullBleed, cobre todo o hero (inclusive atrás dos
-// botões de CTA): o cursor é rastreado via window, então aproximar-se de um
-// botão já aproxima o cursor daquela região da rede — sem precisar acoplar a
-// lógica aos próprios botões. Sem rótulos de terminal. Sem loop ambiente:
-// movimento só em resposta à interação.
+// do cursor, quanto mais perto, mais a rede se organiza. Em modo fullBleed,
+// cobre todo o hero (inclusive atrás dos botões de CTA): o cursor é rastreado
+// via window, então aproximar-se de um botão já aproxima o cursor daquela
+// região da rede. O ponteiro e a força de cada nó são suavizados (lerp .12 a
+// cada quadro) para tudo acender e apagar de forma fluida, não abrupta.
+// Sem rótulos de terminal. Sem loop ambiente: movimento só em resposta à
+// interação (gate de reduzir movimento apenas suaviza a transição, já que
+// isso não é um gatilho vestibular).
 export const AINetworkVisual: React.FC<AINetworkVisualProps> = ({ fullBleed = false }) => {
   const shouldReduceMotion = useReducedMotion();
   const containerRef = useRef<HTMLDivElement>(null);
-  const rafRef = useRef<number | undefined>(undefined);
-  const [pointer, setPointer] = useState<{ x: number; y: number } | null>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
+  const rafId = useRef<number | undefined>(undefined);
+  const ptr = useRef<{ x: number; y: number } | null>(null);
+  const sp = useRef<{ x: number; y: number } | null>(null);
+  const nodeStrength = useRef<number[]>([]);
 
   const NODES = fullBleed ? NODES_FULLBLEED : NODES_BOXED;
   const VIEW_W = fullBleed ? 1000 : 600;
   const VIEW_H = fullBleed ? 480 : 400;
   const NEAR_RADIUS = fullBleed ? 240 : 170;
   const LINK_RADIUS = fullBleed ? 170 : 130;
+  const restThreshold = fullBleed ? 75 : 60;
+  const REST_COLOR = "#A7B9B5";
+  const ACTIVE_COLOR = "#143C3C";
+  const LINK_COLOR = "#287777";
+  const REST_LINK_COLOR = "#D6E0DD";
+
+  const restLinks: [number, number][] = [];
+  const candLinks: [number, number][] = [];
+  for (let i = 0; i < NODES.length; i++) {
+    for (let j = i + 1; j < NODES.length; j++) {
+      const d = dist(NODES[i], NODES[j]);
+      if (d < restThreshold) restLinks.push([i, j]);
+      if (d < LINK_RADIUS) candLinks.push([i, j]);
+    }
+  }
 
   useEffect(() => {
+    nodeStrength.current = NODES.map(() => 0);
+
     const updateFromClient = (clientX: number, clientY: number) => {
       const el = containerRef.current;
       if (!el) return;
       const rect = el.getBoundingClientRect();
       const inside = clientX >= rect.left && clientX <= rect.right && clientY >= rect.top && clientY <= rect.bottom;
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-      rafRef.current = requestAnimationFrame(() => {
-        if (!inside) {
-          setPointer(null);
-          return;
-        }
-        setPointer({
-          x: ((clientX - rect.left) / rect.width) * VIEW_W,
-          y: ((clientY - rect.top) / rect.height) * VIEW_H
-        });
-      });
+      if (!inside) { ptr.current = null; return; }
+      ptr.current = {
+        x: ((clientX - rect.left) / rect.width) * VIEW_W,
+        y: ((clientY - rect.top) / rect.height) * VIEW_H
+      };
     };
-
     const onMouseMove = (e: MouseEvent) => updateFromClient(e.clientX, e.clientY);
-    const onTouchMove = (e: TouchEvent) => {
-      const t = e.touches[0];
-      if (t) updateFromClient(t.clientX, t.clientY);
-    };
-    const onTouchEnd = () => setPointer(null);
-
+    const onTouchMove = (e: TouchEvent) => { const t = e.touches[0]; if (t) updateFromClient(t.clientX, t.clientY); };
+    const onTouchEnd = () => { ptr.current = null; };
     window.addEventListener("mousemove", onMouseMove, { passive: true });
     window.addEventListener("touchmove", onTouchMove, { passive: true });
     window.addEventListener("touchend", onTouchEnd);
+
+    const lerpFactor = shouldReduceMotion ? 1 : 0.12;
+    const loop = () => {
+      const svg = svgRef.current;
+      if (svg) {
+        if (ptr.current) {
+          sp.current = sp.current
+            ? { x: sp.current.x + (ptr.current.x - sp.current.x) * lerpFactor, y: sp.current.y + (ptr.current.y - sp.current.y) * lerpFactor }
+            : { ...ptr.current };
+        }
+        const P = ptr.current ? sp.current : null;
+        const circles = svg.querySelectorAll<SVGCircleElement>("[data-nn]");
+        NODES.forEach((n, i) => {
+          const target = P ? clamp(1 - dist(n, P) / NEAR_RADIUS) : 0;
+          nodeStrength.current[i] += (target - nodeStrength.current[i]) * lerpFactor;
+          const s = nodeStrength.current[i];
+          const el = circles[i];
+          if (!el) return;
+          el.setAttribute("r", String(3.5 + s * 3));
+          el.setAttribute("fill", mix(REST_COLOR, ACTIVE_COLOR, clamp(s * 2.2)));
+        });
+        svg.querySelectorAll<SVGLineElement>("[data-al]").forEach((l) => {
+          const i = Number(l.dataset.i), j = Number(l.dataset.j);
+          const a = nodeStrength.current[i], b = nodeStrength.current[j];
+          const strength = Math.min(a, b);
+          l.setAttribute("opacity", strength > 0.02 ? String(strength * 1.3) : "0");
+        });
+      }
+      rafId.current = requestAnimationFrame(loop);
+    };
+    rafId.current = requestAnimationFrame(loop);
+
     return () => {
       window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("touchmove", onTouchMove);
       window.removeEventListener("touchend", onTouchEnd);
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      if (rafId.current) cancelAnimationFrame(rafId.current);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fullBleed]);
-
-  // Links "de repouso": pares de nós naturalmente próximos, sempre visíveis
-  // e discretos — para a rede nunca parecer vazia sem o cursor por perto.
-  const restLinks: [number, number][] = [];
-  const restThreshold = fullBleed ? 75 : 60;
-  for (let i = 0; i < NODES.length; i++) {
-    for (let j = i + 1; j < NODES.length; j++) {
-      if (dist(NODES[i], NODES[j]) < restThreshold) restLinks.push([i, j]);
-    }
-  }
-
-  const activeLinks: [number, number, number][] = []; // [i, j, strength]
-  if (pointer) {
-    for (let i = 0; i < NODES.length; i++) {
-      const di = dist(NODES[i], pointer);
-      if (di > NEAR_RADIUS) continue;
-      for (let j = i + 1; j < NODES.length; j++) {
-        const dj = dist(NODES[j], pointer);
-        if (dj > NEAR_RADIUS) continue;
-        const dij = dist(NODES[i], NODES[j]);
-        if (dij > LINK_RADIUS) continue;
-        const strength = 1 - Math.max(di, dj) / NEAR_RADIUS;
-        activeLinks.push([i, j, strength]);
-      }
-    }
-  }
-
-  const transitionMs = shouldReduceMotion ? 0 : 220;
+  }, [fullBleed, shouldReduceMotion]);
 
   const wrapperClass = fullBleed
     ? "absolute inset-0"
@@ -128,54 +149,20 @@ export const AINetworkVisual: React.FC<AINetworkVisualProps> = ({ fullBleed = fa
   return (
     <div ref={containerRef} className={wrapperClass}>
       <svg
+        ref={svgRef}
         className={fullBleed ? "w-full h-full" : "w-full h-full max-w-[500px] max-h-[350px]"}
         viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
         preserveAspectRatio={fullBleed ? "xMidYMid slice" : "xMidYMid meet"}
       >
-        {/* Links de repouso — discretos, sempre presentes */}
         {restLinks.map(([i, j], idx) => (
-          <line
-            key={`rest-${idx}`}
-            x1={NODES[i].x} y1={NODES[i].y}
-            x2={NODES[j].x} y2={NODES[j].y}
-            stroke="#CBD5E1"
-            strokeWidth={1}
-          />
+          <line key={`rest-${idx}`} x1={NODES[i].x} y1={NODES[i].y} x2={NODES[j].x} y2={NODES[j].y} stroke={REST_LINK_COLOR} strokeWidth={1} />
         ))}
-
-        {/* Links ativos — a rede "se organizando" perto do cursor */}
-        {activeLinks.map(([i, j, strength], idx) => (
-          <line
-            key={`active-${idx}`}
-            x1={NODES[i].x} y1={NODES[i].y}
-            x2={NODES[j].x} y2={NODES[j].y}
-            stroke="#287777"
-            strokeWidth={1.5}
-            style={{ opacity: strength, transition: `opacity ${transitionMs}ms ease-out` }}
-          />
+        {candLinks.map(([i, j], idx) => (
+          <line key={`cand-${idx}`} data-al="" data-i={i} data-j={j} x1={NODES[i].x} y1={NODES[i].y} x2={NODES[j].x} y2={NODES[j].y} stroke={LINK_COLOR} strokeWidth={1.5} opacity={0} />
         ))}
-
-        {/* Nós */}
-        {NODES.map((node, i) => {
-          const d = pointer ? dist(node, pointer) : Infinity;
-          const active = d < NEAR_RADIUS;
-          const strength = active ? 1 - d / NEAR_RADIUS : 0;
-          const r = 3.5 + strength * 3;
-          return (
-            <circle
-              key={i}
-              cx={node.x}
-              cy={node.y}
-              r={r}
-              fill={active ? "#143c3c" : "#94A3B8"}
-              style={{
-                transition: shouldReduceMotion
-                  ? "none"
-                  : `r ${transitionMs}ms ease-out, fill ${transitionMs}ms ease-out`
-              }}
-            />
-          );
-        })}
+        {NODES.map((node, i) => (
+          <circle key={i} data-nn="" cx={node.x} cy={node.y} r={3.5} fill={REST_COLOR} />
+        ))}
       </svg>
     </div>
   );

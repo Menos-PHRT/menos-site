@@ -14,7 +14,7 @@ export const testimonials: Testimonial[] = [
     text: "A plataforma transformou a rotina do programa. Hoje temos clareza sobre o histórico e acompanhamento de cada bolsista, integrando mentorias, tutorias e a gestão em um ambiente organizado e acessível.",
     author: "Lorrane de Paula",
     role: "Coordenadora do Programa Melhores Cabeças",
-    company: "Fundação Lucia e Pelerson Penido — FLUPP",
+    company: "Fundação Lucia e Pelerson Penido (FLUPP)",
     projectSlug: "plataforma-melhores-cabecas"
   },
   {
@@ -22,7 +22,7 @@ export const testimonials: Testimonial[] = [
     text: "Foi o primeiro ano em que não tivemos fila na porta e nem reclamações de certificados que não chegaram no e-mail. A solução funcionou de forma impecável.",
     author: "Natalia Vieira",
     role: "Coordenadora Geral de Eventos da FLUPP",
-    company: "Fundação Lucia e Pelerson Penido — FLUPP",
+    company: "Fundação Lucia e Pelerson Penido (FLUPP)",
     projectSlug: "sistema-de-credenciamento"
   },
   {
@@ -30,7 +30,7 @@ export const testimonials: Testimonial[] = [
     text: "A reformulação da página do Prêmio trouxe uma apresentação muito mais convidativa e clara para os professores e estudantes. O fluxo de inscrição ficou simples, visualmente acolhedor e com feedback imediato.",
     author: "Natália Vieira",
     role: "Coordenadora do Projeto",
-    company: "Fundação Lucia e Pelerson Penido — FLUPP",
+    company: "Fundação Lucia e Pelerson Penido (FLUPP)",
     projectSlug: "reformulacao-paginas-institucionais"
   },
   {
