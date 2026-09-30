@@ -8,6 +8,14 @@ import { Button } from "./ui/Button";
 
 const clamp = (v: number, a: number, b: number) => Math.max(a, Math.min(b, v));
 
+// "Soluções" (/servicos) continua ativo em /projetos também — cases e
+// serviços são a mesma frente de conteúdo agora, só /projetos não tem
+// entrada própria no menu.
+function isNavActive(pathname: string, href: string): boolean {
+  if (href === "/servicos") return pathname.startsWith("/servicos") || pathname.startsWith("/projetos");
+  return pathname === href;
+}
+
 export const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -46,9 +54,13 @@ export const Header: React.FC = () => {
     setIsMenuOpen(false);
   }, [pathname]);
 
+  // "Serviços" e "Cases" viraram um item só ("Soluções"): cada página de
+  // serviço já mostra o serviço e, logo abaixo, os cases reais que o usam
+  // (relatedServices em projects.ts) — não faz mais sentido separar os dois
+  // no menu. /projetos continua existindo como página (ex.: link "Ver todos
+  // os cases" da home), só não tem mais entrada própria no menu principal.
   const navLinks = [
-    { name: "Serviços", href: "/servicos" },
-    { name: "Cases", href: "/projetos" },
+    { name: "Soluções", href: "/servicos" },
     { name: "Parceiros", href: "/parceiros" },
     { name: "Como trabalhamos", href: "/como-trabalhamos" },
     { name: "Contato", href: "/contato" },
@@ -86,7 +98,7 @@ export const Header: React.FC = () => {
                 key={link.href}
                 href={link.href}
                 className="text-sm font-medium transition-colors"
-                style={{ color: pathname === link.href ? "#287777" : "#4E5F5D" }}
+                style={{ color: isNavActive(pathname, link.href) ? "#287777" : "#4E5F5D" }}
               >
                 {link.name}
               </Link>
@@ -141,7 +153,7 @@ export const Header: React.FC = () => {
                 key={link.href}
                 href={link.href}
                 className="text-lg font-medium transition-colors"
-                style={{ color: pathname === link.href ? "#287777" : "#1F2E2E" }}
+                style={{ color: isNavActive(pathname, link.href) ? "#287777" : "#1F2E2E" }}
               >
                 {link.name}
               </Link>

@@ -155,7 +155,11 @@ export const projects: Project[] = [
     category: "Credenciamento e Eventos",
     challenge: "Gerenciar a entrada e presença de 570 participantes espalhados por 11 oficinas simultâneas sem gerar filas na recepção.",
     solution: "Desenvolvimento de um sistema de check-in web ultra-rápido por QR Code, integrado à emissão automatizada de certificados baseada na contagem de presença real.",
-    impact: "Tempo médio de credenciamento reduzido de 1 minuto para menos de 5 segundos por pessoa, com zero filas na recepção do evento físico.",
+    impact: "Tempo médio de credenciamento reduzido de 1 minuto para menos de 5 segundos por pessoa, com zero filas na recepção do evento físico. Reduzimos pela metade a equipe necessária para o credenciamento e para o controle de presença das oficinas, e a disponibilidade de vagas passou a ser calculada instantaneamente.",
+    keyMetrics: [
+      { value: "50%", label: "menos pessoas no credenciamento" },
+      { value: "50%", label: "menos pessoas no controle das oficinas" }
+    ],
     description: "Eventos criativos de grande porte, como o Seminário de Educação Infantil do Vale do Paraíba realizado pela FLUPP com apoio da prefeitura de Jacareí, costumam sofrer na recepção. A FLUPP operava com checagem de listas de papel que poderiam ser modernizadas com processos de automação e informatização. A MENOS desenhou um sistema web leve no qual cada participante recebia um passe digital com QR Code. Os credenciadores puderam utilizar a própria câmera do celular para ler o código instantaneamente, alimentando um painel de lotação de salas em tempo real e permitindo o disparo de certificados personalizados no encerramento.",
     keyFeatures: [
       "Leitor de QR Code integrado no navegador do celular (sem necessidade de instalar aplicativo).",
@@ -227,9 +231,8 @@ export const projects: Project[] = [
     category: "Plataformas Digitais",
     challenge: "A geração e o envio de certificados eram feitos manualmente, um a um, consumindo muito tempo da equipe e tornando o processo pouco escalável.",
     solution: "Uma plataforma que gera certificados em lote a partir de planilhas vinculadas aos eventos e permite que cada participante consulte seus documentos usando o CPF.",
-    impact: "Reduzimos pela metade a equipe necessária para operar o credenciamento e o controle de presença das oficinas, automatizamos ou simplificamos cerca de 85% das atividades de um fluxo mapeado e reduzimos a certificação e o envio de três semanas para menos de uma hora. A disponibilidade das oficinas passou a ser calculada instantaneamente e cada participante consulta seus certificados sem depender do atendimento da equipe.",
+    impact: "Automatizamos ou simplificamos cerca de 85% das atividades de um fluxo mapeado e reduzimos a certificação e o envio de três semanas para menos de uma hora. Cada participante consulta seus certificados sem depender do atendimento da equipe.",
     keyMetrics: [
-      { value: "50%", label: "menos pessoas no credenciamento" },
       { value: "< 1h", label: "certificação e envio (antes: 3 semanas)" },
       { value: "85%", label: "atividades automatizadas ou simplificadas" }
     ],

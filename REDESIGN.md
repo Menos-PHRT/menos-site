@@ -69,4 +69,13 @@ Os dois cases citados pelo Paulo ganharam números e resultados reais nos cards 
 - **Plataforma de Certificados FLUPP:** 50% menos pessoas necessárias no credenciamento, certificação e envio reduzidos de três semanas para menos de uma hora, e cerca de 85% das atividades de um fluxo mapeado automatizadas ou simplificadas.
 - **Plataforma Melhores Cabeças:** sem percentual (nenhum foi medido para este case) — o destaque é qualitativo: rotina mais simples, acompanhamento mais personalizado, e o número de contexto de ~200 estudantes atendidos.
 
-**Atenção, ponto a confirmar com o Paulo:** os números de "credenciamento" (pessoas no check-in, controle de oficinas) vieram descritos como parte do "case 1 = Certificados FLUPP", mas esses números, por natureza, parecem pertencer mais ao projeto "Sistema de Credenciamento", que já existe como um card separado no site. Apliquei exatamente como foi indicado, mas vale conferir se esse número não deveria estar no card de Credenciamento em vez de (ou além de) Certificados.
+**Atualização (confirmado pelo Paulo):** Sistema de Credenciamento e Plataforma de Certificados são o mesmo projeto, dividido em dois cards por complexidade. Redistribuí os números pelo card que cada um descreve de fato:
+- **Sistema de Credenciamento**: 50% menos pessoas no credenciamento, 50% menos pessoas no controle das oficinas.
+- **Plataforma de Certificados FLUPP**: certificação e envio de 3 semanas para menos de 1 hora, ~85% das atividades automatizadas ou simplificadas.
+
+## Fusão Serviços + Projetos (continuação)
+
+O conteúdo dessa fusão já existia parcialmente: cada página de serviço (`/servicos/[slug]`) já listava os cases reais relacionados (via `relatedServices` em `projects.ts`). Faltava:
+
+1. **O menu virar um item só.** "Serviços" e "Cases" viraram **"Soluções"**, apontando para `/servicos`. `/projetos` continua existindo como página (ex.: o link "Ver todos os cases" da home ainda leva lá), só não tem mais entrada própria no menu principal. O item "Soluções" também fica destacado quando a pessoa está navegando em `/projetos`, porque conceitualmente é a mesma frente de conteúdo agora.
+2. **Cards de case mais ricos na página de serviço.** Antes eram só texto (cliente, nome, resumo do desafio). Agora mostram a imagem do sistema e, quando existem, as métricas de destaque (os mesmos números que aparecem no carrossel da home) — para o merge parecer de verdade um "aqui está o serviço e a prova de que funciona", não só uma lista de links.

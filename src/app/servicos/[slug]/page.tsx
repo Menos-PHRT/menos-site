@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import React from "react";
 import { ArrowLeft, ArrowRight, HelpCircle, CheckCircle2, ChevronRight, Briefcase } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { Card } from "@/components/ui/Card";
 import { projects } from "@/data/projects";
 import { services } from "@/data/services";
 
@@ -144,25 +143,47 @@ export default async function ServiceSlugPage({ params }: ServicePageProps) {
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {relatedProjects.map((project) => (
-                <Card key={project.slug} className="flex flex-col justify-between p-6">
-                  <div>
-                    <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest block mb-2">
-                      {project.client}
+                <Link
+                  key={project.slug}
+                  href={`/projetos/${project.slug}`}
+                  className="group flex flex-col rounded-2xl border border-slate-100 bg-white overflow-hidden transition-all duration-300 hover:border-brand-200 hover:shadow-lg hover:shadow-slate-100"
+                >
+                  {project.image && (
+                    <div className="relative aspect-[16/10] overflow-hidden bg-brand-950">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={project.image}
+                        alt={project.name}
+                        className="w-full h-full object-cover object-top"
+                      />
+                    </div>
+                  )}
+                  <div className="flex flex-col justify-between flex-grow p-6">
+                    <div>
+                      <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest block mb-2">
+                        {project.client}
+                      </span>
+                      <h4 className="text-base font-bold text-brand-950 mb-2">
+                        {project.name}
+                      </h4>
+                      <p className="text-xs text-slate-500 leading-relaxed mb-4 line-clamp-2">
+                        {project.challenge}
+                      </p>
+                      {project.keyMetrics && project.keyMetrics.length > 0 && (
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          {project.keyMetrics.map((metric, mi) => (
+                            <span key={mi} className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-brand-50 text-brand-700 border border-brand-100">
+                              {metric.value} {metric.label}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                    <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-600 group-hover:text-brand-950 transition self-start">
+                      Ver estudo de caso <ChevronRight className="h-3.5 w-3.5" />
                     </span>
-                    <h4 className="text-base font-bold text-brand-950 mb-2">
-                      {project.name}
-                    </h4>
-                    <p className="text-xs text-slate-500 leading-relaxed mb-4 line-clamp-2">
-                      {project.challenge}
-                    </p>
                   </div>
-                  <Link
-                    href={`/projetos/${project.slug}`}
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-600 hover:text-brand-950 transition self-start"
-                  >
-                    Ver estudo de caso <ChevronRight className="h-3.5 w-3.5" />
-                  </Link>
-                </Card>
+                </Link>
               ))}
             </div>
           </div>
