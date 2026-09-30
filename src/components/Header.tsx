@@ -8,12 +8,10 @@ import { Button } from "./ui/Button";
 
 const clamp = (v: number, a: number, b: number) => Math.max(a, Math.min(b, v));
 
-// "Soluções" (/servicos) continua ativo em /projetos também — cases e
-// serviços são a mesma frente de conteúdo agora, só /projetos não tem
-// entrada própria no menu.
+// Ativo também nas subpáginas (ex.: /servicos/automacoes acende "Serviços").
 function isNavActive(pathname: string, href: string): boolean {
-  if (href === "/servicos") return pathname.startsWith("/servicos") || pathname.startsWith("/projetos");
-  return pathname === href;
+  if (href === "/") return pathname === "/";
+  return pathname === href || pathname.startsWith(href + "/");
 }
 
 export const Header: React.FC = () => {
@@ -78,13 +76,12 @@ export const Header: React.FC = () => {
     setIsMenuOpen(false);
   }, [pathname]);
 
-  // "Serviços" e "Cases" viraram um item só ("Soluções"): cada página de
-  // serviço já mostra o serviço e, logo abaixo, os cases reais que o usam
-  // (relatedServices em projects.ts) — não faz mais sentido separar os dois
-  // no menu. /projetos continua existindo como página (ex.: link "Ver todos
-  // os cases" da home), só não tem mais entrada própria no menu principal.
+  // Menu igual ao handoff de design: Serviços e Cases separados (a fusão de
+  // conteúdo continua existindo — cada página de serviço mostra os cases
+  // reais relacionados — só o menu não junta os dois num item só).
   const navLinks = [
-    { name: "Soluções", href: "/servicos" },
+    { name: "Serviços", href: "/servicos" },
+    { name: "Cases", href: "/projetos" },
     { name: "Parceiros", href: "/parceiros" },
     { name: "Como trabalhamos", href: "/como-trabalhamos" },
     { name: "Contato", href: "/contato" },
