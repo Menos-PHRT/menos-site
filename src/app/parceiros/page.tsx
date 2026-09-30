@@ -31,10 +31,10 @@ export default function PartnersPage() {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Header */}
         <div className="max-w-2xl mb-16">
-          <span className="text-xs font-semibold text-blue-600 uppercase tracking-widest mb-3 block">
+          <span className="text-xs font-semibold text-brand-600 uppercase tracking-widest mb-3 block">
             Rede de Trabalho
           </span>
-          <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-slate-900 leading-tight">
+          <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-brand-950 leading-tight">
             Boas soluções são construídas em conjunto.
           </h1>
           <p className="text-slate-500 mt-4 text-base md:text-lg font-light leading-relaxed">
@@ -44,8 +44,8 @@ export default function PartnersPage() {
 
         {/* 1. Clientes Atendidos */}
         <section className="mb-20">
-          <h2 className="text-xl font-bold text-slate-900 mb-8 pb-3 border-b border-slate-100 flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-blue-600"></span> Organizações Atendidas
+          <h2 className="text-xl font-bold text-brand-950 mb-8 pb-3 border-b border-slate-100 flex items-center gap-2">
+            <span className="h-2 w-2 rounded-full bg-brand-600"></span> Organizações Atendidas
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {clients.map((client, idx) => {
@@ -72,14 +72,14 @@ export default function PartnersPage() {
                           href={client.externalLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-slate-400 hover:text-blue-600 transition"
+                          className="text-slate-400 hover:text-brand-600 transition"
                           aria-label={`Visitar site de ${client.name}`}
                         >
                           <Globe className="h-4 w-4" />
                         </a>
                       </div>
 
-                      <h3 className="font-bold text-base text-slate-900 mb-2">
+                      <h3 className="font-bold text-base text-brand-950 mb-2">
                         {client.name}
                       </h3>
                       <p className="text-xs text-slate-500 leading-relaxed mb-4">
@@ -96,7 +96,7 @@ export default function PartnersPage() {
                     {relatedProject && (
                       <Link
                         href={`/projetos/${relatedProject.slug}`}
-                        className="inline-flex items-center gap-1 text-[10px] uppercase font-bold tracking-wider text-blue-600 hover:text-slate-900 transition mt-2"
+                        className="inline-flex items-center gap-1 text-[10px] uppercase font-bold tracking-wider text-brand-600 hover:text-brand-950 transition mt-2"
                       >
                         <Briefcase className="h-3 w-3 mr-1" /> Ver estudo de caso &rarr;
                       </Link>
@@ -110,8 +110,8 @@ export default function PartnersPage() {
 
         {/* 2. Parceiros Institucionais */}
         <section className="mb-20">
-          <h2 className="text-xl font-bold text-slate-900 mb-8 pb-3 border-b border-slate-100 flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-blue-600"></span> Parceiros Institucionais
+          <h2 className="text-xl font-bold text-brand-950 mb-8 pb-3 border-b border-slate-100 flex items-center gap-2">
+            <span className="h-2 w-2 rounded-full bg-brand-600"></span> Parceiros Institucionais
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {institutionals.map((inst, idx) => (
@@ -124,7 +124,7 @@ export default function PartnersPage() {
                 className="p-6 border border-slate-100 rounded-2xl bg-slate-50/50 flex flex-col gap-3"
               >
                 <div className="flex justify-between items-center">
-                  <h3 className="font-bold text-base text-slate-900">{inst.name}</h3>
+                  <h3 className="font-bold text-base text-brand-950">{inst.name}</h3>
                   <span className="text-[10px] font-mono text-slate-400">{inst.period}</span>
                 </div>
                 <p className="text-xs text-slate-500 leading-relaxed">{inst.description}</p>
@@ -138,8 +138,8 @@ export default function PartnersPage() {
 
         {/* 3. Colaboradores */}
         <section className="mb-20">
-          <h2 className="text-xl font-bold text-slate-900 mb-8 pb-3 border-b border-slate-100 flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-blue-600"></span> Apoiadores do Projeto
+          <h2 className="text-xl font-bold text-brand-950 mb-8 pb-3 border-b border-slate-100 flex items-center gap-2">
+            <span className="h-2 w-2 rounded-full bg-brand-600"></span> Apoiadores do Projeto
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {collaborators.map((collab, idx) => (
@@ -168,12 +168,12 @@ export default function PartnersPage() {
                 </div>
                 <div className="flex flex-col gap-1 text-xs">
                   <div className="flex items-center justify-between gap-4">
-                    <span className="font-bold text-sm text-slate-900">{collab.name}</span>
+                    <span className="font-bold text-sm text-brand-950">{collab.name}</span>
                     <a
                       href={collab.externalLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-blue-600 hover:underline font-mono text-[10px]"
+                      className="text-brand-600 hover:underline font-mono text-[10px]"
                     >
                       perfil &rarr;
                     </a>
@@ -188,8 +188,8 @@ export default function PartnersPage() {
 
         {/* 4. Fornecedores e Integrações */}
         <section className="mb-20">
-          <h2 className="text-xl font-bold text-slate-900 mb-8 pb-3 border-b border-slate-100 flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-blue-600"></span> Infraestrutura & Integrações recomendadas
+          <h2 className="text-xl font-bold text-brand-950 mb-8 pb-3 border-b border-slate-100 flex items-center gap-2">
+            <span className="h-2 w-2 rounded-full bg-brand-600"></span> Infraestrutura & Integrações recomendadas
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {vendors.map((vendor, idx) => (
@@ -197,7 +197,7 @@ export default function PartnersPage() {
                 key={vendor.name}
                 className="p-5 border border-slate-100 rounded-xl bg-white flex flex-col gap-2"
               >
-                <h4 className="text-sm font-bold text-slate-900">{vendor.name}</h4>
+                <h4 className="text-sm font-bold text-brand-950">{vendor.name}</h4>
                 <p className="text-xs text-slate-500 leading-relaxed">{vendor.desc}</p>
               </div>
             ))}
@@ -211,7 +211,7 @@ export default function PartnersPage() {
           viewport={{ once: true }}
           className="p-8 md:p-12 rounded-3xl bg-slate-50 border border-slate-100 text-center flex flex-col items-center gap-6"
         >
-          <h3 className="text-2xl md:text-3xl font-bold text-slate-900">
+          <h3 className="text-2xl md:text-3xl font-bold text-brand-950">
             Pronto para simplificar a operação da sua empresa?
           </h3>
           <p className="text-slate-500 max-w-xl text-sm md:text-base leading-relaxed">

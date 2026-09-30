@@ -26,10 +26,10 @@ export const Button: React.FC<ButtonProps> = ({
   const baseStyles = "inline-flex items-center justify-center font-medium rounded-full transition-all duration-300 focus:outline-none disabled:opacity-50 disabled:pointer-events-none";
   
   const variants = {
-    primary: "bg-slate-900 text-white hover:bg-blue-600 shadow-sm hover:shadow-md",
-    secondary: "bg-slate-100 text-slate-900 hover:bg-slate-200",
+    primary: "bg-brand-950 text-white hover:bg-brand-600 shadow-sm hover:shadow-md",
+    secondary: "bg-slate-100 text-brand-950 hover:bg-slate-200",
     outline: "border border-slate-200 text-slate-800 hover:bg-slate-50 hover:border-slate-300",
-    text: "text-slate-800 hover:text-blue-600 px-0 py-0"
+    text: "text-slate-800 hover:text-brand-600 px-0 py-0"
   };
 
   const sizes = {

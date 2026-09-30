@@ -74,10 +74,10 @@ export default function HowWeWorkPage() {
       <div className="max-w-4xl mx-auto px-6 relative z-10">
         {/* Header */}
         <div className="mb-16">
-          <span className="text-xs font-semibold text-blue-600 uppercase tracking-widest mb-3 block">
+          <span className="text-xs font-semibold text-brand-600 uppercase tracking-widest mb-3 block">
             Método MENOS
           </span>
-          <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-slate-900 leading-tight">
+          <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-brand-950 leading-tight">
             Clareza antes, durante e depois do desenvolvimento.
           </h1>
           <p className="text-slate-500 mt-4 text-sm md:text-base font-light leading-relaxed">
@@ -98,11 +98,11 @@ export default function HowWeWorkPage() {
                 className="relative flex flex-col gap-2"
               >
                 {/* Indicador no eixo */}
-                <div className="absolute -left-[45px] top-1 h-8 w-8 rounded-full bg-slate-900 text-white font-mono text-[10px] font-bold flex items-center justify-center border-4 border-white shadow-sm z-10">
+                <div className="absolute -left-[45px] top-1 h-8 w-8 rounded-full bg-brand-950 text-white font-mono text-[10px] font-bold flex items-center justify-center border-4 border-white shadow-sm z-10">
                   {step.num}
                 </div>
 
-                <h3 className="text-base font-bold text-slate-900 leading-snug">
+                <h3 className="text-base font-bold text-brand-950 leading-snug">
                   {step.title}
                 </h3>
                 <p className="text-sm text-slate-500 leading-relaxed font-light">
@@ -115,8 +115,8 @@ export default function HowWeWorkPage() {
 
         {/* FAQs de Contratação */}
         <section className="border-t border-slate-100 pt-16 mb-20">
-          <h2 className="text-xl font-bold text-slate-900 mb-8 flex items-center gap-2">
-            <HelpCircle className="h-5 w-5 text-blue-600" /> Perguntas Comuns sobre Contratação
+          <h2 className="text-xl font-bold text-brand-950 mb-8 flex items-center gap-2">
+            <HelpCircle className="h-5 w-5 text-brand-600" /> Perguntas Comuns sobre Contratação
           </h2>
 
           <div className="flex flex-col gap-8">
@@ -129,7 +129,7 @@ export default function HowWeWorkPage() {
                 transition={{ duration: 0.4 }}
                 className="flex flex-col gap-2"
               >
-                <h4 className="text-sm font-bold text-slate-900 leading-snug">
+                <h4 className="text-sm font-bold text-brand-950 leading-snug">
                   {faq.q}
                 </h4>
                 <p className="text-sm text-slate-500 leading-relaxed pl-4 border-l-2 border-slate-100">
@@ -147,7 +147,7 @@ export default function HowWeWorkPage() {
           viewport={{ once: true }}
           className="p-8 md:p-12 rounded-3xl bg-slate-50 border border-slate-100 text-center flex flex-col items-center gap-6"
         >
-          <h3 className="text-2xl font-bold text-slate-900">Vamos simplificar seu processo?</h3>
+          <h3 className="text-2xl font-bold text-brand-950">Vamos simplificar seu processo?</h3>
           <p className="text-slate-500 max-w-md text-sm leading-relaxed">
             Podemos começar por um diagnóstico gratuito. Agende uma conversa com nosso estúdio e traga seu problema.
           </p>

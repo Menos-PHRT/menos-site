@@ -68,7 +68,7 @@ export function ProjectGallery({ items, projectName }: ProjectGalleryProps) {
       <div className="flex items-center justify-between gap-2 overflow-x-auto pb-2 scrollbar-none">
         <div className="flex items-center gap-1.5 min-w-max">
           <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400 mr-1 flex items-center gap-1">
-            <Layers className="w-3.5 h-3.5 text-blue-600" /> Módulos:
+            <Layers className="w-3.5 h-3.5 text-brand-600" /> Módulos:
           </span>
           {items.map((item, index) => {
             const isActive = index === currentIndex;
@@ -78,11 +78,11 @@ export function ProjectGallery({ items, projectName }: ProjectGalleryProps) {
                 onClick={() => setCurrentIndex(index)}
                 className={`text-xs px-3 py-1.5 rounded-lg transition-all duration-200 font-medium flex items-center gap-1.5 ${
                   isActive
-                    ? "bg-slate-900 text-white shadow-sm ring-1 ring-slate-800"
-                    : "bg-slate-100/80 text-slate-600 hover:bg-slate-200/70 hover:text-slate-900"
+                    ? "bg-brand-950 text-white shadow-sm ring-1 ring-slate-800"
+                    : "bg-slate-100/80 text-slate-600 hover:bg-slate-200/70 hover:text-brand-950"
                 }`}
               >
-                <span className={`text-[10px] font-mono ${isActive ? "text-blue-400" : "text-slate-400"}`}>
+                <span className={`text-[10px] font-mono ${isActive ? "text-brand-400" : "text-slate-400"}`}>
                   0{index + 1}
                 </span>
                 <span className="truncate max-w-[130px] sm:max-w-none">{item.title}</span>
@@ -93,9 +93,9 @@ export function ProjectGallery({ items, projectName }: ProjectGalleryProps) {
       </div>
 
       {/* Janela Principal do Navegador (Mockup Interativo) */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl transition-all">
+      <div className="bg-brand-950 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl transition-all">
         {/* Barra Superior do Navegador */}
-        <div className="bg-slate-900 px-4 py-3 border-b border-slate-800/80 flex items-center justify-between gap-3">
+        <div className="bg-brand-950 px-4 py-3 border-b border-slate-800/80 flex items-center justify-between gap-3">
           {/* Bolinhas macOS + Indicador Seguro Neutro */}
           <div className="flex items-center gap-2.5 min-w-0">
             <div className="flex items-center gap-1.5 shrink-0">
@@ -137,7 +137,7 @@ export function ProjectGallery({ items, projectName }: ProjectGalleryProps) {
             <button
               onClick={() => setIsLightboxOpen(true)}
               title="Expandir imagem em tela cheia"
-              className="flex items-center gap-1.5 text-xs text-slate-300 hover:text-white bg-slate-800/80 hover:bg-blue-600 px-2.5 py-1.5 rounded-lg border border-slate-700/60 transition"
+              className="flex items-center gap-1.5 text-xs text-slate-300 hover:text-white bg-slate-800/80 hover:bg-brand-600 px-2.5 py-1.5 rounded-lg border border-slate-700/60 transition"
             >
               <Maximize2 className="w-3.5 h-3.5" />
               <span className="hidden lg:inline text-[11px] font-medium">Ver tela cheia</span>
@@ -170,21 +170,21 @@ export function ProjectGallery({ items, projectName }: ProjectGalleryProps) {
 
           {/* Dica de clique para ampliar */}
           <div className="absolute inset-0 bg-slate-950/0 group-hover:bg-slate-950/20 transition-colors pointer-events-none flex items-center justify-center">
-            <span className="opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 text-xs font-semibold px-4 py-2 bg-slate-900/90 text-white rounded-full shadow-xl backdrop-blur-md border border-slate-700/80 flex items-center gap-2">
-              <Eye className="w-3.5 h-3.5 text-blue-400" /> Clique para ampliar em tela cheia
+            <span className="opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 text-xs font-semibold px-4 py-2 bg-brand-950/90 text-white rounded-full shadow-xl backdrop-blur-md border border-slate-700/80 flex items-center gap-2">
+              <Eye className="w-3.5 h-3.5 text-brand-400" /> Clique para ampliar em tela cheia
             </span>
           </div>
         </div>
 
         {/* Legenda Informativa da Tela Atual */}
-        <div className="bg-slate-900/95 px-5 py-4 border-t border-slate-800/80 flex flex-col md:flex-row md:items-center justify-between gap-3">
+        <div className="bg-brand-950/95 px-5 py-4 border-t border-slate-800/80 flex flex-col md:flex-row md:items-center justify-between gap-3">
           <div className="flex flex-col gap-1">
             <div className="flex items-center gap-2">
               <h4 className="text-sm md:text-base font-bold text-white tracking-wide">
                 {currentItem.title}
               </h4>
               {currentItem.category && (
-                <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 font-medium">
+                <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/20 font-medium">
                   {currentItem.category}
                 </span>
               )}
@@ -197,7 +197,7 @@ export function ProjectGallery({ items, projectName }: ProjectGalleryProps) {
           <div className="shrink-0 flex items-center gap-2 self-start md:self-auto">
             <button
               onClick={() => setIsLightboxOpen(true)}
-              className="text-xs text-blue-400 hover:text-blue-300 font-semibold inline-flex items-center gap-1 transition"
+              className="text-xs text-brand-400 hover:text-brand-300 font-semibold inline-flex items-center gap-1 transition"
             >
               Zoom detalhado <ChevronRight className="w-3.5 h-3.5" />
             </button>
@@ -215,7 +215,7 @@ export function ProjectGallery({ items, projectName }: ProjectGalleryProps) {
               onClick={() => setCurrentIndex(index)}
               className={`relative rounded-xl overflow-hidden border transition-all duration-200 group text-left flex flex-col ${
                 isActive
-                  ? "border-blue-600 ring-2 ring-blue-500/30 shadow-md scale-[1.02]"
+                  ? "border-brand-600 ring-2 ring-brand-500/30 shadow-md scale-[1.02]"
                   : "border-slate-200/90 bg-slate-100 hover:border-slate-300 opacity-75 hover:opacity-100"
               }`}
             >
@@ -227,7 +227,7 @@ export function ProjectGallery({ items, projectName }: ProjectGalleryProps) {
                   className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
                 />
                 {isActive && (
-                  <div className="absolute top-1 right-1 w-4 h-4 rounded-full bg-blue-600 text-white flex items-center justify-center">
+                  <div className="absolute top-1 right-1 w-4 h-4 rounded-full bg-brand-600 text-white flex items-center justify-center">
                     <Check className="w-2.5 h-2.5" />
                   </div>
                 )}
@@ -254,7 +254,7 @@ export function ProjectGallery({ items, projectName }: ProjectGalleryProps) {
             {/* Top Bar do Modal */}
             <div className="flex items-center justify-between text-white pb-3 border-b border-slate-800/80">
               <div className="flex items-center gap-3">
-                <span className="text-xs font-mono text-blue-400 font-semibold uppercase tracking-wider">
+                <span className="text-xs font-mono text-brand-400 font-semibold uppercase tracking-wider">
                   {projectName}
                 </span>
                 <span className="text-slate-600">/</span>
@@ -283,7 +283,7 @@ export function ProjectGallery({ items, projectName }: ProjectGalleryProps) {
                   e.stopPropagation();
                   handlePrev();
                 }}
-                className="absolute left-2 md:left-6 z-10 p-3 rounded-full bg-slate-900/80 hover:bg-slate-800 text-white border border-slate-700/80 shadow-2xl backdrop-blur transition transform hover:scale-110"
+                className="absolute left-2 md:left-6 z-10 p-3 rounded-full bg-brand-950/80 hover:bg-slate-800 text-white border border-slate-700/80 shadow-2xl backdrop-blur transition transform hover:scale-110"
                 title="Tela anterior"
               >
                 <ChevronLeft className="w-6 h-6" />
@@ -313,7 +313,7 @@ export function ProjectGallery({ items, projectName }: ProjectGalleryProps) {
                   e.stopPropagation();
                   handleNext();
                 }}
-                className="absolute right-2 md:right-6 z-10 p-3 rounded-full bg-slate-900/80 hover:bg-slate-800 text-white border border-slate-700/80 shadow-2xl backdrop-blur transition transform hover:scale-110"
+                className="absolute right-2 md:right-6 z-10 p-3 rounded-full bg-brand-950/80 hover:bg-slate-800 text-white border border-slate-700/80 shadow-2xl backdrop-blur transition transform hover:scale-110"
                 title="Próxima tela"
               >
                 <ChevronRight className="w-6 h-6" />
@@ -321,12 +321,12 @@ export function ProjectGallery({ items, projectName }: ProjectGalleryProps) {
             </div>
 
             {/* Legenda Inferior do Modal */}
-            <div className="bg-slate-900/90 border border-slate-800/80 rounded-2xl p-4 max-w-3xl mx-auto w-full flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-left">
+            <div className="bg-brand-950/90 border border-slate-800/80 rounded-2xl p-4 max-w-3xl mx-auto w-full flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-left">
               <div>
                 <div className="flex items-center gap-2 mb-1">
                   <h5 className="font-bold text-white text-sm">{currentItem.title}</h5>
                   {currentItem.category && (
-                    <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-blue-500/20 text-blue-300">
+                    <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-brand-500/20 text-brand-300">
                       {currentItem.category}
                     </span>
                   )}
@@ -344,7 +344,7 @@ export function ProjectGallery({ items, projectName }: ProjectGalleryProps) {
                     onClick={() => setCurrentIndex(idx)}
                     className={`w-10 h-7 rounded overflow-hidden border transition ${
                       idx === currentIndex
-                        ? "border-blue-500 ring-2 ring-blue-500/50"
+                        ? "border-brand-500 ring-2 ring-brand-500/50"
                         : "border-slate-700 opacity-50 hover:opacity-100"
                     }`}
                   >

@@ -29,11 +29,11 @@ export const CookieBanner: React.FC = () => {
     <div className="fixed bottom-6 left-6 right-6 md:left-auto md:max-w-md z-50 animate-fade-in-up">
       <div className="bg-white border border-slate-100 rounded-2xl p-5 shadow-xl shadow-slate-200/50 flex flex-col gap-4">
         <div className="flex flex-col gap-1">
-          <h4 className="text-sm font-semibold text-slate-900">Uso de Cookies & LGPD</h4>
+          <h4 className="text-sm font-semibold text-brand-950">Uso de Cookies & LGPD</h4>
           <p className="text-xs text-slate-500 leading-relaxed">
             Usamos cookies para melhorar sua experiência em nosso site. Ao navegar, você concorda com nossos{" "}
-            <a href="/termos" className="text-blue-600 underline">Termos de Uso</a> e nossa{" "}
-            <a href="/privacidade" className="text-blue-600 underline">Política de Privacidade</a>.
+            <a href="/termos" className="text-brand-600 underline">Termos de Uso</a> e nossa{" "}
+            <a href="/privacidade" className="text-brand-600 underline">Política de Privacidade</a>.
           </p>
         </div>
         <div className="flex items-center gap-3 justify-end">

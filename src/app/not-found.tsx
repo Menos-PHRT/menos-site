@@ -13,7 +13,7 @@ export default function NotFoundPage() {
           404
         </div>
 
-        <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-slate-900 leading-tight">
+        <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-brand-950 leading-tight">
           Caminho não encontrado.
         </h1>
         

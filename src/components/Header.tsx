@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { MenosWordmark } from "./MenosWordmark";
 import { Button } from "./ui/Button";
 
 export const Header: React.FC = () => {
@@ -29,13 +30,12 @@ export const Header: React.FC = () => {
   }, [pathname]);
 
   const navLinks = [
-    { name: "Início", href: "/" },
-    { name: "A MENOS", href: "/a-menos" },
     { name: "Serviços", href: "/servicos" },
-    { name: "Projetos", href: "/projetos" },
+    { name: "Cases", href: "/projetos" },
     { name: "Parceiros", href: "/parceiros" },
     { name: "Como trabalhamos", href: "/como-trabalhamos" },
-    { name: "Contato", href: "/contato" }
+    { name: "Contato", href: "/contato" },
+    { name: "A MENOS", href: "/a-menos" }
   ];
 
   return (
@@ -49,11 +49,10 @@ export const Header: React.FC = () => {
           {/* Logo */}
           <Link
             href="/"
-            className="group flex items-center gap-2 font-semibold text-xl tracking-wider text-slate-900 uppercase focus:outline-none"
+            className="group font-semibold text-xl tracking-wider text-brand-950 uppercase focus:outline-none transition-colors duration-300 hover:text-brand-600"
             aria-label="Ir para página inicial MENOS"
           >
-            <span className="h-[3px] w-5 bg-slate-900 transition-all duration-300 group-hover:w-2.5 group-hover:bg-blue-600"></span>
-            menos
+            <MenosWordmark animateIntro />
           </Link>
 
           {/* Desktop Nav */}
@@ -64,7 +63,7 @@ export const Header: React.FC = () => {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`text-sm font-medium transition-colors hover:text-blue-600 ${isActive ? "text-blue-600" : "text-slate-600"
+                  className={`text-sm font-medium transition-colors hover:text-brand-600 ${isActive ? "text-brand-600" : "text-slate-600"
                     }`}
                 >
                   {link.name}
@@ -83,21 +82,21 @@ export const Header: React.FC = () => {
           {/* Burger Button (Mobile) */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden p-2 text-slate-900 focus:outline-none"
+            className="lg:hidden p-2 text-brand-950 focus:outline-none"
             aria-label="Abrir menu de navegação"
             aria-expanded={isMenuOpen}
           >
             <div className="w-6 h-5 flex flex-col justify-between relative">
               <span
-                className={`w-6 h-[2px] bg-slate-900 rounded transition-all duration-300 origin-left ${isMenuOpen ? "rotate-45 translate-x-1" : ""
+                className={`w-6 h-[2px] bg-brand-950 rounded transition-all duration-300 origin-left ${isMenuOpen ? "rotate-45 translate-x-1" : ""
                   }`}
               ></span>
               <span
-                className={`w-6 h-[2px] bg-slate-900 rounded transition-all duration-300 ${isMenuOpen ? "opacity-0" : ""
+                className={`w-6 h-[2px] bg-brand-950 rounded transition-all duration-300 ${isMenuOpen ? "opacity-0" : ""
                   }`}
               ></span>
               <span
-                className={`w-6 h-[2px] bg-slate-900 rounded transition-all duration-300 origin-left ${isMenuOpen ? "-rotate-45 translate-x-1" : ""
+                className={`w-6 h-[2px] bg-brand-950 rounded transition-all duration-300 origin-left ${isMenuOpen ? "-rotate-45 translate-x-1" : ""
                   }`}
               ></span>
             </div>
@@ -113,7 +112,7 @@ export const Header: React.FC = () => {
         {/* Backdrop */}
         <div
           onClick={() => setIsMenuOpen(false)}
-          className={`absolute inset-0 bg-slate-900/10 backdrop-blur-sm transition-opacity duration-500 ${isMenuOpen ? "opacity-100" : "opacity-0"
+          className={`absolute inset-0 bg-brand-950/10 backdrop-blur-sm transition-opacity duration-500 ${isMenuOpen ? "opacity-100" : "opacity-0"
             }`}
         ></div>
 
@@ -129,7 +128,7 @@ export const Header: React.FC = () => {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`text-lg font-medium transition-colors hover:text-blue-600 ${isActive ? "text-blue-600" : "text-slate-800"
+                  className={`text-lg font-medium transition-colors hover:text-brand-600 ${isActive ? "text-brand-600" : "text-slate-800"
                     }`}
                 >
                   {link.name}

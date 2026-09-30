@@ -106,3 +106,111 @@ await resend.emails.send({
 
 ### Como integrar com CRM ou webhooks de WhatsApp
 Você pode adicionar requisições HTTP do tipo `fetch` dentro da rota `POST` para despachar os dados em formato JSON para plataformas como Hubspot, RD Station, ou integradores como Zapier e Make.
+
+---
+
+## 🧭 Decisões de posicionamento e de números (atualizado em 28/09/2026)
+
+Registro do que foi decidido com o Paulo antes da revitalização visual do site. Vale mais que qualquer texto antigo do site que contradiga isto.
+
+### Posicionamento
+- A MENOS passa a se apresentar como **AI-driven**: desenvolvimento focado em IA, com curadoria humana especializada, times pequenos e próximos do cliente.
+- **Não usar a expressão "software house"** em nenhum texto do site. O modelo de trabalho é esse, mas a palavra não entra.
+- Frase institucional de referência: "Menos complexidade operacional. Mais resultado com software e IA."
+- O tom antigo ("estúdio criativo", "terceiro setor") deixa de ser o eixo. Afeta hero, marquee, `metadata` do `layout.tsx` e a página `/a-menos`.
+- Cuidado de identidade: "IA" não pode virar visual genérico de IA. A identidade deve transmitir critério humano e contenção (combina com o nome MENOS).
+
+### Números comerciais (resultados medidos)
+| Número | Regra de uso |
+|---|---|
+| 50% menos necessidade de **pessoas** em atividades operacionais | É sobre pessoas. Nunca escrever como redução de custo, de folha ou de horas. |
+| Processo de até 3 semanas → menos de 1 hora | Vem do Melhores Cabeças. Ainda falta identificar qual processo é, para a legenda. |
+| 11 de 13 atividades automatizadas ou simplificadas (~85%) | "Atividades de um fluxo mapeado", não "85% do trabalho". |
+| Credenciamento de 1 min → menos de 5 s por pessoa (570 participantes, 11 oficinas) | Confirmado como medido. |
+| 99,6% de realização das mentorias | Confirmado como medido. |
+
+### Regras de apresentação (revisadas)
+- **Regra anterior:** número sempre acoplado ao case.
+- **Regra atual:** número pode aparecer **como dado geral** da MENOS (fora do case) e também dentro do case. Isso porque virão mais cases e o site precisa de uma leitura agregada.
+- Continua valendo: dado geral deve ser apresentado como **resultado alcançado em projetos realizados**, nunca como garantia ("sempre", "garantimos"). Todo número geral deve ser rastreável até pelo menos um case listado.
+- Com poucos cases, não chamar de "média". Preferir "em projetos como…" ou "até…".
+- Afirmações sem número medido ficam como texto qualitativo até haver uma medida (ex.: % de etapas automatizadas).
+- **Capacidade ≠ resultado.** "Podemos automatizar até 90% do fluxo de credenciamento, conforme o nível do projeto" é uma **capacidade/estimativa** informada pelo Paulo (28/09/2026), não um resultado medido. Deve aparecer com essa formulação ("até", "conforme o projeto") e **separada visualmente** dos resultados alcançados. Só vira resultado quando houver um case em que isso foi medido.
+- Quando faltar um número real para uma afirmação, o Paulo busca nos outros cases e informa; não estimar nem arredondar por conta própria.
+- Os números aparecem em **duas camadas**: uma seção de dados gerais na home e o detalhe dentro de cada case.
+
+### Pendências
+- Número do WhatsApp do botão final da home (`5511999999999`) é **provisório**; trocar depois.
+- Identificar o processo das "3 semanas" do Melhores Cabeças.
+- Mapear e medir a automação de credenciamento em geral (novo eixo de dados gerais).
+- Paulo vai revisar o site, indicar onde os dados devem entrar e mandar referências visuais.
+
+### Ferramentas de design
+- Skill **design-motion-principles** (Kyle Zantos, MIT), instalada em `~/.claude/skills/`, só arquivos de texto, sem scripts. Usar para criar e auditar animações.
+- **Impeccable** (Paul Bakaus): decidido **não instalar** (o plugin roda um binário e um hook a cada edição). Usar apenas as regras/anti-padrões dele como checklist manual.
+
+### Alterações aplicadas em 28/09/2026 (certas, para revisão local)
+- **Bug de animação corrigido:** as animações de entrada (`whileInView`/`animate`) usavam `initial={false}`, então os elementos já nasciam no estado final e nada se movia. Trocado por `variants` (hidden/visible) com spring `duration: 0.5, bounce: 0` (padrão Jakub Krehel, ver skill `design-motion-principles`), respeitando `prefers-reduced-motion` via `useReducedMotion()` do framer-motion. Afeta hero, grid de problemas, grid de serviços, cases em destaque e timeline de método, todos em [src/app/page.tsx](src/app/page.tsx).
+- **Copy do hero e do manifesto** ([src/app/page.tsx](src/app/page.tsx)) e **metadados** ([src/app/layout.tsx](src/app/layout.tsx)) atualizados para o posicionamento AI-driven decidido (sem a palavra "software house", sem o antigo tom "estúdio criativo/terceiro setor" no título e na descrição do site).
+- **Verificado:** `npx tsc --noEmit` sem erros; `npm run build` sem erros; build de produção testado no browser (`next start`), sem erros de console; conteúdo renderiza visível (não preso em opacidade 0).
+- **Nota técnica:** durante `npm run dev`, o console mostra um aviso de "hydration mismatch" nos elementos animados — é ruído conhecido do React 19 + Framer Motion em modo dev (Framer aplica estilo via ref logo após montar, e o novo detector de hidratação do React sinaliza isso mesmo sendo o comportamento esperado). Não aparece em produção (`next start`), testado e confirmado limpo.
+- **Ainda não alterado (fora do escopo de hoje):** página `/a-menos` (bio, "o que não somos"), `Footer.tsx` ("MENOS Estúdio Criativo de Tecnologia"), `termos`/`privacidade` (mencionam "estúdio criativo"), `services.ts`/filtro de projetos (menções a "terceiro setor" como categoria, essas podem ficar — são segmento de cliente, não posicionamento), número de WhatsApp de exemplo, seção de dados/números comerciais, labels fictícios do `SimplificationVisual.tsx` (ex.: "Latência: 1.2ms").
+- Criado `.claude/launch.json` para rodar o preview local (`npm run dev`, porta 3000) e testado também com `npm run start`.
+
+### Alterações aplicadas em 28/09/2026 (rodada 2 — feedback visual do Paulo)
+- **Bug real corrigido:** em `/contato`, o número de WhatsApp exibido (+55 11 95291-7968, real) linkava para o número de exemplo `5511999999999`. Corrigido. Esse mesmo número real agora é usado em todos os links de WhatsApp do site (CTA final da home, rodapé, botão flutuante) — o número de exemplo não existe mais em lugar nenhum.
+- **Removida a faixa em movimento** ("menos é mais / menos burocracia...") da home — julgada símbolo genérico. CSS morto (`@keyframes marquee`, `.animate-marquee`) removido junto.
+- **Removido o link do GitHub** do rodapé e da página de contato (ícone + link).
+- **Adicionado botão flutuante de WhatsApp** ([src/components/WhatsAppButton.tsx](src/components/WhatsAppButton.tsx)), fixo no canto inferior direito em todas as páginas, com entrada única (spring, sem loop) e respeito a `prefers-reduced-motion`. Sobe temporariamente enquanto o banner de cookies (mesmo canto) ainda não foi respondido.
+- **Removidos rótulos "estilo terminal" genéricos:** `DETECÇÃO_0X` nos cards de problema (home) e `[ CARREGANDO_FORMULARIO ]` no formulário de contato (virou "Carregando formulário..."). Removido também o card de fallback `PROJETO_CASE_0X` da seção de projetos em destaque — era código morto (nenhum projeto está sem imagem hoje).
+- **Pulso em loop removido** do selo "X telas" nos cards de projeto (contraria a regra da skill `design-motion-principles` contra motion decorativo em loop).
+- **Ainda pendente (rótulos "estilo terminal"):** `projetos/[slug]/page.tsx` (ex.: `[ COENTRO ERP ]`) e outras páginas de detalhe/serviço ainda têm o mesmo padrão de rótulo tipo-código; não mexido ainda porque exige revisão própria dessas páginas.
+- **Decisões grandes de identidade visual, aguardando definição antes de construir:** paleta verde (tom exato), substituição do visual "flow_optimizer" por uma animação de IA/rede, símbolo da marca (círculo com traço de menos) + animação, e carrossel "3D" para os cases. Ver conversa com o Paulo de 28/09/2026.
+- **Bug relatado, não reproduzido:** Paulo relatou que as páginas aparecem "na topbar, não abaixo dela". Testado em `/`, `/a-menos`, `/servicos`, `/projetos`, `/contato` (desktop, ~800px de largura) sem overlap — conteúdo sempre renderiza com espaçamento correto abaixo do header fixo. Precisa de página + dispositivo específicos para reproduzir.
+
+### Alterações aplicadas em 28/09/2026 (rodada 3 — paleta verde + conceitos visuais)
+- **Paleta trocada para verde-petróleo escuro**, a partir do tom exato dado pelo Paulo (`#143c3c`). Escala completa gerada em HSL (mesma matiz/saturação, 11 tons de `brand-50` a `brand-950`) em [src/app/globals.css](src/app/globals.css), com contraste WCAG checado (branco sobre `brand-900` = 12.06:1, `brand-600` sobre branco = 5.26:1). `#143c3c` é exatamente `brand-900`.
+  - Todo uso de `blue-*` (Tailwind, ~140 ocorrências em ~20 arquivos) virou `brand-*` — era literalmente a cor de destaque do site inteiro.
+  - `slate-900` (o token `--primary` do design system — botões, logo, títulos) virou `brand-950`. Cinzas neutros (`slate-50` a `slate-800`, usados em texto de corpo, bordas, fundos) **não foram alterados** — ficam neutros de propósito.
+  - Script de geração da escala: `/tmp/palette2.js` (não versionado, só para referência de como os valores foram calculados).
+- **Símbolo da marca construído**: [src/components/MenosMark.tsx](src/components/MenosMark.tsx) — círculo + traço (SVG), a partir das referências que o Paulo enviou (mesmo símbolo que funciona como "menos" e como a letra E de "MENOS"). Usado no Header e no Footer no lugar do tracinho antigo. No Header, tem animação de **formação** ao carregar: o traço aparece primeiro, depois o círculo se desenha ao redor — a ideia de "evolução do processo de simplificar" que o Paulo descreveu. Respeita `prefers-reduced-motion`.
+  - **Não implementado ainda**: o lockup tipográfico completo (o "E" de "MENOS" virando o símbolo, como no print enviado) — o Paulo disse que o logo ainda não está fechado ("não temos ele estruturado definitivamente"), então por ora o símbolo fica como ícone ao lado da palavra "menos", não substituindo uma letra.
+- **Carrossel de cases**: [src/components/CaseCarousel.tsx](src/components/CaseCarousel.tsx) substitui a lista vertical "de cima para baixo" da home por um carrossel horizontal com profundidade (cards laterais encolhem/apagam/giram levemente — efeito "coverflow" via CSS transform, sem WebGL). Mostra **todos** os cases (5), não só 3 destaques. Navegação por arraste/toque nativo (scroll-snap), setas, indicadores clicáveis. O efeito de profundidade (que usa rotação/escala presos ao scroll) é um gatilho vestibular — desligado com `prefers-reduced-motion`, mantendo só a navegação funcional.
+- **Visual do hero trocado**: `SimplificationVisual.tsx` (removido, tinha rótulos falsos tipo "INPUT_CHAOS"/"LATÊNCIA: 1.2ms") virou [src/components/AINetworkVisual.tsx](src/components/AINetworkVisual.tsx) — uma rede de pontos dispersos que se conecta e escurece perto do cursor (mouse ou toque), como se estivesse se organizando. Testado ao vivo: funciona. Posições dos nós são fixas/determinísticas (não `Math.random()`, evita erro de hidratação SSR). Movimento só acontece em resposta à interação, sem loop ambiente.
+- **Verificado:** `npx tsc --noEmit` e `npm run build` sem erros a cada etapa; testado ao vivo no navegador (paleta, logo, carrossel — clique em "próximo" funcionando, rede neural — hover testado e conectando corretamente).
+- **Perguntas em aberto para o Paulo:**
+  - O visual da rede neural é a direção certa, ou ele imaginava algo diferente (ex.: mais deliberadamente "IA", com forma de rosto/rede maior, cores/estilo diferentes)?
+  - Testar o carrossel e a rede no celular (toque) — implementado mas não testado em viewport mobile real.
+  - Quando o logo estiver fechado, revisitar o Header para o lockup completo com o símbolo substituindo o "E".
+
+### Alterações aplicadas em 28/09/2026 (rodada 4 — logotipo, navegação, reestruturação da home)
+- **Logotipo "MENOS" com o símbolo no lugar do E**: [src/components/MenosMark.tsx](src/components/MenosMark.tsx) ganhou uma variante `"e"` — círculo com uma quebra de ~50° do lado direito, desenhada com um arco SVG calculado por ângulo exato (`M 87.16 67.33 A 41 41 0 1 1 87.16 32.67`, r=41, cx=cy=50). **Importante:** a primeira tentativa usou `stroke-dasharray` num `<circle>` assumindo que o ponto de início do path fica no lado direito (3h) — isso se mostrou **errado** na prática (a quebra saía no canto superior); por isso o arco manual por ângulo, que é determinístico e não depende de suposição sobre o navegador.
+- [src/components/MenosWordmark.tsx](src/components/MenosWordmark.tsx): lockup completo "M[símbolo]NOS", dimensionado em `em` (0.72em, top 0.02em) para acompanhar o tamanho do texto ao redor. Usado no Header e no Footer no lugar do ícone + texto separados.
+- **Navegação**: removido "Início" (não faz sentido página própria pra home — é o logo). Nova ordem: Serviços, Cases, Parceiros, Como trabalhamos, Contato, A MENOS (por último, de propósito).
+- **"Projetos" renomeado para "Cases"** na navegação e no título da seção da home ("Nossos cases" / "Ver todos os cases"). A URL continua `/projetos` por enquanto (evita quebrar links); revisitar quando a fusão com Serviços acontecer (ver pendência abaixo).
+- **Seção "Problemas reais" removida** da home (redundante com "Soluções criadas a partir do problema"). Código morto removido junto: array `problems`, estado `hoveredProblem`, ícones não usados.
+- **Home reordenada**: Hero → Soluções (serviços) → Nossos Cases (carrossel) → Nosso Posicionamento (manifesto) → Método → Parceiros → Depoimentos → CTA final. Antes o Posicionamento vinha antes dos Cases; agora vem depois.
+- **Zoom genérico removido** da imagem dos cards no carrossel de cases (`group-hover:scale-105`) — mantida só a elevação/sombra do card como interação. **Pendente:** o mesmo efeito de zoom ainda existe em outros lugares (grid de `/projetos`, páginas de detalhe) — não mexido nesta rodada.
+- **Rede do hero (`AINetworkVisual`) virou fundo do hero inteiro** (`fullBleed`), atrás do texto e dos botões, em vez de um cartão separado ao lado. O rastreamento do cursor passou a ser feito via `window` (com checagem de limites do container), então passar o mouse perto dos botões "Conte seu problema" / "Conheça nossos projetos" já aproxima o cursor daquela região da rede — que se organiza ali, como o Paulo descreveu (a ideia de "se aproximar do problema = a rede se organiza"). Não há mais um elo direto botão→nó específico; é a proximidade espacial natural que gera o efeito.
+
+### Pendências e decisões em aberto
+- **Fusão Serviços + Projetos**: decidido com o Paulo (28/09/2026) que vira **uma página só por solução** — cada serviço (Automações, Sistemas Internos...) mostra sua descrição e, embutidos, os cases reais que o usam (usar o campo `relatedServices` que já existe em `projects.ts` para casar case↔serviço). Nav vira um item só ("Soluções"). **Ainda não implementado** — é uma reestruturação de conteúdo maior, fica para uma rodada dedicada. Até lá, Serviços e Cases continuam como dois itens de nav separados.
+- **Carrossel de cases "3D" de verdade**: o carrossel atual (coverflow simples, CSS transform) não é o que o Paulo pediu. Ele quer algo mais elaborado/interativo, tipo "cards se aproximando de cima da tela", navegação por clique lateral. Pesquisa feita (28/09/2026), três direções identificadas:
+  1. **Sticky stack com scroll** (GSAP ScrollTrigger): cards empilhados, cada um inclina/avança em 3D e desliza pra fora ao rolar, revelando o próximo. É o que mais parece com "aproximar de cima da tela".
+  2. **Carrossel em espaço 3D de verdade** (`transform-style: preserve-3d`, `translateZ`/`rotateX` escalados pelo scroll): cards literalmente arranjados em 3D, como um tambor giratório.
+  3. **Slider com tilt de física** reagindo ao mouse (sensação de peso/profundidade), navegação por clique.
+  - **Atenção a uma dependência nova**: os padrões mais usados na prática usam GSAP + ScrollTrigger, que não está instalado no projeto (só `framer-motion`). Antes de instalar, vale tentar com o que já existe (framer-motion tem `useScroll`/`useTransform`, dá pra fazer efeito parecido). Só recorrer ao GSAP se o resultado com framer-motion não ficar bom.
+  - Falta o Paulo escolher a direção antes de eu construir de novo.
+- **Animação futura do logo** (mencionada pelo Paulo, não para agora): o símbolo "menos" padrão (círculo fechado) aparece primeiro, depois se transforma no símbolo "E" (quebra à direita) enquanto as letras M-NOS aparecem ao lado, de forma interativa. Só rascunho por enquanto — o `MenosMark` já tem as duas variantes (`"minus"` e `"e"`) prontas como base técnica para essa transição no futuro.
+
+### Alterações aplicadas em 28/09/2026 (rodada 5 — logo maior + animação de formação)
+- **Símbolo aumentado** no lockup "MENOS": de `0.72em` para `0.85em` (testado ao vivo em 4 tamanhos antes de escolher).
+- **Animação de formação implementada** em [src/components/MenosWordmark.tsx](src/components/MenosWordmark.tsx), via a nova prop `animateIntro` (ligada só no [Header.tsx](src/components/Header.tsx), não no rodapé — é um momento de marca, não pra repetir toda hora): o símbolo "menos" original (círculo fechado, preto) aparece sozinho, depois se dissolve/gira dando lugar ao símbolo "E" (a variante com a quebra, na cor herdada do texto), enquanto "M" e "NOS" deslizam e aparecem dos lados. Sequência: 0 – 0.35s símbolo fechado sozinho · 0.35 – 0.95s transição (crossfade + leve rotação/escala) · 0.75 – 1.25s letras entrando. Respeita `prefers-reduced-motion` (pula direto pro estado final).
+- **Verificado:** `tsc`/`build` limpos. O navegador de teste desta sessão está com "reduzir movimento" ativado no sistema, então a animação real não pôde ser vista rodando ao vivo aqui — simulei a mesma coreografia (tempos/ângulos idênticos) com CSS puro fora do React pra validar visualmente as duas pontas (estado inicial: só o símbolo fechado; estado final: "MENOS" completo). A lógica e os valores são os mesmos do componente real. **Pedir para o Paulo confirmar visualmente com "reduzir movimento" desligado**, já que não consegui testar o componente de produção rodando de verdade nesta sessão.
+
+### Bug crítico corrigido em 30/09/2026 — quebra de hidratação para quem usa "reduzir movimento"
+- **Sintoma:** `Uncaught Error: Hydration failed` no console, reproduzido rodando a build de produção (`npm run start`) numa aba nova.
+- **Causa raiz:** `useReducedMotion()` (framer-motion) pode retornar o valor real (`true`/`false`) já no primeiro render do **cliente**, diferente do que o **servidor** renderizou (o servidor nunca sabe a preferência do sistema operacional do visitante). Isso é inofensivo quando só muda VALORES de estilo no mesmo elemento (React só corrige silenciosamente — é o aviso "won't be patched up" que já tínhamos visto e é sabidamente benigno). Mas em [MenosWordmark.tsx](src/components/MenosWordmark.tsx), a diferença trocava a **estrutura inteira do HTML** (fragmento com dois `<div>`+SVG vs. um único `<svg>`) — isso o React não consegue corrigir e quebra a hidratação de verdade pra qualquer visitante real com "reduzir movimento" ativado no sistema (comum em modo economia de bateria, configuração de acessibilidade, etc.).
+- **Correção:** a versão animada só é ativada depois de montado no cliente (`useState(false)` + `useEffect` para virar `true`), então servidor e primeiro paint do cliente **sempre** renderizam a versão estática (idênticos, sem risco de mismatch) — a troca para a versão animada acontece só depois, como uma atualização normal do lado do cliente, que não conflita com hidratação.
+- **Auditoria:** conferido todo o resto do código que usa `shouldReduceMotion` ([page.tsx](src/app/page.tsx), [CaseCarousel.tsx](src/components/CaseCarousel.tsx), [AINetworkVisual.tsx](src/components/AINetworkVisual.tsx), [WhatsAppButton.tsx](src/components/WhatsAppButton.tsx)) — todos só trocam valores de estilo no mesmo elemento, nenhum troca a estrutura do HTML. Não têm esse risco.
+- **Verificado:** `tsc`/`build` limpos; testado a build de produção numa aba nova — **zero erros e zero avisos no console**.

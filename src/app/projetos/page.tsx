@@ -42,10 +42,10 @@ export default function ProjectsPage() {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Header */}
         <div className="max-w-2xl mb-16">
-          <span className="text-xs font-semibold text-blue-600 uppercase tracking-widest mb-3 block">
+          <span className="text-xs font-semibold text-brand-600 uppercase tracking-widest mb-3 block">
             Nosso Portfólio
           </span>
-          <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-slate-900 leading-tight">
+          <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-brand-950 leading-tight">
             Cada projeto começa com algo que poderia funcionar melhor.
           </h1>
           <p className="text-slate-500 mt-4 text-base md:text-lg font-light leading-relaxed">
@@ -61,7 +61,7 @@ export default function ProjectsPage() {
               onClick={() => setActiveFilter(filter.id)}
               className={`px-4 py-2 rounded-full text-xs font-semibold tracking-wider uppercase transition-all duration-300 ${
                 activeFilter === filter.id
-                  ? "bg-slate-900 text-white shadow-sm"
+                  ? "bg-brand-950 text-white shadow-sm"
                   : "bg-slate-50 border border-slate-100 text-slate-600 hover:bg-slate-100"
               }`}
             >
@@ -86,9 +86,9 @@ export default function ProjectsPage() {
               {project.image ? (
                 <Link
                   href={`/projetos/${project.slug}`}
-                  className="block relative rounded-2xl md:rounded-3xl overflow-hidden border border-slate-200/90 bg-slate-900 shadow-sm group-hover:shadow-xl transition-all duration-300"
+                  className="block relative rounded-2xl md:rounded-3xl overflow-hidden border border-slate-200/90 bg-brand-950 shadow-sm group-hover:shadow-xl transition-all duration-300"
                 >
-                  <div className="bg-slate-900 px-4 py-2.5 border-b border-slate-800 flex items-center justify-between">
+                  <div className="bg-brand-950 px-4 py-2.5 border-b border-slate-800 flex items-center justify-between">
                     <div className="flex items-center gap-1.5">
                       <div className="w-2 h-2 rounded-full bg-[#ff5f56]"></div>
                       <div className="w-2 h-2 rounded-full bg-[#ffbd2e]"></div>
@@ -97,7 +97,7 @@ export default function ProjectsPage() {
                         Ambiente Protegido
                       </span>
                     </div>
-                    <span className="text-[9px] font-semibold text-blue-400 uppercase px-2 py-0.5 bg-blue-950/60 border border-blue-800/40 rounded-full">
+                    <span className="text-[9px] font-semibold text-brand-400 uppercase px-2 py-0.5 bg-brand-950/60 border border-brand-800/40 rounded-full">
                       {project.category}
                     </span>
                   </div>
@@ -116,13 +116,13 @@ export default function ProjectsPage() {
                     <span className="text-[10px] font-mono text-slate-400 tracking-wider uppercase">
                       CASE_0{i + 1}
                     </span>
-                    <span className="text-[10px] font-semibold text-blue-600 uppercase px-2 py-0.5 bg-blue-50 border border-blue-100/30 rounded-full">
+                    <span className="text-[10px] font-semibold text-brand-600 uppercase px-2 py-0.5 bg-brand-50 border border-brand-100/30 rounded-full">
                       {project.category}
                     </span>
                   </div>
 
                   <div className="my-auto">
-                    <h3 className="font-bold text-xl text-slate-900 group-hover:text-blue-600 transition tracking-tight">
+                    <h3 className="font-bold text-xl text-brand-950 group-hover:text-brand-600 transition tracking-tight">
                       {project.name}
                     </h3>
                     <span className="text-xs text-slate-400 font-medium">
@@ -149,12 +149,12 @@ export default function ProjectsPage() {
                   <strong>O Desafio:</strong> {project.challenge}
                 </p>
                 <div className="p-4 bg-slate-50/50 rounded-2xl border border-slate-100 text-xs text-slate-600 leading-relaxed">
-                  <span className="font-bold text-slate-900 uppercase block mb-0.5 tracking-wider text-[10px]">Resultado</span>
+                  <span className="font-bold text-brand-950 uppercase block mb-0.5 tracking-wider text-[10px]">Resultado</span>
                   {project.impact}
                 </div>
                 <Link
                   href={`/projetos/${project.slug}`}
-                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-900 hover:text-blue-600 transition self-start"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-950 hover:text-brand-600 transition self-start"
                 >
                   Entender estudo de caso <ArrowUpRight className="h-4 w-4" />
                 </Link>

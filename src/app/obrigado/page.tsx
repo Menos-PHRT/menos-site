@@ -9,11 +9,11 @@ export default function ThankYouPage() {
 
       <div className="max-w-md mx-auto px-6 text-center relative z-10 flex flex-col items-center gap-6">
         {/* Ícone de Sucesso Animado */}
-        <div className="h-16 w-16 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 shadow-sm mb-2">
+        <div className="h-16 w-16 rounded-full bg-brand-50 border border-brand-100 flex items-center justify-center text-brand-600 shadow-sm mb-2">
           <Check className="h-8 w-8" />
         </div>
 
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900 leading-tight">
+        <h1 className="text-3xl font-bold tracking-tight text-brand-950 leading-tight">
           Obrigado pelo contato!
         </h1>
         

@@ -42,10 +42,10 @@ export default function ServicesPage() {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Header */}
         <div className="max-w-2xl mb-16">
-          <span className="text-xs font-semibold text-blue-600 uppercase tracking-widest mb-3 block">
+          <span className="text-xs font-semibold text-brand-600 uppercase tracking-widest mb-3 block">
             Nossas soluções
           </span>
-          <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-slate-900 leading-tight">
+          <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-brand-950 leading-tight">
             Tecnologia pensada para resolver, organizar e simplificar.
           </h1>
           <p className="text-slate-500 mt-4 text-base md:text-lg font-light leading-relaxed">
@@ -64,8 +64,8 @@ export default function ServicesPage() {
                 onClick={() => setActiveCategory(cat.id)}
                 className={`cursor-pointer px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase transition-all duration-200 outline-none select-none ${
                   isActive
-                    ? "bg-slate-900 text-white shadow-sm ring-2 ring-slate-900 ring-offset-2"
-                    : "bg-slate-50 border border-slate-100 text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+                    ? "bg-brand-950 text-white shadow-sm ring-2 ring-brand-950 ring-offset-2"
+                    : "bg-slate-50 border border-slate-100 text-slate-600 hover:bg-slate-100 hover:text-brand-950"
                 }`}
               >
                 {cat.name}
@@ -88,10 +88,10 @@ export default function ServicesPage() {
                   </span>
                 </div>
 
-                <h3 className="text-xl font-bold text-slate-900 mb-2">
+                <h3 className="text-xl font-bold text-brand-950 mb-2">
                   {service.name}
                 </h3>
-                <p className="text-sm font-semibold text-blue-600 italic mb-4 leading-relaxed">
+                <p className="text-sm font-semibold text-brand-600 italic mb-4 leading-relaxed">
                   {service.tagline}
                 </p>
                 <p className="text-sm text-slate-500 leading-relaxed mb-6">
@@ -100,13 +100,13 @@ export default function ServicesPage() {
 
                 {/* Problems Resolved Preview */}
                 <div className="mb-8">
-                  <h4 className="text-xs uppercase font-bold tracking-wider text-slate-900 mb-3">
+                  <h4 className="text-xs uppercase font-bold tracking-wider text-brand-950 mb-3">
                     Dores que eliminamos:
                   </h4>
                   <ul className="flex flex-col gap-2">
                     {service.problemsSolved.slice(0, 2).map((prob, idx) => (
                       <li key={idx} className="flex items-start gap-2.5 text-xs text-slate-600 leading-relaxed">
-                        <CheckCircle2 className="h-4 w-4 text-blue-600 shrink-0 mt-0.5" />
+                        <CheckCircle2 className="h-4 w-4 text-brand-600 shrink-0 mt-0.5" />
                         <span>{prob}</span>
                       </li>
                     ))}
@@ -117,7 +117,7 @@ export default function ServicesPage() {
               <div className="flex items-center justify-between border-t border-slate-50 pt-6 mt-4">
                 <Link
                   href={`/servicos/${service.slug}`}
-                  className="text-xs font-bold text-slate-900 hover:text-blue-600 transition flex items-center gap-1"
+                  className="text-xs font-bold text-brand-950 hover:text-brand-600 transition flex items-center gap-1"
                 >
                   Entenda a solução <ChevronRight className="h-4 w-4" />
                 </Link>

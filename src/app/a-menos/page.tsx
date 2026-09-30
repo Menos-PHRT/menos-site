@@ -49,7 +49,7 @@ export default function AboutPage() {
             initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-xs font-semibold text-blue-600 uppercase tracking-widest mb-3"
+            className="text-xs font-semibold text-brand-600 uppercase tracking-widest mb-3"
           >
             Sobre nós
           </motion.div>
@@ -57,7 +57,7 @@ export default function AboutPage() {
             initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-3xl md:text-5xl font-bold tracking-tight text-slate-900 leading-tight"
+            className="text-3xl md:text-5xl font-bold tracking-tight text-brand-950 leading-tight"
           >
             Criamos menos obstáculos entre uma necessidade e sua solução.
           </motion.h1>
@@ -71,14 +71,14 @@ export default function AboutPage() {
           transition={{ duration: 0.6 }}
           className="flex flex-col gap-6 mb-20 text-slate-600 leading-relaxed text-base"
         >
-          <h2 className="text-xl font-bold text-slate-900">A Origem do Nome</h2>
+          <h2 className="text-xl font-bold text-brand-950">A Origem do Nome</h2>
           <p>
             A MENOS nasceu de uma frustração comum: por que a tecnologia corporativa parece estar ficando cada vez mais complexa, lenta e burocrática? Na pressa de adicionar novos recursos, a maioria das empresas de software esquece que o verdadeiro valor de um sistema está em <strong>liberar espaço mental e operacional</strong>.
           </p>
           <p>
             Escolhemos o nome <strong>MENOS</strong> como um lembrete e um compromisso. Menos cliques para completar um cadastro. Menos planilhas soltas para gerenciar estoques. Menos reuniões de alinhamento para entender dados confusos.
           </p>
-          <p className="font-medium text-slate-900">
+          <p className="font-medium text-brand-950">
             Acreditamos que, no mundo digital, subtrair o que é desnecessário é a forma mais refinada de multiplicar a produtividade.
           </p>
         </motion.section>
@@ -92,13 +92,13 @@ export default function AboutPage() {
             transition={{ duration: 0.6 }}
             className="p-8 rounded-2xl bg-slate-50 border border-slate-100"
           >
-            <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider mb-6 flex items-center gap-2">
-              <CheckCircle2 className="h-5 w-5 text-blue-600" /> O que a MENOS é
+            <h3 className="text-sm font-bold text-brand-950 uppercase tracking-wider mb-6 flex items-center gap-2">
+              <CheckCircle2 className="h-5 w-5 text-brand-600" /> O que a MENOS é
             </h3>
             <ul className="flex flex-col gap-4 text-sm text-slate-600">
               {whatWeAre.map((item, idx) => (
                 <li key={idx} className="flex items-start gap-3">
-                  <span className="h-1.5 w-1.5 rounded-full bg-blue-600 mt-1.5"></span>
+                  <span className="h-1.5 w-1.5 rounded-full bg-brand-600 mt-1.5"></span>
                   <span>{item}</span>
                 </li>
               ))}
@@ -112,7 +112,7 @@ export default function AboutPage() {
             transition={{ duration: 0.6 }}
             className="p-8 rounded-2xl bg-slate-50 border border-slate-100"
           >
-            <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider mb-6 flex items-center gap-2">
+            <h3 className="text-sm font-bold text-brand-950 uppercase tracking-wider mb-6 flex items-center gap-2">
               <XCircle className="h-5 w-5 text-red-500" /> O que a MENOS NÃO é
             </h3>
             <ul className="flex flex-col gap-4 text-sm text-slate-600">
@@ -128,7 +128,7 @@ export default function AboutPage() {
 
         {/* 3. Missão, Visão e Valores */}
         <section className="mb-20">
-          <h2 className="text-xl font-bold text-slate-900 mb-8">Missão, Visão e Valores</h2>
+          <h2 className="text-xl font-bold text-brand-950 mb-8">Missão, Visão e Valores</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {pillars.map((pillar, idx) => (
               <motion.div
@@ -139,7 +139,7 @@ export default function AboutPage() {
                 transition={{ duration: 0.5, delay: idx * 0.05 }}
                 className="flex flex-col gap-2"
               >
-                <h4 className="font-bold text-slate-900 text-base">
+                <h4 className="font-bold text-brand-950 text-base">
                   {pillar.title}
                 </h4>
                 <p className="text-sm text-slate-500 leading-relaxed">{pillar.desc}</p>
@@ -156,12 +156,12 @@ export default function AboutPage() {
           transition={{ duration: 0.6 }}
           className="border-t border-slate-100 pt-16 mb-20"
         >
-          <h2 className="text-xl font-bold text-slate-900 mb-8">Quem Conduz</h2>
+          <h2 className="text-xl font-bold text-brand-950 mb-8">Quem Conduz</h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-12 items-start">
             {/* Robert Alcântara */}
             <div className="flex flex-col gap-6">
               <div className="flex items-center gap-4">
-                <div className="relative h-20 w-20 md:h-24 md:w-24 rounded-full overflow-hidden border-2 border-slate-200 shadow-sm bg-slate-900 shrink-0">
+                <div className="relative h-20 w-20 md:h-24 md:w-24 rounded-full overflow-hidden border-2 border-slate-200 shadow-sm bg-brand-950 shrink-0">
                   <Image
                     src="/images/robert-alcantara-v3.jpg"
                     alt="Robert Alcântara — Presidente, Fundador e Desenvolvedor da MENOS"
@@ -171,8 +171,8 @@ export default function AboutPage() {
                   />
                 </div>
                 <div>
-                  <h3 className="text-lg md:text-xl font-bold text-slate-900">Robert Alcântara</h3>
-                  <p className="text-xs font-mono text-blue-600 font-semibold uppercase tracking-wider mt-0.5">
+                  <h3 className="text-lg md:text-xl font-bold text-brand-950">Robert Alcântara</h3>
+                  <p className="text-xs font-mono text-brand-600 font-semibold uppercase tracking-wider mt-0.5">
                     Fundador e Desenvolvedor da MENOS
                   </p>
                 </div>
@@ -194,13 +194,13 @@ export default function AboutPage() {
             {/* Paulo Henrique */}
             <div className="flex flex-col gap-6">
               <div className="flex items-center gap-4">
-                <div className="h-20 w-20 md:h-24 md:w-24 rounded-full bg-slate-900 text-white font-bold flex flex-col items-center justify-center border-2 border-slate-200 shadow-sm shrink-0">
+                <div className="h-20 w-20 md:h-24 md:w-24 rounded-full bg-brand-950 text-white font-bold flex flex-col items-center justify-center border-2 border-slate-200 shadow-sm shrink-0">
                   <span className="text-2xl font-mono tracking-widest">P.H.</span>
-                  <span className="text-[9px] text-blue-400 uppercase tracking-widest font-semibold mt-0.5">MENOS</span>
+                  <span className="text-[9px] text-brand-400 uppercase tracking-widest font-semibold mt-0.5">MENOS</span>
                 </div>
                 <div>
-                  <h3 className="text-lg md:text-xl font-bold text-slate-900">Paulo Henrique</h3>
-                  <p className="text-xs font-mono text-blue-600 font-semibold uppercase tracking-wider mt-0.5">
+                  <h3 className="text-lg md:text-xl font-bold text-brand-950">Paulo Henrique</h3>
+                  <p className="text-xs font-mono text-brand-600 font-semibold uppercase tracking-wider mt-0.5">
                     Cofundador e desenvolvedor da MENOS
                   </p>
                 </div>
@@ -228,7 +228,7 @@ export default function AboutPage() {
           viewport={{ once: true }}
           className="p-8 md:p-12 rounded-3xl bg-slate-50 border border-slate-100/60 text-center flex flex-col items-center gap-6"
         >
-          <h3 className="text-2xl font-bold text-slate-900">Pronto para retirar o excesso?</h3>
+          <h3 className="text-2xl font-bold text-brand-950">Pronto para retirar o excesso?</h3>
           <p className="text-slate-500 max-w-md text-sm leading-relaxed">
             Seja qual for seu problema operacional ou ideia digital, podemos criar um caminho mais curto e organizado para resolvê-lo.
           </p>

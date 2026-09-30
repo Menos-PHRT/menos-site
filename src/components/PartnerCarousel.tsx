@@ -19,7 +19,7 @@ export const PartnerCarousel: React.FC = () => {
               className="flex items-center gap-2 group cursor-default"
             >
               {/* Ícone geométrico abstrato sutil antes do nome */}
-              <span className="h-1.5 w-1.5 rounded-full bg-slate-300 transition-colors group-hover:bg-blue-600"></span>
+              <span className="h-1.5 w-1.5 rounded-full bg-slate-300 transition-colors group-hover:bg-brand-600"></span>
               <span className="text-sm font-semibold tracking-widest text-slate-400 group-hover:text-slate-800 uppercase transition-colors duration-300">
                 {item.name}
               </span>

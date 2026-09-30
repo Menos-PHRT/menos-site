@@ -143,7 +143,7 @@ export const ContactForm: React.FC = () => {
             onChange={handleChange}
             placeholder="Ex: Carlos Silva"
             className={`w-full px-4 py-3 rounded-xl border bg-white focus:outline-none transition-colors text-sm ${
-              errors.name ? "border-red-500 focus:border-red-500" : "border-slate-200 focus:border-blue-600"
+              errors.name ? "border-red-500 focus:border-red-500" : "border-slate-200 focus:border-brand-600"
             }`}
           />
           {errors.name && <span className="text-[11px] text-red-500">{errors.name}</span>}
@@ -161,7 +161,7 @@ export const ContactForm: React.FC = () => {
             value={formData.company}
             onChange={handleChange}
             placeholder="Ex: Instituto Verde"
-            className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-600 bg-white focus:outline-none transition-colors text-sm"
+            className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-600 bg-white focus:outline-none transition-colors text-sm"
           />
         </div>
 
@@ -178,7 +178,7 @@ export const ContactForm: React.FC = () => {
             onChange={handleChange}
             placeholder="carlos@empresa.com"
             className={`w-full px-4 py-3 rounded-xl border bg-white focus:outline-none transition-colors text-sm ${
-              errors.email ? "border-red-500 focus:border-red-500" : "border-slate-200 focus:border-blue-600"
+              errors.email ? "border-red-500 focus:border-red-500" : "border-slate-200 focus:border-brand-600"
             }`}
           />
           {errors.email && <span className="text-[11px] text-red-500">{errors.email}</span>}
@@ -197,7 +197,7 @@ export const ContactForm: React.FC = () => {
             onChange={handleChange}
             placeholder="(11) 99999-9999"
             className={`w-full px-4 py-3 rounded-xl border bg-white focus:outline-none transition-colors text-sm ${
-              errors.phone ? "border-red-500 focus:border-red-500" : "border-slate-200 focus:border-blue-600"
+              errors.phone ? "border-red-500 focus:border-red-500" : "border-slate-200 focus:border-brand-600"
             }`}
           />
           {errors.phone && <span className="text-[11px] text-red-500">{errors.phone}</span>}
@@ -215,7 +215,7 @@ export const ContactForm: React.FC = () => {
             value={formData.city}
             onChange={handleChange}
             placeholder="Ex: São Paulo - SP"
-            className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-600 bg-white focus:outline-none transition-colors text-sm"
+            className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-600 bg-white focus:outline-none transition-colors text-sm"
           />
         </div>
 
@@ -230,7 +230,7 @@ export const ContactForm: React.FC = () => {
             value={formData.solutionType}
             onChange={handleChange}
             className={`w-full px-4 py-3 rounded-xl border bg-white focus:outline-none transition-colors text-sm appearance-none ${
-              errors.solutionType ? "border-red-500 focus:border-red-500" : "border-slate-200 focus:border-blue-600"
+              errors.solutionType ? "border-red-500 focus:border-red-500" : "border-slate-200 focus:border-brand-600"
             }`}
           >
             <option value="">Selecione...</option>
@@ -262,7 +262,7 @@ export const ContactForm: React.FC = () => {
               name="referredBy"
               value={formData.referredBy}
               onChange={handleChange}
-              className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-600 bg-white focus:outline-none transition-colors text-sm appearance-none cursor-pointer"
+              className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-600 bg-white focus:outline-none transition-colors text-sm appearance-none cursor-pointer"
             >
               <option value="">Selecione uma opção...</option>
               <option value="Redes sociais">Redes sociais</option>
@@ -290,7 +290,7 @@ export const ContactForm: React.FC = () => {
                 value={formData.referredByOther}
                 onChange={handleChange}
                 placeholder="Conte-nos como chegou até nós..."
-                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:border-blue-600 bg-slate-50/50 focus:bg-white focus:outline-none transition-colors text-sm"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:border-brand-600 bg-slate-50/50 focus:bg-white focus:outline-none transition-colors text-sm"
                 autoFocus
               />
             </div>
@@ -309,7 +309,7 @@ export const ContactForm: React.FC = () => {
             value={formData.deadline}
             onChange={handleChange}
             placeholder="Ex: 1 mês, Urgente..."
-            className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-600 bg-white focus:outline-none transition-colors text-sm"
+            className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-600 bg-white focus:outline-none transition-colors text-sm"
           />
         </div>
 
@@ -325,7 +325,7 @@ export const ContactForm: React.FC = () => {
             value={formData.budget}
             onChange={handleChange}
             placeholder="Opcional"
-            className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-600 bg-white focus:outline-none transition-colors text-sm"
+            className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-600 bg-white focus:outline-none transition-colors text-sm"
           />
         </div>
       </div>
@@ -343,7 +343,7 @@ export const ContactForm: React.FC = () => {
           rows={5}
           placeholder="Conte-nos onde existe burocracia, retrabalho, lentidão operacional ou qual é a ideia de sistema que você deseja construir."
           className={`w-full px-4 py-3 rounded-xl border bg-white focus:outline-none transition-colors text-sm resize-none ${
-            errors.problemDescription ? "border-red-500 focus:border-red-500" : "border-slate-200 focus:border-blue-600"
+            errors.problemDescription ? "border-red-500 focus:border-red-500" : "border-slate-200 focus:border-brand-600"
           }`}
         />
         {errors.problemDescription && <span className="text-[11px] text-red-500">{errors.problemDescription}</span>}
@@ -357,11 +357,11 @@ export const ContactForm: React.FC = () => {
             name="privacyConsent"
             checked={formData.privacyConsent}
             onChange={handleChange}
-            className="h-4.5 w-4.5 rounded border-slate-300 text-blue-600 focus:ring-blue-500 mt-0.5"
+            className="h-4.5 w-4.5 rounded border-slate-300 text-brand-600 focus:ring-brand-500 mt-0.5"
           />
           <span className="text-xs text-slate-500 leading-relaxed select-none">
             Concordo com a coleta de dados deste formulário para fins de contato comercial pelo estúdio MENOS, em total conformidade com a nossa{" "}
-            <a href="/privacidade" target="_blank" className="text-blue-600 underline font-medium">Política de Privacidade</a>.
+            <a href="/privacidade" target="_blank" className="text-brand-600 underline font-medium">Política de Privacidade</a>.
           </span>
         </label>
         {errors.privacyConsent && <span className="text-[11px] text-red-500">{errors.privacyConsent}</span>}
