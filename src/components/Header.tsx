@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
-import { MenosWordmark } from "./MenosWordmark";
+import { MenosWordmark, type MenosWordmarkHandle } from "./MenosWordmark";
 import { Button } from "./ui/Button";
 
 const clamp = (v: number, a: number, b: number) => Math.max(a, Math.min(b, v));
@@ -24,7 +24,15 @@ export const Header: React.FC = () => {
   // Progresso do logotipo: 0 = só o símbolo fechado, 1 = "MENOS" completo.
   // Avança/recua suavemente (não instantâneo) ao passar/tirar o mouse,
   // aproximadamente 1.2s para o percurso inteiro, como no handoff de design.
-  const [logoProgress, setLogoProgress] = useState(0);
+  //
+  // Importante: isto NÃO usa useState. Atualizar state do React a cada
+  // quadro (60x/s) re-renderiza o Header inteiro 60x/s, o que rouba tempo de
+  // CPU de toda a página e é exatamente o tipo de coisa que faz animação
+  // parecer "menos suave" de forma generalizada, não só o logo. A marca é
+  // atualizada direto no DOM via ref (MenosWordmarkHandle.setProgress), e o
+  // loop de requestAnimationFrame só roda enquanto a transição está de fato
+  // em andamento — parado (mouse fora, já recolhido) não consome nada.
+  const wordmarkRef = useRef<MenosWordmarkHandle>(null);
   const logoTarget = useRef(0);
   const logoP = useRef(0);
   const rafId = useRef<number | undefined>(undefined);
@@ -32,16 +40,32 @@ export const Header: React.FC = () => {
 
   useEffect(() => {
     reduceMotionRef.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }, []);
+
+  const runLogoLoop = () => {
+    if (rafId.current !== undefined) return; // já rodando
     const step = reduceMotionRef.current ? 1 : 1 / 72;
-    const loop = () => {
+    const tick = () => {
       const delta = clamp(logoTarget.current - logoP.current, -step, step);
       logoP.current += delta;
-      setLogoProgress(logoP.current);
-      rafId.current = requestAnimationFrame(loop);
+      wordmarkRef.current?.setProgress(logoP.current);
+      if (Math.abs(logoTarget.current - logoP.current) < 0.001) {
+        logoP.current = logoTarget.current;
+        wordmarkRef.current?.setProgress(logoP.current);
+        rafId.current = undefined; // chegou no alvo: para o loop
+        return;
+      }
+      rafId.current = requestAnimationFrame(tick);
     };
-    rafId.current = requestAnimationFrame(loop);
-    return () => { if (rafId.current) cancelAnimationFrame(rafId.current); };
-  }, []);
+    rafId.current = requestAnimationFrame(tick);
+  };
+
+  useEffect(() => () => { if (rafId.current) cancelAnimationFrame(rafId.current); }, []);
+
+  const setLogoTarget = (value: number) => {
+    logoTarget.current = value;
+    runLogoLoop();
+  };
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -83,12 +107,12 @@ export const Header: React.FC = () => {
             href="/"
             className="flex items-center h-8 w-[150px] cursor-pointer focus:outline-none"
             aria-label="MENOS, página inicial"
-            onMouseEnter={() => { logoTarget.current = 1; }}
-            onMouseLeave={() => { logoTarget.current = 0; }}
-            onFocus={() => { logoTarget.current = 1; }}
-            onBlur={() => { logoTarget.current = 0; }}
+            onMouseEnter={() => setLogoTarget(1)}
+            onMouseLeave={() => setLogoTarget(0)}
+            onFocus={() => setLogoTarget(1)}
+            onBlur={() => setLogoTarget(0)}
           >
-            <MenosWordmark progress={logoProgress} className="h-[26px] w-auto" />
+            <MenosWordmark ref={wordmarkRef} progress={0} className="h-[26px] w-auto" />
           </Link>
 
           {/* Desktop Nav — sem botão de CTA aqui, por desenho */}

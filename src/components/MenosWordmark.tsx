@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useRef } from "react";
 
 // Geometria exata extraída do handoff de design (assets/*-original.svg).
 // viewBox do lockup completo: -2 -2 254 59 (ou -2 0 254 55 no rodapé).
@@ -36,7 +36,11 @@ const S_PATH = "M222.11,47.25c1.28.69,3.2,1.58,5.66,2.21,2.17.55,6.27,1.55,11.04
 interface MenosWordmarkProps {
   className?: string;
   /** Controlado externamente (0 = só o símbolo fechado, 1 = "MENOS" completo).
-   * Quando omitido, o componente fica estático em p=1 (rodapé, chamada final). */
+   * Quando omitido, o componente fica estático em p=1 (rodapé, chamada final).
+   * Só é lido uma vez ao montar — para animar quadro a quadro (hover do
+   * cabeçalho), use a ref (`setProgress`) em vez desta prop: atualizar uma
+   * prop React a 60fps re-renderiza o componente a cada quadro, o que é
+   * exatamente o tipo de coisa que faz uma animação perder fluidez. */
   progress?: number;
   /** Cores do traço/símbolo: [fechado, aberto]. Padrão: preto original -> verde da marca. */
   colors?: [string, string];
@@ -44,17 +48,24 @@ interface MenosWordmarkProps {
   letterColor?: string;
 }
 
+export interface MenosWordmarkHandle {
+  /** Atualiza o progresso (0-1) direto nos atributos do SVG via ref, sem
+   * passar por state/re-render do React — usar dentro de um loop de
+   * requestAnimationFrame para animação quadro a quadro suave. */
+  setProgress: (p: number) => void;
+}
+
 // Lockup "MENOS": M e N são polígonos preenchidos; o "e" é um círculo com uma
 // abertura à direita (o mesmo símbolo da marca); O e S completam a palavra.
 // Com `progress` de 0 a 1, o símbolo fechado (cor original #0E1414) desliza da
 // posição do "e" para a esquerda enquanto M/N/O/S entram e a cor migra para a
 // cor da marca — a mesma coreografia do cabeçalho no hover e da intro.
-export const MenosWordmark: React.FC<MenosWordmarkProps> = ({
+export const MenosWordmark = forwardRef<MenosWordmarkHandle, MenosWordmarkProps>(function MenosWordmark({
   className = "",
   progress,
   colors = ["#0E1414", "#143C3C"],
   letterColor = "#143C3C"
-}) => {
+}, ref) {
   const wrapRef = useRef<SVGGElement>(null);
   const circleRef = useRef<SVGCircleElement>(null);
   const lineRef = useRef<SVGLineElement>(null);
@@ -86,14 +97,14 @@ export const MenosWordmark: React.FC<MenosWordmarkProps> = ({
     letter(sRef.current, 0.58, 1, -90);
   }, [colors]);
 
-  useEffect(() => {
-    if (progress !== undefined) apply(progress);
-  }, [progress, apply]);
+  useImperativeHandle(ref, () => ({ setProgress: apply }), [apply]);
 
   useEffect(() => {
-    if (progress === undefined) apply(1);
+    apply(progress ?? 1);
+    // Só na montagem / quando `progress` muda como prop (uso estático).
+    // Atualizações quadro a quadro devem usar a ref (setProgress), não esta prop.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [progress]);
 
   return (
     <svg viewBox="-2 -2 254 59" className={className} style={{ overflow: "visible" }} aria-label="MENOS">
@@ -115,6 +126,6 @@ export const MenosWordmark: React.FC<MenosWordmarkProps> = ({
       </g>
     </svg>
   );
-};
+});
 
 export default MenosWordmark;
