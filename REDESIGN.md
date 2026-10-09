@@ -80,3 +80,15 @@ O conteúdo dessa fusão já existia parcialmente: cada página de serviço (`/s
 1. **Cards de case mais ricos na página de serviço.** Antes eram só texto (cliente, nome, resumo do desafio). Agora mostram a imagem do sistema e, quando existem, as métricas de destaque (os mesmos números que aparecem no carrossel da home) — para o merge parecer de verdade um "aqui está o serviço e a prova de que funciona", não só uma lista de links.
 
 **Sobre o menu (revertido em 30/09/2026):** cheguei a juntar "Serviços" e "Cases" num item só ("Soluções"), mas isso não batia com o material de design que o Paulo enviou depois (que mostra os dois separados nas telas de referência). O Paulo confirmou: **o menu volta a ter Serviços e Cases separados**, igual ao protótipo. A fusão de *conteúdo* (cases reais dentro de cada página de serviço) continua valendo — só o menu não junta os dois num item só.
+
+## Terceira versão (branch `redesign-visual-v3`, 09/10/2026)
+
+A v3 implementa o handoff de design v8 (versão final do time de design) sobre a v2. A intenção do v8: tudo que se move é escrito direto no DOM por um loop único de `requestAnimationFrame` (nada de estado do React a cada quadro, que foi a causa do bug de lentidão da rodada 8), com os números do protótipo copiados sem aproximação.
+
+Mudanças de conteúdo pedidas pelo Paulo nesta rodada:
+
+- **Título de Serviços:** "Soluções criadas com menos dor de cabeça e mais eficiência." (substitui "...a partir do problema, não da tecnologia.").
+- **Contato:** e-mail robert@menosdev.com além de menos.lab@gmail.com.
+- **Equipe em "A MENOS":** sai Paulo Henrique, entra Samuele Barbosa (sem foto por enquanto).
+
+O detalhe técnico e as decisões que divergem do README do pacote estão em `DOCUMENTACAO.md`, Rodada 10.

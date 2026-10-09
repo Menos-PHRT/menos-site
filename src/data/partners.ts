@@ -3,6 +3,8 @@ export interface Partner {
   name: string;
   logo: string; // nome do logo ou texto estilizado
   category: "client" | "institutional" | "collaborator" | "vendor";
+  /** Rótulo exibido na grade da home (ex.: "Apoiadora"). Se ausente, deriva de category. */
+  kindLabel?: string;
   description: string;
   relation: string;
   externalLink: string;
@@ -90,6 +92,7 @@ export const partners: Partner[] = [
     name: "Stefani Vasconcellos",
     logo: "Stefani Vasconcellos",
     category: "collaborator",
+    kindLabel: "Apoiadora",
     description: "Engenheira de software na Oracle especialista em Cloud, Inteligência Artificial Generativa e ERP Fusion Cloud, com certificações OCI e AWS e atuação em Java e Python.",
     relation: "Applications Software Engineer na Oracle",
     externalLink: "https://www.linkedin.com/in/stefani-beatriz-carvalho-vasconcellos/",

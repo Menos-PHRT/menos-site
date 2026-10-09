@@ -191,31 +191,19 @@ export default function AboutPage() {
               </div>
             </div>
 
-            {/* Paulo Henrique */}
+            {/* Samuele Barbosa (sem foto e sem bio por enquanto) */}
             <div className="flex flex-col gap-6">
               <div className="flex items-center gap-4">
                 <div className="h-20 w-20 md:h-24 md:w-24 rounded-full bg-brand-950 text-white font-bold flex flex-col items-center justify-center border-2 border-slate-200 shadow-sm shrink-0">
-                  <span className="text-2xl font-mono tracking-widest">P.H.</span>
+                  <span className="text-2xl font-mono tracking-widest">S.B.</span>
                   <span className="text-[9px] text-brand-400 uppercase tracking-widest font-semibold mt-0.5">MENOS</span>
                 </div>
                 <div>
-                  <h3 className="text-lg md:text-xl font-bold text-brand-950">Paulo Henrique</h3>
+                  <h3 className="text-lg md:text-xl font-bold text-brand-950">Samuele Barbosa</h3>
                   <p className="text-xs font-mono text-brand-600 font-semibold uppercase tracking-wider mt-0.5">
-                    Cofundador e desenvolvedor da MENOS
+                    Equipe MENOS
                   </p>
                 </div>
-              </div>
-
-              <div className="flex flex-col gap-3 text-slate-600 leading-relaxed text-sm">
-                <p>
-                  Formado em Sistemas de Informação pela Universidade de São Paulo, Paulo Henrique construiu sua trajetória profissional a partir do desenvolvimento de software e da participação em diferentes projetos de tecnologia. Sua experiência inclui a atuação em software houses, ambientes marcados pela criação de soluções sob medida, integração de sistemas e resolução de desafios técnicos diversos.
-                </p>
-                <p>
-                  Ao longo desse percurso, desenvolveu uma visão prática e estratégica sobre programação, arquitetura de sistemas e construção de produtos digitais. Na MENOS, contribui para transformar necessidades reais em soluções tecnicamente sólidas, escaláveis e eficientes.
-                </p>
-                <p>
-                  Como cofundador, Paulo soma sua experiência em desenvolvimento à proposta da MENOS de criar tecnologias simples, funcionais e bem estruturadas, capazes de reduzir a complexidade dos processos sem comprometer a qualidade da solução.
-                </p>
               </div>
             </div>
           </div>

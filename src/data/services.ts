@@ -13,44 +13,44 @@ export interface Service {
 
 export const services: Service[] = [
   {
-    slug: "automacoes",
-    name: "Automações",
-    tagline: "Reduza tarefas repetitivas e libere tempo para o que importa.",
-    shortDescription: "Soluções inteligentes para integrar suas ferramentas favoritas e eliminar o trabalho manual repetitivo de uma vez por todas.",
-    description: "Tarefas repetitivas drenam a energia criativa e produtiva de qualquer equipe. Desenvolvemos automações que conectam suas ferramentas do dia a dia (como e-mail, planilhas, Slack, CRMs e bancos de dados), realizando fluxos de trabalho inteiros sem que ninguém precise mover um dedo. O resultado é menos esforço manual e zero erro humano.",
+    slug: "camadas-agenticas",
+    name: "Camadas Agênticas",
+    tagline: "Agentes de IA trabalhando sobre as ferramentas que você já usa.",
+    shortDescription: "Uma camada de agentes de IA sobre as aplicações e serviços que sua empresa já usa. Começamos por um diagnóstico dos seus processos para definir onde e como a IA entra.",
+    description: "Sua empresa já tem e-mail, planilhas, CRM, ERP e outras ferramentas funcionando. Em vez de trocar tudo, criamos uma camada de agentes de IA por cima delas: agentes que leem, decidem dentro de regras claras e executam tarefas entre os sistemas, sempre com supervisão humana nos pontos que importam. Tudo começa por um diagnóstico dos seus processos, para definir onde e como a IA entra.",
     problemsSolved: [
-      "Copiar e colar dados manualmente entre sistemas.",
-      "Esquecimento de envio de e-mails ou alertas importantes.",
-      "Demora no processamento de leads ou cadastros.",
-      "Falha de sincronização de informações entre equipes."
+      "Equipes copiando e colando dados entre sistemas todos os dias.",
+      "Tarefas que dependem de alguém ler, interpretar e encaminhar mensagens e documentos.",
+      "Processos que travam quando a pessoa responsável não está disponível.",
+      "Falta de clareza sobre onde a IA realmente ajudaria na operação."
     ],
     applications: [
-      "Envio automatizado de relatórios semanais por e-mail ou WhatsApp.",
-      "Sincronização instantânea de dados de vendas para o financeiro.",
-      "Geração automática de contratos em PDF a partir de um formulário preenchido.",
-      "Alertas inteligentes no Slack ou WhatsApp quando um evento crítico ocorre."
+      "Agentes que triam e encaminham solicitações recebidas por e-mail ou WhatsApp.",
+      "Agentes que extraem dados de documentos e preenchem seus sistemas.",
+      "Rotinas que acompanham prazos e avisam a pessoa certa na hora certa.",
+      "Assistentes internos que respondem dúvidas com base nos documentos da empresa."
     ],
     benefits: [
-      "Economia de horas semanais de trabalho manual.",
-      "Redução drástica de falhas operacionais e erros de digitação.",
-      "Respostas mais rápidas para clientes e parceiros.",
-      "Processos padronizados e documentados em código."
+      "Menos trabalho manual e repetitivo para a equipe.",
+      "Processos que seguem regras claras e ficam registrados.",
+      "Aproveitamento das ferramentas que a empresa já usa, sem migração forçada.",
+      "Supervisão humana definida onde o risco é maior."
     ],
     steps: [
-      "Mapeamento do fluxo de trabalho manual atual.",
-      "Identificação dos pontos de atrito e definição dos gatilhos e ações.",
-      "Desenvolvimento e conexão segura via APIs.",
+      "Diagnóstico dos processos e definição de onde a IA entra.",
+      "Desenho dos agentes, regras de decisão e pontos de aprovação humana.",
+      "Conexão segura com as aplicações e serviços existentes.",
       "Fase de testes assistidos e ajustes finos.",
-      "Entrega com monitoramento ativo de falhas."
+      "Entrega com monitoramento e curadoria contínua."
     ],
     faq: [
       {
-        question: "Preciso de um programador na minha equipe para gerenciar a automação?",
-        answer: "Não. Entregamos a automação completamente configurada, testada e rodando em nuvem. Se precisar de ajustes futuros, nossa equipe de suporte cuida disso para você."
+        question: "Preciso trocar os sistemas que minha empresa já usa?",
+        answer: "Não. A camada de agentes se conecta ao que você já tem, por APIs e integrações. A ideia é aproveitar as ferramentas atuais, não substituí-las."
       },
       {
-        question: "Quais ferramentas vocês conseguem integrar?",
-        answer: "Qualquer ferramenta que possua uma API (Interface de Programação) aberta ou estruturada, como Planilhas Google, Airtable, Notion, Slack, WhatsApp Business, Trello, Asana, CRMs (RD Station, Hubspot), gateways de pagamento, ERPs, entre outras."
+        question: "A IA toma decisões sozinha?",
+        answer: "Apenas dentro das regras definidas em conjunto com você. Em ações sensíveis, o agente prepara a decisão e uma pessoa aprova antes de executar."
       }
     ]
   },
@@ -58,7 +58,7 @@ export const services: Service[] = [
     slug: "sistemas-internos",
     name: "Sistemas Internos",
     tagline: "Organize sua operação em um único painel feito sob medida.",
-    shortDescription: "Sistemas personalizados projetados especificamente para organizar equipes, informações, rotinas e processos administrativos da sua empresa.",
+    shortDescription: "Sistemas personalizados projetados especificamente para organizar equipes, informações, rotinas e processos administrativos da sua empresa, incluindo credenciamento e gestão de eventos.",
     description: "Sistemas prontos costumam vir com excesso de botões que você nunca usa ou com a falta de recursos que você precisa de verdade. Criamos sistemas internos desenhados especificamente para a realidade e dinâmica operacional da sua empresa. Sem excessos, sem complexidades desnecessárias: apenas o que sua equipe precisa para trabalhar com clareza e fluidez.",
     problemsSolved: [
       "Operações inteiras rodando em planilhas que travam ou são editadas erroneamente.",
@@ -70,7 +70,8 @@ export const services: Service[] = [
       "Painel de gestão de ordens de serviço personalizados.",
       "Sistema de gerenciamento de estoque integrado com expedição.",
       "Intranet para centralizar documentos, manuais de treinamento e comunicados.",
-      "Ferramentas de controle financeiro simplificado para o fluxo de caixa."
+      "Ferramentas de controle financeiro simplificado para o fluxo de caixa.",
+      "Credenciamento e gestão de eventos: inscrições, check-in por QR Code, controle de presença e certificados."
     ],
     benefits: [
       "Aumento na produtividade operacional da equipe.",
@@ -89,6 +90,10 @@ export const services: Service[] = [
       {
         question: "O sistema será nosso ou pagaremos mensalidade vitalícia?",
         answer: "O código-fonte e o banco de dados são seus. Não cobramos licenças de usuário. Os custos contínuos limitam-se apenas à hospedagem em nuvem (servidores), que estruturamos para ser o mais econômica possível."
+      },
+      {
+        question: "Os credenciadores de um evento precisam instalar algum aplicativo?",
+        answer: "Não. Fornecemos um painel web seguro otimizado para celular. Basta abrir o endereço no navegador, fazer login e usar a câmera para ler os QR Codes dos participantes."
       },
       {
         question: "Consigo importar dados de planilhas antigas?",
@@ -181,86 +186,44 @@ export const services: Service[] = [
     ]
   },
   {
-    slug: "formularios-inteligentes",
-    name: "Formulários Inteligentes",
-    tagline: "Colete dados sem atrito e crie fluxos lógicos agradáveis.",
-    shortDescription: "Formulários interativos estruturados com fluxos dinâmicos de perguntas, validações avançadas e automação de respostas.",
-    description: "Ninguém gosta de preencher formulários longos e confusos. Desenvolvemos formulários focados na experiência do usuário (UX), que exibem perguntas condicionalmente com base nas respostas anteriores. Após o preenchimento, os dados são limpos, salvos no local correto e já engatilham ações como e-mails de confirmação ou alertas para a equipe.",
+    slug: "aplicativos-mobile",
+    name: "Aplicativos Mobile",
+    tagline: "O que sua equipe e seus clientes precisam, no bolso.",
+    shortDescription: "Aplicativos para iOS e Android pensados para o dia a dia de quem usa, integrados aos sistemas e dados que sua empresa já tem.",
+    description: "Muita coisa acontece fora do computador: na rua, no balcão, no campo, na porta de um evento. Criamos aplicativos para iOS e Android desenhados para o uso real de quem está com o celular na mão, com poucas telas, fluxos curtos e integração direta com os sistemas e dados que sua empresa já tem.",
     problemsSolved: [
-      "Altas taxas de abandono em cadastros complexos.",
-      "Recebimento de dados incompletos ou formatos incorretos (como e-mails inválidos).",
-      "Trabalho manual de ler cada resposta e enviar retornos individualmente.",
-      "Formulários que parecem feios ou que não funcionam direito no celular."
+      "Equipes em campo anotando em papel ou mensagens soltas e digitando depois.",
+      "Sistemas que só funcionam bem no computador e são difíceis de usar no celular.",
+      "Clientes sem um canal simples para acompanhar pedidos, solicitações ou serviços.",
+      "Dados da rua que chegam atrasados ou incompletos ao escritório."
     ],
     applications: [
-      "Formulários de briefing ou triagem de clientes qualificados.",
-      "Fichas de inscrição para prêmios, editais e submissões com uploads de arquivos.",
-      "Pesquisas de satisfação interativas (NPS) com ramificação de perguntas.",
-      "Sistemas de onboarding de clientes com fluxos de assinatura ou termos."
+      "Aplicativos de registro em campo, com fotos, formulários e localização.",
+      "Aplicativos para clientes acompanharem pedidos, agendamentos ou solicitações.",
+      "Leitura de QR Code e check-in para eventos e controle de acesso.",
+      "Versão mobile de sistemas internos já existentes."
     ],
     benefits: [
-      "Redução expressiva no abandono de formulários.",
-      "Qualidade e precisão dos dados recebidos através de validações rígidas.",
-      "Automação instantânea de e-mails de boas-vindas ou PDFs anexados.",
-      "Visual moderno que complementa a estética de marcas sofisticadas."
+      "Informação registrada no momento em que acontece.",
+      "Telas simples, pensadas para quem usa todos os dias.",
+      "Integração com os sistemas e dados que a empresa já tem.",
+      "Uma base única para iOS e Android, com manutenção mais simples."
     ],
     steps: [
-      "Modelagem lógica do fluxo de perguntas (árvore de decisão).",
-      "Design de interface focado na redução da carga cognitiva.",
-      "Desenvolvimento com validações de dados no lado do cliente e servidor.",
-      "Integração com bancos de dados, planilhas ou plataformas de marketing.",
-      "Ajustes de acessibilidade (leitores de tela e navegação por teclado)."
+      "Conversa com quem vai usar o aplicativo no dia a dia.",
+      "Desenho dos fluxos e telas, com o mínimo de passos possível.",
+      "Desenvolvimento e integração com os sistemas existentes.",
+      "Testes em aparelhos reais com usuários reais.",
+      "Publicação nas lojas e acompanhamento nas primeiras semanas."
     ],
     faq: [
       {
-        question: "Posso limitar o número de respostas ou o prazo do formulário?",
-        answer: "Sim. É possível configurar regras automatizadas para encerrar o recebimento em uma data específica ou quando atingir um limite predefinido de preenchimentos."
+        question: "O aplicativo funciona para iOS e Android?",
+        answer: "Sim. Construímos uma base única que atende os dois sistemas, o que também facilita a manutenção ao longo do tempo."
       },
       {
-        question: "Os uploads de arquivos são seguros?",
-        answer: "Sim. Todos os uploads passam por verificação de tipo de arquivo e tamanho limite, sendo salvos em servidores de nuvem seguros com links protegidos."
-      }
-    ]
-  },
-  {
-    slug: "credenciamento-e-eventos",
-    name: "Credenciamento e Eventos",
-    tagline: "Do convite à certificação, uma jornada sem filas.",
-    shortDescription: "Sistemas completos para gestão de eventos: inscrições online, controle de acesso por QR Code, certificados automatizados e gestão de presença.",
-    description: "Evite a burocracia e a desorganização em eventos de qualquer porte. Criamos sistemas que gerenciam toda a jornada do participante: a inscrição em múltiplos lotes, a seleção de oficinas, a leitura rápida de QR Code na entrada via celular dos organizadores, e o disparo automático de certificados personalizados em PDF após o término.",
-    problemsSolved: [
-      "Filas gigantescas na recepção de eventos e checagem manual em papel.",
-      "Trabalho manual insustentável para gerar e enviar centenas de certificados.",
-      "Dificuldade de controlar a lotação de salas de oficinas simultâneas.",
-      "Falta de relatórios de presença em tempo real."
-    ],
-    applications: [
-      "Sistemas de credenciamento para congressos, conferências e festivais.",
-      "Plataforma de gestão de presença para aulas, palestras e cursos.",
-      "Gerador automatizado de crachás e certificados em lote.",
-      "Controle de acesso por check-in rápido via câmera do smartphone."
-    ],
-    benefits: [
-      "Experiência premium para o participante, sem esperas ou atritos.",
-      "Eliminação total do trabalho manual pós-evento (certificados disparados por e-mail).",
-      "Dados precisos sobre quem compareceu e quais atividades foram mais populares.",
-      "Redução da necessidade de equipes numerosas na recepção."
-    ],
-    steps: [
-      "Mapeamento do fluxo de credenciamento e limites físicos do local.",
-      "Desenvolvimento do sistema de inscrições e emissão de ingressos com QR Code.",
-      "Interface web para credenciadores lerem os códigos sem app adicional.",
-      "Desenho do template do certificado e lógica de emissão automática.",
-      "Acompanhamento técnico e monitoramento no dia do evento."
-    ],
-    faq: [
-      {
-        question: "Os credenciadores precisam instalar algum aplicativo no celular?",
-        answer: "Não. Fornecemos um painel web seguro otimizado para celular. Basta abrir a URL no navegador do smartphone, fazer login e usar a própria câmera para ler os QR Codes dos participantes."
-      },
-      {
-        question: "Como funciona a emissão dos certificados?",
-        answer: "O sistema valida quem compareceu ao evento (ou obteve a presença mínima nas oficinas) e envia por e-mail um link personalizado onde o participante pode baixar seu certificado com autenticação de autenticidade."
+        question: "Ele se conecta aos sistemas que já usamos?",
+        answer: "Sim. O aplicativo é integrado aos sistemas e dados que sua empresa já tem, para que a informação circule sem digitação duplicada."
       }
     ]
   },

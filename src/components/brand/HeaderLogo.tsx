@@ -1,9 +1,14 @@
 "use client";
-// Logo do header: em repouso só o ⊖ preto; no hover se desdobra em MENOS (~1.2s) e volta ao sair.
-// Portado 1:1 do protótipo (método headerLogo()). Progresso linear por frame + easeInOut por trecho.
+// Logo do header: em repouso só o ⊖; no hover se desdobra em MENOS (~1.2s) e volta ao sair.
+// Portado 1:1 do protótipo (método headerLogo()/headerFrame()). Progresso linear por frame
+// + easeInOut por trecho. As cores acompanham o tema do cabeçalho (clock.themeK):
+// claro = ⊖ #0E1414 → marca #143C3C e letras #143C3C; escuro = ⊖ #EAF2EE → #8CD9D9 e letras #EAF2EE.
 import Link from "next/link";
 import React, { useEffect, useRef } from "react";
-import { M_POLYS, N_POLYS, S_PATH, E, O, STROKE, L_E, GAP, AOFF, seg, clamp, easeIO, mix } from "./menosGeometry";
+import { M_POLYS, N_POLYS, S_PATH, E, O, STROKE, L_E, GAP, AOFF, seg, clamp, easeIO } from "./menosGeometry";
+import { clock } from "../motion/clock";
+import { subscribe } from "../motion/frame";
+import { COL, mixv, rgb } from "../motion/math";
 
 export default function HeaderLogo() {
   const target = useRef(0), p = useRef(0);
@@ -11,22 +16,23 @@ export default function HeaderLogo() {
     m = useRef<SVGGElement>(null), n = useRef<SVGGElement>(null), o = useRef<SVGCircleElement>(null), s = useRef<SVGPathElement>(null);
 
   useEffect(() => {
-    let raf = 0;
     const STEP = 1 / 72; // ~1.2s a 60fps
-    const frame = () => {
+    return subscribe(() => {
       p.current += clamp(target.current - p.current, -STEP, STEP);
-      const P = p.current, c = circ.current!;
-      const col = mix("#0E1414", "#143C3C", easeIO(seg(P, 0, 0.3))), gp = easeIO(seg(P, 0.1, 0.42));
+      const P = p.current, k = clock.themeK, c = circ.current!;
+      const base = mixv(COL.paper, COL.ink0, k), brand = mixv(COL.mint, COL.brand, k), ink = rgb(mixv(COL.paper, COL.brand, k));
+      const col = rgb(mixv(base, brand, easeIO(seg(P, 0, 0.3)))), gp = easeIO(seg(P, 0.1, 0.42));
       c.setAttribute("stroke", col); line.current!.setAttribute("stroke", col);
       c.setAttribute("stroke-dasharray", `${L_E - gp * GAP} ${gp * GAP}`); c.setAttribute("stroke-dashoffset", `${-gp * AOFF}`);
       const shift = easeIO(seg(P, 0.22, 0.78));
       wrap.current!.setAttribute("transform", `translate(${(1 - shift) * -55.9} 0)`);
-      const L = (el: SVGElement, a: number, b: number, dx: number) => { const k = easeIO(seg(P, a, b)); el.style.opacity = `${k}`; el.style.transform = `translateX(${(1 - k) * dx}px)`; };
-      L(m.current!, 0.32, 0.8, 26); L(n.current!, 0.38, 0.82, -30); L(o.current!, 0.48, 0.9, -60); L(s.current!, 0.58, 1, -90);
-      raf = requestAnimationFrame(frame);
-    };
-    raf = requestAnimationFrame(frame);
-    return () => cancelAnimationFrame(raf);
+      const L = (el: SVGElement, a: number, b: number, dx: number, attr: "fill" | "stroke") => {
+        const kk = easeIO(seg(P, a, b));
+        el.style.opacity = `${kk}`; el.style.transform = `translateX(${(1 - kk) * dx}px)`; el.setAttribute(attr, ink);
+      };
+      L(m.current!, 0.32, 0.8, 26, "fill"); L(n.current!, 0.38, 0.82, -30, "fill");
+      L(o.current!, 0.48, 0.9, -60, "stroke"); L(s.current!, 0.58, 1, -90, "stroke");
+    });
   }, []);
 
   const on = () => (target.current = 1), off = () => (target.current = 0);
@@ -34,7 +40,7 @@ export default function HeaderLogo() {
     <Link href="/" aria-label="MENOS, página inicial" onMouseEnter={on} onMouseLeave={off} onFocus={on} onBlur={off}
       style={{ display: "flex", alignItems: "center", height: 32, width: 150 }}>
       <svg viewBox="-2 -2 254 59" style={{ height: 26, width: "auto", overflow: "visible" }}>
-        <g ref={wrap}>
+        <g ref={wrap} transform="translate(-55.9 0)">
           <g ref={m} fill="#143C3C" style={{ opacity: 0 }}>{M_POLYS.map((q) => <polygon key={q} points={q} />)}</g>
           <circle ref={circ} cx={E.cx} cy={E.cy} r={E.r} fill="none" stroke="#0E1414" strokeWidth={STROKE} />
           <line ref={line} x1={E.x1} y1={E.y1} x2={E.x2} y2={E.y2} stroke="#0E1414" strokeWidth={STROKE} />

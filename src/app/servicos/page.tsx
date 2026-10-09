@@ -18,14 +18,13 @@ export default function ServicesPage() {
 
   // Mapeamento de categoria por slug de serviço
   const serviceCategories: Record<string, string> = {
-    "automacoes": "automacoes-integracoes",
+    "camadas-agenticas": "automacoes-integracoes",
     "integracao-de-processos": "automacoes-integracoes",
     "sistemas-internos": "sistemas-dados",
     "dashboards": "sistemas-dados",
     "plataformas-digitais": "sites-formularios",
     "sites-institucionais": "sites-formularios",
-    "formularios-inteligentes": "sites-formularios",
-    "credenciamento-e-eventos": "sites-formularios",
+    "aplicativos-mobile": "sites-formularios",
     "solucoes-com-ia": "design-ia",
     "design-e-melhoria-de-interfaces": "design-ia"
   };

@@ -234,12 +234,11 @@ export const ContactForm: React.FC = () => {
             }`}
           >
             <option value="">Selecione...</option>
-            <option value="automacoes">Automação</option>
+            <option value="camadas-agenticas">Camada agêntica</option>
             <option value="sistemas-internos">Sistema Interno</option>
             <option value="plataformas-digitais">Plataforma</option>
             <option value="sites-institucionais">Site</option>
-            <option value="formularios-inteligentes">Formulário Inteligente</option>
-            <option value="credenciamento-e-eventos">Credenciamento de Evento</option>
+            <option value="aplicativos-mobile">Aplicativo mobile</option>
             <option value="dashboards">Dashboard</option>
             <option value="integracao-de-processos">Integração de Sistemas</option>
             <option value="solucoes-com-ia">Solução com IA</option>

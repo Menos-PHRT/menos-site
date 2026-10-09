@@ -2,6 +2,7 @@
 // Intro de entrada em tela cheia. Portado 1:1 do protótipo (método intro()).
 // Anima por requestAnimationFrame escrevendo atributos direto no DOM (sem re-render),
 // é isso que dá a fluidez. Não trocar por framer-motion nem CSS transitions.
+// Roda sempre, mesmo com "reduzir movimento" ligado no sistema (decisão do cliente). Não reativar a checagem de prefers-reduced-motion.
 import React, { useEffect, useRef, useState } from "react";
 import { M_POLYS, N_POLYS, S_PATH, E, O, STROKE, L_E, GAP, AOFF, seg, easeOut, easeIO, mix } from "./menosGeometry";
 
@@ -11,7 +12,6 @@ export default function BrandIntro({ onDone }: { onDone?: () => void }) {
     line = useRef<SVGLineElement>(null), mG = useRef<SVGGElement>(null), nG = useRef<SVGGElement>(null), tag = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { setDone(true); onDone?.(); return; }
     document.body.style.overflow = "hidden";
     const t0 = performance.now(); let raf = 0;
     const frame = (now: number) => {
@@ -40,7 +40,7 @@ export default function BrandIntro({ onDone }: { onDone?: () => void }) {
   if (done) return null;
   const skip = () => { document.body.style.overflow = ""; setDone(true); onDone?.(); };
   return (
-    <div ref={ov} style={{ position: "fixed", inset: 0, zIndex: 100, background: "#FCFCFA", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 40 }}>
+    <div ref={ov} style={{ position: "fixed", inset: 0, zIndex: 300, background: "#FCFCFA", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 40 }}>
       <svg viewBox="-10 -30 270 115" style={{ width: "min(78vw,760px)", overflow: "visible" }}>
         <g ref={wrap}>
           <g ref={mG} style={{ opacity: 0 }} fill="#143C3C">{M_POLYS.map((p) => <polygon key={p} points={p} />)}</g>

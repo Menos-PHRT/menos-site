@@ -108,6 +108,12 @@ body {
   -webkit-backdrop-filter: blur(12px);
 }
 
+/* Cursor personalizado (MotionLayer): esconde o cursor nativo só com mouse e depois da intro */
+.mn-nocursor,
+.mn-nocursor * {
+  cursor: none !important;
+}
+
 /* Focus styles for accessibility */
 *:focus-visible {
   outline: 2px solid var(--accent);

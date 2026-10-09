@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import React from "react";
-import BrandIntro from "@/components/brand/BrandIntro";
 import CookieBanner from "@/components/CookieBanner";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import MotionLayer from "@/components/motion/MotionLayer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import "./globals.css";
 
 const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  // fonte variável: todos os pesos de 100 a 900 (o handoff usa 200 a 700)
   display: "swap"
 });
 
@@ -53,10 +53,10 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${outfit.variable} h-full antialiased scroll-smooth`}
+      className={`${outfit.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans bg-background text-foreground antialiased selection:bg-brand-100 selection:text-brand-900">
-        <BrandIntro />
+        <MotionLayer />
         <Header />
         {/* Espaçamento para o Header flutuante */}
         <main className="flex-grow pt-24 md:pt-28">
