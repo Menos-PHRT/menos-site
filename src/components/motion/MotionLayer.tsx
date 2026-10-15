@@ -7,11 +7,32 @@
 //    "folhas" que escalam ao entrar (data-sheet).
 // Tudo escreve direto no DOM dentro do loop único de requestAnimationFrame.
 import { usePathname } from "next/navigation";
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
 import BrandIntro from "../brand/BrandIntro";
 import { clock, HERO_DELAY_MS } from "./clock";
 import { subscribe } from "./frame";
 import { clamp, ease, lerp } from "./math";
+
+// A intro roda só na primeira entrada de uma visita: depois que roda, fica 30 min
+// sem repetir (vale para trocar de página, recarregar e abrir outra aba).
+// O valor é lido uma vez por carregamento de página.
+// ?intro=1 na URL força rodar de novo (útil para demonstrar).
+const INTRO_KEY = "menos-intro-seen";
+const INTRO_TTL_MS = 30 * 60 * 1000;
+let seenAtLoad: boolean | null = null;
+function introAlreadySeen(): boolean {
+  if (seenAtLoad === null) {
+    try {
+      if (new URL(location.href).searchParams.get("intro") === "1") localStorage.removeItem(INTRO_KEY);
+      const at = Number(localStorage.getItem(INTRO_KEY));
+      seenAtLoad = at > 0 && Date.now() - at < INTRO_TTL_MS;
+    } catch {
+      seenAtLoad = false;
+    }
+  }
+  return seenAtLoad;
+}
+const noopSubscribe = () => () => {};
 
 const useIsoLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
@@ -22,6 +43,8 @@ interface Revealable extends HTMLElement {
 
 export default function MotionLayer() {
   const pathname = usePathname();
+  // false no servidor/hidratação (a intro já vem no HTML); true no cliente se já foi vista.
+  const introSeen = useSyncExternalStore(noopSubscribe, introAlreadySeen, () => false);
   const [cursorOn, setCursorOn] = useState(false);
   const ring = useRef<HTMLDivElement>(null), vbar = useRef<SVGLineElement>(null),
     dot = useRef<HTMLDivElement>(null), bub = useRef<HTMLDivElement>(null), bubText = useRef<HTMLSpanElement>(null);
@@ -130,7 +153,12 @@ export default function MotionLayer() {
     st.smoothOn = fine && !reduced;
     setCursorOn(st.cursorOn);
 
-    if (!clock.introDone) {
+    if (introAlreadySeen()) {
+      // Já viu a intro nesta sessão: o hero entra agora, sem overlay nem trava de rolagem.
+      clock.introDone = true;
+      clock.heroT0 = performance.now();
+    } else if (!clock.introDone) {
+      try { localStorage.setItem(INTRO_KEY, String(Date.now())); } catch { /* sem storage: roda a cada carregamento */ }
       clock.heroT0 = performance.now() + HERO_DELAY_MS;
       window.scrollTo(0, 0);
     }
@@ -247,7 +275,11 @@ export default function MotionLayer() {
 
   return (
     <>
-      <BrandIntro onDone={finish} />
+      {!introSeen && (
+        <div data-intro-overlay="">
+          <BrandIntro onDone={finish} />
+        </div>
+      )}
       {cursorOn && (
         <>
           <div ref={ring} aria-hidden="true" style={{ position: "fixed", left: 0, top: 0, zIndex: 400, width: 40, height: 40, margin: "-20px 0 0 -20px", pointerEvents: "none", mixBlendMode: "difference", opacity: 0, willChange: "transform" }}>

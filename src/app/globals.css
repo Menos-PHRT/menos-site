@@ -10,7 +10,7 @@
   --card-bg: #FFFFFF;
 
   /* Escala "brand" — verde-petróleo escuro, gerada a partir do tom definido
-     pelo Paulo (#143c3c = brand-900), mesma matiz/saturação em toda a escala.
+     pelo cliente (#143c3c = brand-900), mesma matiz/saturação em toda a escala.
      Contraste checado (WCAG): brand-600 sobre branco 5.26:1, branco sobre
      brand-900 12.06:1. Ver DOCUMENTACAO.md (28/09/2026). */
   --brand-50: #f4fbfb;
@@ -112,6 +112,11 @@ body {
 .mn-nocursor,
 .mn-nocursor * {
   cursor: none !important;
+}
+
+/* Intro já vista nesta sessão: o overlay nem chega a aparecer (ver layout.tsx). */
+html[data-intro-seen] [data-intro-overlay] {
+  display: none !important;
 }
 
 /* Focus styles for accessibility */

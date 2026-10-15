@@ -54,7 +54,16 @@ export default function RootLayout({
     <html
       lang="pt-BR"
       className={`${outfit.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
+      <head>
+        {/* Se a intro já rodou nesta sessão, esconde o overlay antes da primeira pintura. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "try{var k=\"menos-intro-seen\",u=new URL(location.href);if(u.searchParams.get(\"intro\")===\"1\")localStorage.removeItem(k);var t=Number(localStorage.getItem(k));if(t>0&&Date.now()-t<1800000)document.documentElement.setAttribute(\"data-intro-seen\",\"\")}catch(e){}"
+          }}
+        />
+      </head>
       <body className="min-h-full flex flex-col font-sans bg-background text-foreground antialiased selection:bg-brand-100 selection:text-brand-900">
         <MotionLayer />
         <Header />

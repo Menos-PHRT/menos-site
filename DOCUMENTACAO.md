@@ -290,3 +290,9 @@ Branch nova criada a partir de `redesign-visual-verde-ia` (a v2 continua intacta
   2. Os textos dos cases vêm de `src/data/projects.ts` (que tem os números aprovados nos cards), não do array `CASES` do HTML, que tinha versões mais curtas.
   3. Cursor personalizado e rolagem suave continuam respeitando "reduzir movimento" (interceptam a entrada do usuário); as animações de conteúdo rodam sempre.
 - **Verificação**: `tsc` e `build` limpos; redirects 301 conferidos com `curl`; seções, rótulos `[01]` a `[07]`, rodapé e troca de case conferidos no navegador de teste (o painel do navegador fica oculto e limita a taxa de quadros, então a fluidez visual precisa ser vista pelo Paulo).
+
+### Rodada 11 (15/10/2026): intro só na primeira entrada
+- **Problema relatado**: a animação de entrada rodava de novo a cada troca de página.
+- **Investigação**: clicando pelo cabeçalho no site publicado localmente (`npm run start`), a troca de página é navegação interna (sem recarregar), então a intro não deveria repetir por esse caminho. Mas qualquer carregamento completo (recarregar, abrir link em outra aba, links `<a href>` comuns como os do banner de cookies, digitar a URL) montava a intro de novo, porque nada guardava que ela já tinha rodado.
+- **Correção**: [MotionLayer.tsx](src/components/motion/MotionLayer.tsx) grava a hora em `localStorage` (`menos-intro-seen`) quando a intro começa; nos 30 minutos seguintes ela não aparece (nem trava a rolagem) e o hero entra direto. Um script no `<head>` ([layout.tsx](src/app/layout.tsx)) esconde o overlay antes da primeira pintura. `?intro=1` na URL força a intro de novo. Links internos do [CookieBanner.tsx](src/components/CookieBanner.tsx) agora usam `Link`.
+- **Limpeza**: comentário em `globals.css` e docs não citam mais o nome do Paulo no código do site; `/a-menos` na v3 não tem mais Paulo Henrique (continua nas branches `main` e `redesign-visual-verde-ia`).
