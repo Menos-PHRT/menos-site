@@ -197,7 +197,8 @@ export default function MotionLayer() {
       const tgt = id && id !== "top" ? document.getElementById(id) : null;
       if (id && id !== "top" && !tgt) return;
       e.preventDefault();
-      scrollToY(tgt ? tgt.getBoundingClientRect().top + window.scrollY : 0);
+      const margin = tgt ? parseFloat(getComputedStyle(tgt).scrollMarginTop) || 0 : 0;
+      scrollToY(tgt ? tgt.getBoundingClientRect().top + window.scrollY - margin : 0);
     };
 
     window.addEventListener("pointermove", onMove, { passive: true });

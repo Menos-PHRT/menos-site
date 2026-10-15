@@ -5,7 +5,7 @@ import { services } from "@/data/services";
 
 // Rodapé do handoff v8 (captura 21): id "a-menos", tema escuro (o cabeçalho
 // lê data-theme), logo pequeno em #EAF2EE com o "e" em #8CD9D9.
-const linkClass = "text-[#8FA9A3] hover:text-[#8CD9D9] transition-colors";
+const linkClass = "inline-block py-1 text-[#8FA9A3] hover:text-[#8CD9D9] transition-colors";
 
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -13,10 +13,10 @@ export const Footer: React.FC = () => {
     {
       title: "Estúdio",
       links: [
-        { name: "Como trabalhamos", href: "/#como-trabalhamos" },
-        { name: "Parceiros", href: "/#parceiros" },
-        { name: "Contato", href: "/contato" },
-        { name: "A MENOS", href: "/a-menos" }
+        { name: "A MENOS", href: "/a-menos" },
+        { name: "Como trabalhamos", href: "/a-menos#como-trabalhamos" },
+        { name: "Parceiros", href: "/a-menos#parceiros" },
+        { name: "Contato", href: "/contato" }
       ]
     },
     {
@@ -66,7 +66,7 @@ export const Footer: React.FC = () => {
           {cols.map((col) => (
             <div key={col.title} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
               <h4 style={{ margin: 0, fontSize: 12, fontWeight: 600, color: "#EAF2EE", textTransform: "uppercase", letterSpacing: ".06em" }}>{col.title}</h4>
-              <nav style={{ display: "flex", flexDirection: "column", gap: 8, fontSize: 14 }}>
+              <nav style={{ display: "flex", flexDirection: "column", gap: 2, fontSize: 14 }}>
                 {col.links.map((l) =>
                   l.external ? (
                     <a key={l.name} href={l.href} target="_blank" rel="noopener noreferrer" className={linkClass}>{l.name}</a>

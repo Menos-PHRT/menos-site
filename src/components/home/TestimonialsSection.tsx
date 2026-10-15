@@ -96,7 +96,7 @@ export default function TestimonialsSection() {
             <span data-qa="" style={{ fontSize: 16, fontWeight: 700, color: "#0C2424" }}>{t.author}</span>
             <span data-qa="" style={{ fontSize: 13, color: "#5B6B69" }}>{t.role} &bull; {t.company}</span>
             {project && (
-              <span data-qa="" style={{ marginTop: 6, font: `600 10px ${MONO}`, letterSpacing: ".08em", textTransform: "uppercase", color: "#287777" }}>Projeto relacionado: {project}</span>
+              <span data-qa="" style={{ marginTop: 6, font: `600 11px ${MONO}`, letterSpacing: ".08em", textTransform: "uppercase", color: "#287777" }}>Projeto relacionado: {project}</span>
             )}
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 16 }}>

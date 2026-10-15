@@ -387,6 +387,6 @@ export const projects: Project[] = [
         image: "/images/site-premio-flupp/Captura de tela 2026-09-25 232534.png"
       }
     ],
-    relatedServices: ["design-e-melhoria-de-interfaces"]
+    relatedServices: ["sites-institucionais"]
   }
 ];

@@ -1,46 +1,22 @@
-"use client";
-
+import type { Metadata } from "next";
 import Link from "next/link";
-import React, { useState } from "react";
-import { ArrowRight, CheckCircle2, ChevronRight } from "lucide-react";
+import React from "react";
+import { CheckCircle2, ChevronRight } from "lucide-react";
 import { services } from "@/data/services";
 
+export const metadata: Metadata = {
+  title: "Serviços",
+  description: "Camadas agênticas, sistemas internos, plataformas digitais, sites institucionais e aplicativos mobile, criados a partir do problema."
+};
+
 export default function ServicesPage() {
-  const [activeCategory, setActiveCategory] = useState("all");
-
-  const categories = [
-    { id: "all", name: "Todos" },
-    { id: "automacoes-integracoes", name: "Automações & Integrações" },
-    { id: "sistemas-dados", name: "Sistemas & Dados" },
-    { id: "sites-formularios", name: "Sites & Formulários" },
-    { id: "design-ia", name: "Design & IA" }
-  ];
-
-  // Mapeamento de categoria por slug de serviço
-  const serviceCategories: Record<string, string> = {
-    "camadas-agenticas": "automacoes-integracoes",
-    "integracao-de-processos": "automacoes-integracoes",
-    "sistemas-internos": "sistemas-dados",
-    "dashboards": "sistemas-dados",
-    "plataformas-digitais": "sites-formularios",
-    "sites-institucionais": "sites-formularios",
-    "aplicativos-mobile": "sites-formularios",
-    "solucoes-com-ia": "design-ia",
-    "design-e-melhoria-de-interfaces": "design-ia"
-  };
-
-  const filteredServices = services.filter((service) => {
-    if (activeCategory === "all") return true;
-    return serviceCategories[service.slug] === activeCategory;
-  });
-
   return (
     <div className="w-full py-16 md:py-24 bg-white relative">
       <div className="absolute inset-0 bg-dot-grid pointer-events-none opacity-40"></div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Header */}
-        <div className="max-w-2xl mb-16">
+        <div className="max-w-2xl mb-12 md:mb-16">
           <span className="text-xs font-semibold text-brand-600 uppercase tracking-widest mb-3 block">
             Nossas soluções
           </span>
@@ -48,60 +24,25 @@ export default function ServicesPage() {
             Tecnologia pensada para resolver, organizar e simplificar.
           </h1>
           <p className="text-slate-500 mt-4 text-base md:text-lg font-light leading-relaxed">
-            Selecione uma categoria para descobrir como atuamos na redução de atrito e aumento da performance operacional da sua empresa.
+            Cinco frentes de trabalho, todas começando pelo problema e não pela tecnologia. Escolha a que mais se aproxima do que você precisa ou conte seu caso e indicamos o caminho.
           </p>
         </div>
 
-        {/* Filters */}
-        <div className="flex flex-wrap gap-2 mb-12 border-b border-slate-100 pb-6">
-          {categories.map((cat) => {
-            const isActive = activeCategory === cat.id;
-            return (
-              <button
-                key={cat.id}
-                type="button"
-                onClick={() => setActiveCategory(cat.id)}
-                className={`cursor-pointer px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase transition-all duration-200 outline-none select-none ${
-                  isActive
-                    ? "bg-brand-950 text-white shadow-sm ring-2 ring-brand-950 ring-offset-2"
-                    : "bg-slate-50 border border-slate-100 text-slate-600 hover:bg-slate-100 hover:text-brand-950"
-                }`}
-              >
-                {cat.name}
-              </button>
-            );
-          })}
-        </div>
-
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {filteredServices.map((service) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          {services.map((service, i) => (
             <div
               key={service.slug}
-              className="bg-white border border-slate-100 p-8 rounded-3xl flex flex-col justify-between hover:shadow-lg hover:shadow-slate-100 hover:border-slate-200 transition duration-300"
+              className="bg-white border border-slate-100 p-6 md:p-8 rounded-3xl flex flex-col justify-between hover:shadow-lg hover:shadow-slate-100 hover:border-slate-200 transition duration-300"
             >
               <div>
-                <div className="flex justify-end items-start mb-6">
-                  <span className="text-xs text-slate-500 bg-slate-50 border border-slate-100 px-3 py-1 rounded-full font-medium">
-                    {categories.find((c) => c.id === serviceCategories[service.slug])?.name}
-                  </span>
-                </div>
+                <span className="block text-xs font-mono font-semibold text-brand-600 tracking-widest mb-4">{`0${i + 1}`}</span>
+                <h2 className="text-xl font-bold text-brand-950 mb-2">{service.name}</h2>
+                <p className="text-sm font-semibold text-brand-600 italic mb-4 leading-relaxed">{service.tagline}</p>
+                <p className="text-sm text-slate-500 leading-relaxed mb-6">{service.shortDescription}</p>
 
-                <h3 className="text-xl font-bold text-brand-950 mb-2">
-                  {service.name}
-                </h3>
-                <p className="text-sm font-semibold text-brand-600 italic mb-4 leading-relaxed">
-                  {service.tagline}
-                </p>
-                <p className="text-sm text-slate-500 leading-relaxed mb-6">
-                  {service.shortDescription}
-                </p>
-
-                {/* Problems Resolved Preview */}
                 <div className="mb-8">
-                  <h4 className="text-xs uppercase font-bold tracking-wider text-brand-950 mb-3">
-                    Dores que eliminamos:
-                  </h4>
+                  <h3 className="text-xs uppercase font-bold tracking-wider text-brand-950 mb-3">Dores que eliminamos:</h3>
                   <ul className="flex flex-col gap-2">
                     {service.problemsSolved.slice(0, 2).map((prob, idx) => (
                       <li key={idx} className="flex items-start gap-2.5 text-xs text-slate-600 leading-relaxed">
@@ -113,16 +54,16 @@ export default function ServicesPage() {
                 </div>
               </div>
 
-              <div className="flex items-center justify-between border-t border-slate-50 pt-6 mt-4">
+              <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-1 border-t border-slate-50 pt-4 mt-4">
                 <Link
                   href={`/servicos/${service.slug}`}
-                  className="text-xs font-bold text-brand-950 hover:text-brand-600 transition flex items-center gap-1"
+                  className="inline-flex items-center gap-1 min-h-11 text-xs font-bold text-brand-950 hover:text-brand-600 transition"
                 >
                   Entenda a solução <ChevronRight className="h-4 w-4" />
                 </Link>
                 <Link
                   href={`/contato?solucao=${service.slug}`}
-                  className="text-xs font-semibold text-slate-400 hover:text-slate-800 transition"
+                  className="inline-flex items-center min-h-11 text-xs font-semibold text-slate-500 hover:text-slate-800 transition"
                 >
                   Solicitar orçamento &rarr;
                 </Link>

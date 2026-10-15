@@ -59,7 +59,7 @@ export default function HomeHero() {
       id="top"
       data-theme="light"
       className="-mt-24 md:-mt-28"
-      style={{ position: "relative", minHeight: "78vh", display: "flex", alignItems: "center", padding: "128px 0 72px", background: "#FFFFFF", overflow: "hidden", boxSizing: "border-box" }}
+      style={{ position: "relative", minHeight: "78svh", display: "flex", alignItems: "center", padding: "128px 0 72px", background: "#FFFFFF", overflow: "hidden", boxSizing: "border-box" }}
     >
       <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(rgba(20,60,60,.08) 1.5px,transparent 1.5px)", backgroundSize: "24px 24px", opacity: 0.6, pointerEvents: "none" }} />
       <AINetworkVisual />

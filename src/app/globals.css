@@ -119,6 +119,15 @@ html[data-intro-seen] [data-intro-overlay] {
   display: none !important;
 }
 
+/* iOS dá zoom automático em campos com fonte menor que 16px */
+@media (max-width: 640px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
+}
+
 /* Focus styles for accessibility */
 *:focus-visible {
   outline: 2px solid var(--accent);

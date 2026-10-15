@@ -39,7 +39,7 @@ export default function PartnersSection() {
             </h2>
           </div>
           <Link
-            href="/parceiros"
+            href="/a-menos#parceiros"
             className="inline-flex text-[14px] font-medium rounded-full border border-[#D6E0DD] text-[#1F2E2E] whitespace-nowrap transition-colors duration-300 hover:bg-white"
             style={{ padding: "12px 24px" }}
           >
@@ -61,7 +61,7 @@ export default function PartnersSection() {
               className="bg-[#F6F8F7] hover:bg-white"
               style={{ padding: "26px 24px 28px", minHeight: 140, boxSizing: "border-box", display: "flex", flexDirection: "column", justifyContent: "space-between", gap: 24, transition: "background .4s" }}
             >
-              <span style={{ font: `600 10px ${MONO}`, letterSpacing: ".12em", textTransform: "uppercase", color: "#8A9A97" }}>{kindOf(p)}</span>
+              <span style={{ font: `600 11px ${MONO}`, letterSpacing: ".12em", textTransform: "uppercase", color: "#8A9A97" }}>{kindOf(p)}</span>
               <span style={{ fontSize: "clamp(15px,1.25vw,18px)", fontWeight: 600, letterSpacing: ".06em", textTransform: "uppercase", lineHeight: 1.35, color: "#1F2E2E" }}>{p.name}</span>
             </div>
           ))}

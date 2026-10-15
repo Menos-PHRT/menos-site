@@ -239,9 +239,6 @@ export const ContactForm: React.FC = () => {
             <option value="plataformas-digitais">Plataforma</option>
             <option value="sites-institucionais">Site</option>
             <option value="aplicativos-mobile">Aplicativo mobile</option>
-            <option value="dashboards">Dashboard</option>
-            <option value="integracao-de-processos">Integração de Sistemas</option>
-            <option value="solucoes-com-ia">Solução com IA</option>
             <option value="indefinido">Ainda não sei o que preciso</option>
             <option value="outro">Outro</option>
           </select>

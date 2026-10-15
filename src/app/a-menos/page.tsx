@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { CheckCircle2, XCircle, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import React from "react";
+import HowWeWork from "@/components/about/HowWeWork";
+import Partners from "@/components/about/Partners";
 import { Button } from "@/components/ui/Button";
 
 export default function AboutPage() {
@@ -63,13 +65,35 @@ export default function AboutPage() {
           </motion.h1>
         </div>
 
+        {/* Navegação interna da página */}
+        <nav
+          aria-label="Nesta página"
+          className="sticky top-[60px] md:top-[64px] z-30 -mx-6 px-6 mb-12 bg-white/90 backdrop-blur border-b border-slate-100"
+        >
+          <ul className="flex gap-1 overflow-x-auto py-1 text-sm font-medium text-slate-600">
+            {[
+              ["Quem somos", "#origem"],
+              ["Equipe", "#equipe"],
+              ["Como trabalhamos", "#como-trabalhamos"],
+              ["Parceiros", "#parceiros"]
+            ].map(([label, href]) => (
+              <li key={href} className="shrink-0">
+                <a href={href} className="inline-flex items-center min-h-11 px-3 rounded-full hover:text-brand-600 hover:bg-slate-50 transition">
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
         {/* 1. Origem e História */}
         <motion.section
+          id="origem"
           initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="flex flex-col gap-6 mb-20 text-slate-600 leading-relaxed text-base"
+          className="scroll-mt-32 flex flex-col gap-6 mb-20 text-slate-600 leading-relaxed text-base"
         >
           <h2 className="text-xl font-bold text-brand-950">A Origem do Nome</h2>
           <p>
@@ -150,11 +174,12 @@ export default function AboutPage() {
 
         {/* 4. Fundador */}
         <motion.section
+          id="equipe"
           initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="border-t border-slate-100 pt-16 mb-20"
+          className="scroll-mt-32 border-t border-slate-100 pt-16 mb-20"
         >
           <h2 className="text-xl font-bold text-brand-950 mb-8">Quem Conduz</h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-12 items-start">
@@ -191,7 +216,7 @@ export default function AboutPage() {
               </div>
             </div>
 
-            {/* Samuele Barbosa (sem foto e sem bio por enquanto) */}
+            {/* Samuel Barbosa (sem foto e sem bio por enquanto) */}
             <div className="flex flex-col gap-6">
               <div className="flex items-center gap-4">
                 <div className="h-20 w-20 md:h-24 md:w-24 rounded-full bg-brand-950 text-white font-bold flex flex-col items-center justify-center border-2 border-slate-200 shadow-sm shrink-0">
@@ -199,7 +224,7 @@ export default function AboutPage() {
                   <span className="text-[9px] text-brand-400 uppercase tracking-widest font-semibold mt-0.5">MENOS</span>
                 </div>
                 <div>
-                  <h3 className="text-lg md:text-xl font-bold text-brand-950">Samuele Barbosa</h3>
+                  <h3 className="text-lg md:text-xl font-bold text-brand-950">Samuel Barbosa</h3>
                   <p className="text-xs font-mono text-brand-600 font-semibold uppercase tracking-wider mt-0.5">
                     Equipe MENOS
                   </p>
@@ -208,6 +233,9 @@ export default function AboutPage() {
             </div>
           </div>
         </motion.section>
+
+        <HowWeWork />
+        <Partners />
 
         {/* CTA */}
         <motion.div

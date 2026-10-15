@@ -40,7 +40,7 @@ export const WhatsAppButton: React.FC = () => {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       style={{
-        position: "fixed", right: 24, bottom: cookieBannerVisible ? 176 : 24, zIndex: 90, width: 56, height: 56, borderRadius: "50%",
+        position: "fixed", right: "max(24px, env(safe-area-inset-right))", bottom: cookieBannerVisible ? 176 : "max(24px, env(safe-area-inset-bottom))", zIndex: 90, width: 56, height: 56, borderRadius: "50%",
         background: hover ? "#287777" : "#0C2424", color: "#FFFFFF", display: "flex", alignItems: "center", justifyContent: "center",
         boxShadow: "0 10px 24px rgba(12,36,36,.25)",
         opacity: show ? 1 : 0, pointerEvents: show ? "auto" : "none",

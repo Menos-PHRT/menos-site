@@ -1,5 +1,7 @@
 "use client";
-// Logo do header: em repouso só o ⊖; no hover se desdobra em MENOS (~1.2s) e volta ao sair.
+// Logo do header: em repouso o logo COMPLETO (MENOS); no hover recolhe (~1.2s) até ficar só o
+// símbolo ⊖ e volta a abrir ao sair. É a animação original do protótipo tocada ao contrário.
+// P = 1 é o logo completo, P = 0 é só o símbolo. Em telas sem hover fica sempre completo.
 // Portado 1:1 do protótipo (método headerLogo()/headerFrame()). Progresso linear por frame
 // + easeInOut por trecho. As cores acompanham o tema do cabeçalho (clock.themeK):
 // claro = ⊖ #0E1414 → marca #143C3C e letras #143C3C; escuro = ⊖ #EAF2EE → #8CD9D9 e letras #EAF2EE.
@@ -11,7 +13,7 @@ import { subscribe } from "../motion/frame";
 import { COL, mixv, rgb } from "../motion/math";
 
 export default function HeaderLogo() {
-  const target = useRef(0), p = useRef(0);
+  const target = useRef(1), p = useRef(1);
   const wrap = useRef<SVGGElement>(null), circ = useRef<SVGCircleElement>(null), line = useRef<SVGLineElement>(null),
     m = useRef<SVGGElement>(null), n = useRef<SVGGElement>(null), o = useRef<SVGCircleElement>(null), s = useRef<SVGPathElement>(null);
 
@@ -35,18 +37,18 @@ export default function HeaderLogo() {
     });
   }, []);
 
-  const on = () => (target.current = 1), off = () => (target.current = 0);
+  const retract = () => (target.current = 0), expand = () => (target.current = 1);
   return (
-    <Link href="/" aria-label="MENOS, página inicial" onMouseEnter={on} onMouseLeave={off} onFocus={on} onBlur={off}
+    <Link href="/" aria-label="MENOS, página inicial" onMouseEnter={retract} onMouseLeave={expand}
       style={{ display: "flex", alignItems: "center", height: 32, width: 150 }}>
       <svg viewBox="-2 -2 254 59" style={{ height: 26, width: "auto", overflow: "visible" }}>
-        <g ref={wrap} transform="translate(-55.9 0)">
-          <g ref={m} fill="#143C3C" style={{ opacity: 0 }}>{M_POLYS.map((q) => <polygon key={q} points={q} />)}</g>
-          <circle ref={circ} cx={E.cx} cy={E.cy} r={E.r} fill="none" stroke="#0E1414" strokeWidth={STROKE} />
-          <line ref={line} x1={E.x1} y1={E.y1} x2={E.x2} y2={E.y2} stroke="#0E1414" strokeWidth={STROKE} />
-          <g ref={n} fill="#143C3C" style={{ opacity: 0 }}>{N_POLYS.map((q) => <polygon key={q} points={q} />)}</g>
-          <circle ref={o} cx={O.cx} cy={O.cy} r={O.r} fill="none" stroke="#143C3C" strokeWidth={STROKE} style={{ opacity: 0 }} />
-          <path ref={s} d={S_PATH} fill="none" stroke="#143C3C" strokeWidth={STROKE} style={{ opacity: 0 }} />
+        <g ref={wrap}>
+          <g ref={m} fill="#143C3C">{M_POLYS.map((q) => <polygon key={q} points={q} />)}</g>
+          <circle ref={circ} cx={E.cx} cy={E.cy} r={E.r} fill="none" stroke="#143C3C" strokeWidth={STROKE} strokeDasharray={`${L_E - GAP} ${GAP}`} strokeDashoffset={-AOFF} />
+          <line ref={line} x1={E.x1} y1={E.y1} x2={E.x2} y2={E.y2} stroke="#143C3C" strokeWidth={STROKE} />
+          <g ref={n} fill="#143C3C">{N_POLYS.map((q) => <polygon key={q} points={q} />)}</g>
+          <circle ref={o} cx={O.cx} cy={O.cy} r={O.r} fill="none" stroke="#143C3C" strokeWidth={STROKE} />
+          <path ref={s} d={S_PATH} fill="none" stroke="#143C3C" strokeWidth={STROKE} />
         </g>
       </svg>
     </Link>

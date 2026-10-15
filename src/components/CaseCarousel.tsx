@@ -199,7 +199,7 @@ export default function CaseCarousel({ projects }: { projects: Project[] }) {
                   <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#27c93f", flexShrink: 0 }} />
                   <span style={{ font: `11px ${MONO}`, color: "#8FA9A3", marginLeft: 10, whiteSpace: "nowrap" }}>Ambiente Protegido</span>
                 </div>
-                <span style={{ font: `10px ${MONO}`, color: "#8FA9A3", textTransform: "uppercase", letterSpacing: ".1em", whiteSpace: "nowrap" }}>{SCREENS[cur.slug] ?? ""}</span>
+                <span style={{ font: `11px ${MONO}`, color: "#8FA9A3", textTransform: "uppercase", letterSpacing: ".1em", whiteSpace: "nowrap" }}>{SCREENS[cur.slug] ?? ""}</span>
               </div>
               <div
                 ref={stage}
@@ -238,10 +238,10 @@ export default function CaseCarousel({ projects }: { projects: Project[] }) {
         <div data-cf="5" style={{ marginTop: 24, display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 18 }}>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
             {cur.techStack.map((tk) => (
-              <span key={tk} style={{ font: `10px ${MONO}`, color: "#B8CCC6", border: "1px solid rgba(255,255,255,.14)", padding: "4px 10px", borderRadius: 999 }}>{tk}</span>
+              <span key={tk} style={{ font: `11px ${MONO}`, color: "#B8CCC6", border: "1px solid rgba(255,255,255,.14)", padding: "4px 10px", borderRadius: 999 }}>{tk}</span>
             ))}
           </div>
-          <Link href={`/projetos/${cur.slug}`} className="inline-flex items-center gap-2 text-[14px] font-semibold text-white hover:text-[#8CD9D9] transition-colors">
+          <Link href={`/projetos/${cur.slug}`} className="inline-flex items-center gap-2 min-h-11 text-[14px] font-semibold text-white hover:text-[#8CD9D9] transition-colors">
             Ler estudo de caso completo
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
           </Link>
@@ -256,12 +256,12 @@ export default function CaseCarousel({ projects }: { projects: Project[] }) {
                   key={c.slug}
                   onClick={() => go(i)}
                   style={{
-                    position: "relative", display: "flex", alignItems: "center", gap: 8, padding: "11px 14px 13px", border: "none", borderRadius: 10,
+                    position: "relative", display: "flex", alignItems: "center", gap: 8, padding: "11px 14px 13px", minHeight: 44, border: "none", borderRadius: 10,
                     background: on ? "rgba(140,217,217,.12)" : "transparent", color: on ? "#FFFFFF" : "#8FA9A3",
                     font: "500 13px var(--font-outfit), Outfit, sans-serif", cursor: "pointer", whiteSpace: "nowrap", overflow: "hidden", transition: "background .4s, color .4s"
                   }}
                 >
-                  <span style={{ font: `600 10px ${MONO}`, color: on ? "#8CD9D9" : "#5F7F7A" }}>{`0${i + 1}`}</span>
+                  <span style={{ font: `600 11px ${MONO}`, color: on ? "#8CD9D9" : "#5F7F7A" }}>{`0${i + 1}`}</span>
                   {c.shortName ?? c.name}
                   <span style={{ position: "absolute", left: 14, right: 14, bottom: 6, height: 2, background: "#8CD9D9", transformOrigin: "0 50%", transform: on ? "scaleX(1)" : "scaleX(0)", transition: "transform .9s cubic-bezier(.7,0,.2,1)" }} />
                 </button>
