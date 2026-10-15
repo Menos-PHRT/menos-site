@@ -75,7 +75,7 @@ export default function HomePage() {
   }, [shouldReduceMotion]);
 
   // 6 Serviços em Destaque
-  const featuredServices = services.slice(0, 6);
+  const featuredServices = services.slice(0, 5);
 
   // 3 Projetos em Destaque
 
@@ -115,7 +115,7 @@ export default function HomePage() {
           -mt cancela o pt-24/pt-28 do <main> do layout (o hero já tem seu
           próprio respiro de 128px no padding-top; sem isso, os dois somavam
           e sobrava espaço extra no topo da página). */}
-      <section className="relative -mt-24 md:-mt-28 pt-32 pb-[72px] min-h-[78vh] flex items-center bg-white overflow-hidden">
+      <section className="relative -mt-24 md:-mt-28 pt-32 pb-[72px] min-h-[78svh] flex items-center bg-white overflow-hidden">
         <div className="absolute inset-0 bg-dot-grid pointer-events-none opacity-60"></div>
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0 }}
@@ -308,7 +308,7 @@ export default function HomePage() {
                 Tecnologia é construção conjunta.
               </h3>
             </div>
-            <Button href="/parceiros" variant="outline">
+            <Button href="/a-menos#parceiros" variant="outline">
               Conheça nossos parceiros
             </Button>
           </div>
@@ -324,7 +324,7 @@ export default function HomePage() {
                 onMouseEnter={(e) => { e.currentTarget.style.background = "#F4FBFB"; }}
                 onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; }}
               >
-                <span className="text-[10px] uppercase tracking-widest" style={{ fontFamily: "ui-monospace, monospace", color: "#8A9A97" }}>
+                <span className="text-[11px] uppercase tracking-widest" style={{ fontFamily: "ui-monospace, monospace", color: "#8A9A97" }}>
                   {partner.category === "client" ? "Cliente" : partner.category === "institutional" ? "Parceiro institucional" : partner.category === "collaborator" ? "Colaborador(a)" : "Fornecedor"}
                 </span>
                 <span className="text-sm font-semibold uppercase tracking-wider" style={{ color: "#1F2E2E" }}>{partner.name}</span>
@@ -360,7 +360,7 @@ export default function HomePage() {
                   {testimonials[activeTestimonial].role} &bull; {testimonials[activeTestimonial].company}
                 </span>
                 {testimonials[activeTestimonial].projectSlug && (
-                  <span className="text-[10px] uppercase tracking-wider font-semibold font-mono text-brand-600 mt-2">
+                  <span className="text-[11px] uppercase tracking-wider font-semibold font-mono text-brand-600 mt-2">
                     Projeto relacionado: {projects.find(p => p.slug === testimonials[activeTestimonial].projectSlug)?.name}
                   </span>
                 )}
@@ -371,7 +371,7 @@ export default function HomePage() {
             <div className="flex justify-center items-center gap-4 mt-8">
               <button
                 onClick={prevTestimonial}
-                className="h-10 w-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-50 transition"
+                className="h-11 w-11 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-50 transition"
                 aria-label="Depoimento anterior"
               >
                 <ChevronLeft className="h-5 w-5" />
@@ -381,7 +381,7 @@ export default function HomePage() {
               </span>
               <button
                 onClick={nextTestimonial}
-                className="h-10 w-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-50 transition"
+                className="h-11 w-11 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-50 transition"
                 aria-label="Próximo depoimento"
               >
                 <ChevronRight className="h-5 w-5" />

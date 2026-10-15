@@ -221,7 +221,7 @@ export const projects: Project[] = [
         image: "/images/sistema-de-credenciamento/frequencia-oficinas.png"
       }
     ],
-    relatedServices: ["credenciamento-e-eventos"]
+    relatedServices: ["sistemas-internos"]
   },
   {
     slug: "plataforma-de-certificacao",
@@ -326,7 +326,7 @@ export const projects: Project[] = [
       company: "Coentro"
     },
     image: "/images/coentro-erp.png",
-    relatedServices: ["sistemas-internos", "automacoes"]
+    relatedServices: ["sistemas-internos", "camadas-agenticas"]
   },
   {
     slug: "reformulacao-paginas-institucionais",
@@ -387,6 +387,6 @@ export const projects: Project[] = [
         image: "/images/site-premio-flupp/Captura de tela 2026-09-25 232534.png"
       }
     ],
-    relatedServices: ["design-e-melhoria-de-interfaces"]
+    relatedServices: ["sites-institucionais"]
   }
 ];

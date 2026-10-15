@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import React from "react";
-import BrandIntro from "@/components/brand/BrandIntro";
+import IntroGate from "@/components/brand/IntroGate";
 import CookieBanner from "@/components/CookieBanner";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
@@ -11,7 +11,6 @@ import "./globals.css";
 const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
   display: "swap"
 });
 
@@ -54,9 +53,18 @@ export default function RootLayout({
     <html
       lang="pt-BR"
       className={`${outfit.variable} h-full antialiased scroll-smooth`}
+      suppressHydrationWarning
     >
+      <head>
+        {/* Se a intro já rodou há pouco, esconde o overlay antes da primeira pintura. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "try{var k=\"menos-intro-seen\",u=new URL(location.href);if(u.searchParams.get(\"intro\")===\"1\")localStorage.removeItem(k);var t=Number(localStorage.getItem(k));if(t>0&&Date.now()-t<1800000)document.documentElement.setAttribute(\"data-intro-seen\",\"\")}catch(e){}"
+          }}
+        />
+      </head>
       <body className="min-h-full flex flex-col font-sans bg-background text-foreground antialiased selection:bg-brand-100 selection:text-brand-900">
-        <BrandIntro />
+        <IntroGate />
         <Header />
         {/* Espaçamento para o Header flutuante */}
         <main className="flex-grow pt-24 md:pt-28">

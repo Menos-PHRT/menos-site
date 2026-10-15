@@ -29,7 +29,7 @@ export const WhatsAppButton: React.FC = () => {
       transition={shouldReduceMotion ? { duration: 0 } : { type: "spring", duration: 0.5, bounce: 0, delay: 0.6 }}
       whileHover={shouldReduceMotion ? undefined : { scale: 1.06 }}
       whileTap={shouldReduceMotion ? undefined : { scale: 0.96 }}
-      className={`fixed right-5 md:right-8 z-40 h-14 w-14 rounded-full bg-brand-950 text-white flex items-center justify-center shadow-lg shadow-brand-950/20 hover:bg-brand-600 transition-[background-color,bottom] duration-300 ${
+      className={`fixed right-5 md:right-8 z-40 h-14 w-14 rounded-full bg-brand-950 text-white flex items-center justify-center shadow-lg shadow-brand-950/20 hover:bg-brand-600 transition-[background-color,bottom] duration-300 pb-[env(safe-area-inset-bottom)] ${
         cookieBannerVisible ? "bottom-[15.5rem] md:bottom-44" : "bottom-5 md:bottom-8"
       }`}
     >

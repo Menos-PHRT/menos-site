@@ -1,52 +1,131 @@
+import type { Metadata } from "next";
+import Link from "next/link";
 import React from "react";
+import LegalDocument, { type LegalSection } from "@/components/legal/LegalDocument";
+
+export const metadata: Metadata = {
+  title: "Termos de Uso",
+  description: "Regras para uso do site da MENOS, propriedade intelectual, limites de responsabilidade e foro."
+};
+
+const sections: LegalSection[] = [
+  {
+    id: "aceitacao",
+    title: "Aceitação dos termos",
+    body: (
+      <p>
+        Ao acessar e usar este site, você concorda com estes Termos de Uso. Se não concordar com algum ponto, pedimos que não utilize o site. O site é mantido pela <strong>MENOS</strong>, estúdio criativo de tecnologia.
+      </p>
+    )
+  },
+  {
+    id: "o-site",
+    title: "O que é este site",
+    body: (
+      <p>
+        Este site apresenta a MENOS, seus serviços, projetos realizados e parceiros, e oferece um formulário e canais para você falar conosco. As informações têm caráter institucional e informativo.
+      </p>
+    )
+  },
+  {
+    id: "uso-permitido",
+    title: "Uso permitido",
+    body: (
+      <>
+        <p>Você pode navegar, ler e entrar em contato livremente. Não é permitido:</p>
+        <ul>
+          <li>usar o site para fins ilegais ou que violem direitos de terceiros;</li>
+          <li>tentar acessar áreas, sistemas ou dados que não são públicos, ou interferir no funcionamento do site;</li>
+          <li>enviar mensagens automatizadas em massa, vírus ou qualquer código malicioso;</li>
+          <li>copiar o site ou partes dele para se passar pela MENOS.</li>
+        </ul>
+      </>
+    )
+  },
+  {
+    id: "propriedade-intelectual",
+    title: "Propriedade intelectual",
+    body: (
+      <>
+        <p>
+          Textos, identidade visual, logotipo, animações, imagens e código deste site pertencem à MENOS ou são usados com autorização, e são protegidos pela legislação de direitos autorais e de propriedade industrial. Não podem ser copiados, modificados ou redistribuídos sem autorização por escrito.
+        </p>
+        <p>
+          Nomes, logotipos e marcas de clientes e parceiros pertencem aos seus titulares e aparecem aqui apenas para indicar os trabalhos realizados e a nossa rede.
+        </p>
+      </>
+    )
+  },
+  {
+    id: "informacoes-enviadas",
+    title: "Informações que você envia",
+    body: (
+      <p>
+        Ao preencher o formulário ou nos escrever, você declara que as informações são verdadeiras e que tem o direito de compartilhá-las. Não envie dados pessoais sensíveis nem informações confidenciais de terceiros nessa primeira conversa. O tratamento desses dados segue a nossa <Link href="/privacidade">Política de Privacidade</Link>.
+      </p>
+    )
+  },
+  {
+    id: "links-terceiros",
+    title: "Links e serviços de terceiros",
+    body: (
+      <p>
+        O site pode apontar para páginas de terceiros, como redes sociais, o WhatsApp e sites de clientes. Não controlamos esses ambientes e não somos responsáveis pelo conteúdo ou pelas práticas de privacidade deles.
+      </p>
+    )
+  },
+  {
+    id: "propostas",
+    title: "Propostas e contratação",
+    body: (
+      <p>
+        As informações do site, incluindo descrições de serviços, exemplos de projetos e resultados, não constituem oferta nem promessa de resultado. Prazos, escopo e valores de qualquer trabalho são definidos em proposta ou contrato específico entre as partes.
+      </p>
+    )
+  },
+  {
+    id: "responsabilidade",
+    title: "Disponibilidade e limites de responsabilidade",
+    body: (
+      <p>
+        Empenhamo-nos para manter o site atualizado e funcionando, mas não garantimos que ele estará sempre disponível, livre de erros ou de interrupções. Na extensão permitida pela lei, a MENOS não responde por danos decorrentes do uso do site ou da impossibilidade de usá-lo, nem por conteúdos de terceiros acessados por links.
+      </p>
+    )
+  },
+  {
+    id: "alteracoes",
+    title: "Alterações nestes termos",
+    body: (
+      <p>
+        Podemos alterar estes termos a qualquer momento. A versão em vigor é sempre a publicada nesta página, com a data da última atualização no topo. Continuar usando o site depois da alteração significa que você concorda com a nova versão.
+      </p>
+    )
+  },
+  {
+    id: "lei-e-foro",
+    title: "Lei aplicável e foro",
+    body: (
+      <p>
+        Estes termos são regidos pelas leis da República Federativa do Brasil. Fica eleito o foro da comarca da capital do Estado de São Paulo para resolver qualquer controvérsia decorrente do uso do site, salvo disposição legal em sentido diferente, como os direitos do consumidor.
+      </p>
+    )
+  }
+];
 
 export default function TermsOfUsePage() {
-  const currentDate = new Date().toLocaleDateString("pt-BR");
-
   return (
-    <div className="w-full py-16 md:py-24 bg-white relative">
-      <div className="absolute inset-0 bg-dot-grid pointer-events-none opacity-40"></div>
-
-      <div className="max-w-3xl mx-auto px-6 relative z-10 text-slate-600 leading-relaxed text-sm">
-        <h1 className="text-3xl font-bold tracking-tight text-brand-950 mb-2">
-          Termos de Uso
-        </h1>
-        <p className="text-xs text-slate-400 mb-8">Última atualização: {currentDate}</p>
-
-        <div className="flex flex-col gap-6">
-          <p>
-            Bem-vindo ao site da <strong>MENOS</strong>. Ao acessar e utilizar este website, você concorda em cumprir e estar vinculado aos seguintes termos de uso. Por favor, leia com atenção.
-          </p>
-
-          <h2 className="text-lg font-bold text-brand-950 mt-4">1. Uso do Site</h2>
-          <p>
-            Este site tem como objetivo apresentar o estúdio criativo MENOS, suas soluções em tecnologia, portfólio de projetos, parceiros e possibilitar a realização de contatos comerciais para diagnóstico de software. Você concorda em utilizar este espaço de forma ética, lícita e de acordo com as leis vigentes.
-          </p>
-
-          <h2 className="text-lg font-bold text-brand-950 mt-4">2. Propriedade Intelectual</h2>
-          <p>
-            Todo o conteúdo deste site (textos, design visual, logotipos, ilustrações, códigos e animações) é de propriedade exclusiva da MENOS ou de seus licenciadores, estando protegido pelas leis brasileiras de direitos autorais e propriedade intelectual. É proibida a cópia, reprodução ou distribuição não autorizada deste conteúdo sem autorização prévia por escrito.
-          </p>
-          <p>
-            Os nomes, logotipos e marcas de parceiros e clientes expostos neste site pertencem a seus respectivos titulares e são exibidos para ilustrar nossa rede de atuação conjunta de forma estritamente referencial.
-          </p>
-
-          <h2 className="text-lg font-bold text-brand-950 mt-4">3. Limitação de Responsabilidade</h2>
-          <p>
-            A MENOS envida esforços contínuos para manter o conteúdo do site atualizado e livre de erros técnicos. No entanto, não garantimos que o site estará disponível de forma ininterrupta, livre de vírus ou instabilidades de rede. O site é fornecido no estado em que se encontra, sem garantias implícitas adicionais.
-          </p>
-
-          <h2 className="text-lg font-bold text-brand-950 mt-4">4. Envio de Informações</h2>
-          <p>
-            Ao enviar informações pelo formulário de diagnóstico ou WhatsApp, você garante que os dados fornecidos são verdadeiros, precisos e não violam direitos de terceiros. Você é responsável por manter a confidencialidade de eventuais segredos comerciais de sua própria empresa ao nos detalhar um problema na etapa inicial de triagem.
-          </p>
-
-          <h2 className="text-lg font-bold text-brand-950 mt-4">5. Legislação e Foro</h2>
-          <p>
-            Estes termos de uso são regidos pelas leis da República Federativa do Brasil. Fica eleito o foro da comarca da capital do estado de São Paulo, sede do estúdio MENOS, para dirimir eventuais controvérsias decorrentes da utilização deste site.
-          </p>
-        </div>
-      </div>
-    </div>
+    <LegalDocument
+      eyebrow="Condições de uso"
+      title="Termos de Uso"
+      updatedAt="15 de outubro de 2026"
+      summary={[
+        "O site é institucional: apresenta a MENOS, seus serviços e projetos.",
+        "O conteúdo, a marca e o código são da MENOS e não podem ser copiados sem autorização.",
+        "Valores, prazos e escopo de um trabalho só valem em proposta ou contrato próprio.",
+        "O tratamento dos seus dados segue a Política de Privacidade."
+      ]}
+      sections={sections}
+      other={{ label: "Ler a Política de Privacidade", href: "/privacidade" }}
+    />
   );
 }

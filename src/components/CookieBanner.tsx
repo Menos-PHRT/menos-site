@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { Button } from "./ui/Button";
 
@@ -32,8 +33,8 @@ export const CookieBanner: React.FC = () => {
           <h4 className="text-sm font-semibold text-brand-950">Uso de Cookies & LGPD</h4>
           <p className="text-xs text-slate-500 leading-relaxed">
             Usamos cookies para melhorar sua experiência em nosso site. Ao navegar, você concorda com nossos{" "}
-            <a href="/termos" className="text-brand-600 underline">Termos de Uso</a> e nossa{" "}
-            <a href="/privacidade" className="text-brand-600 underline">Política de Privacidade</a>.
+            <Link href="/termos" className="text-brand-600 underline">Termos de Uso</Link> e nossa{" "}
+            <Link href="/privacidade" className="text-brand-600 underline">Política de Privacidade</Link>.
           </p>
         </div>
         <div className="flex items-center gap-3 justify-end">

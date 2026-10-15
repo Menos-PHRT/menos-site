@@ -108,6 +108,20 @@ body {
   -webkit-backdrop-filter: blur(12px);
 }
 
+/* Intro já vista há pouco: o overlay nem chega a aparecer (ver layout.tsx). */
+html[data-intro-seen] [data-intro-overlay] {
+  display: none !important;
+}
+
+/* iOS dá zoom automático em campos com fonte menor que 16px */
+@media (max-width: 640px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
+}
+
 /* Focus styles for accessibility */
 *:focus-visible {
   outline: 2px solid var(--accent);

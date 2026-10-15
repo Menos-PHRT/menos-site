@@ -1,11 +1,11 @@
 "use client";
-
+// Como trabalhamos: passos do método e perguntas comuns.
+// Seção da página /a-menos (antes era uma página própria).
 import { motion } from "framer-motion";
 import React from "react";
-import { HelpCircle, Check, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import { HelpCircle } from "lucide-react";
 
-export default function HowWeWorkPage() {
+export default function HowWeWork() {
   const steps = [
     {
       num: "01",
@@ -68,18 +68,15 @@ export default function HowWeWorkPage() {
   ];
 
   return (
-    <div className="w-full py-16 md:py-24 bg-white relative">
-      <div className="absolute inset-0 bg-dot-grid pointer-events-none opacity-40"></div>
-
-      <div className="max-w-4xl mx-auto px-6 relative z-10">
-        {/* Header */}
+    <section id="como-trabalhamos" className="scroll-mt-32 border-t border-slate-100 pt-16 mb-20">
+      {/* Header */}
         <div className="mb-16">
           <span className="text-xs font-semibold text-brand-600 uppercase tracking-widest mb-3 block">
             Método MENOS
           </span>
-          <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-brand-950 leading-tight">
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-brand-950 leading-tight">
             Clareza antes, durante e depois do desenvolvimento.
-          </h1>
+          </h2>
           <p className="text-slate-500 mt-4 text-sm md:text-base font-light leading-relaxed">
             Não gostamos de surpresas ou cronogramas confusos. Criamos um processo transparente que coloca você no controle de cada etapa da simplificação digital.
           </p>
@@ -139,23 +136,6 @@ export default function HowWeWorkPage() {
             ))}
           </div>
         </section>
-
-        {/* CTA */}
-        <motion.div
-          initial={false}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="p-8 md:p-12 rounded-3xl bg-slate-50 border border-slate-100 text-center flex flex-col items-center gap-6"
-        >
-          <h3 className="text-2xl font-bold text-brand-950">Vamos simplificar seu processo?</h3>
-          <p className="text-slate-500 max-w-md text-sm leading-relaxed">
-            Podemos começar por um diagnóstico gratuito. Agende uma conversa com nosso estúdio e traga seu problema.
-          </p>
-          <Button href="/contato" variant="primary">
-            Conte seu problema <ArrowRight className="h-4 w-4 ml-1" />
-          </Button>
-        </motion.div>
-      </div>
-    </div>
+    </section>
   );
 }

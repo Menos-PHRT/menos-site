@@ -51,7 +51,7 @@ export default async function ProjectSlugPage({ params }: ProjectPageProps) {
         {/* Back Link */}
         <Link
           href="/projetos"
-          className="inline-flex items-center gap-2 text-xs font-semibold text-slate-400 hover:text-brand-950 uppercase tracking-wider mb-10 transition-colors"
+          className="inline-flex items-center gap-2 min-h-11 text-xs font-semibold text-slate-500 hover:text-brand-950 uppercase tracking-wider mb-6 transition-colors"
         >
           <ArrowLeft className="h-4 w-4" /> Voltar para projetos
         </Link>

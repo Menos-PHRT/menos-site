@@ -14,6 +14,12 @@ export default function ContactPage() {
       href: "mailto:menos.lab@gmail.com"
     },
     {
+      icon: <Mail className="h-5 w-5 text-brand-600" />,
+      label: "E-mail do Robert",
+      value: "robert@menosdev.com",
+      href: "mailto:robert@menosdev.com"
+    },
+    {
       icon: <MessageSquare className="h-5 w-5 text-brand-600" />,
       label: "WhatsApp Business",
       value: "+55 (11) 95291-7968",
@@ -22,7 +28,7 @@ export default function ContactPage() {
     {
       icon: <Compass className="h-5 w-5 text-brand-600" />,
       label: "Prazo de Resposta",
-      value: "Em até 1 hora",
+      value: "Em até 15 minutos",
       href: null
     }
   ];

@@ -272,3 +272,15 @@ O Paulo mandou um segundo zip com código React pronto das animações da marca 
   3. Menu visível a partir de 1024px (`lg:` do Tailwind, padrão).
   4. `<BrandIntro />` montado em `src/app/layout.tsx`, dentro do `<body>`, antes do `<Header />`.
 - **Ainda em aberto**: a intro de tela cheia (`BrandIntro`) e agora também o `HeaderLogo` (não tem mais o gate) puxam a animação de verdade só se `prefers-reduced-motion` estiver desligado. Não foi possível testar isso ao vivo nesta sessão porque o navegador de teste está com essa preferência ativada o tempo todo. Pedido ao Paulo para conferir no próprio sistema.
+
+### Rodada 10 (15/10/2026): intro uma vez, estrutura do site, 5 serviços, logo reverso, páginas legais, responsividade
+Mesmas decisões da v3 (`redesign-visual-v3`, rodadas 11 e 12 de lá), aplicadas aqui por pedido do Paulo. Detalhes completos na documentação da v3.
+
+- **Intro só na primeira entrada**: [IntroGate.tsx](src/components/brand/IntroGate.tsx) grava a hora em `localStorage` (`menos-intro-seen`); por 30 min a intro não repete (trocar de página, recarregar, outra aba). Script no `<head>` do [layout.tsx](src/app/layout.tsx) esconde o overlay antes da primeira pintura. `?intro=1` força de novo.
+- **Estrutura**: menu Serviços (submenu com os 5), Cases, Contato, A MENOS (submenu). "Como trabalhamos" e "Parceiros" viraram seções de `/a-menos` (rotas antigas com 301).
+- **Serviços**: 9 → 5 (`camadas-agenticas`, `sistemas-internos`, `plataformas-digitais`, `sites-institucionais`, `aplicativos-mobile`), com 301 para os removidos.
+- **Logo**: completo em repouso, recolhe para o símbolo no hover.
+- **/privacidade e /termos**: refeitas como documentos legais (resumo, índice, seções numeradas). Texto precisa de revisão jurídica.
+- **Pessoas**: Paulo Henrique removido de `/a-menos`; entra Samuel Barbosa. E-mail novo robert@menosdev.com em `/contato` e no rodapé.
+- **Responsividade**: alvos de toque de 44px, `svh` no hero, rótulos de 11px, campos de 16px no celular.
+- **Diferença da v3**: esta branch não tem a camada de movimento da v8 (cursor, rolagem suave, tema automático do cabeçalho); o cabeçalho aqui é estático.

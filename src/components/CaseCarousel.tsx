@@ -96,7 +96,7 @@ export const CaseCarousel: React.FC<CaseCarouselProps> = ({ projects }) => {
                     <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#27c93f", flexShrink: 0 }} />
                     <span style={{ font: "11px ui-monospace, monospace", color: "#8FA9A3", marginLeft: 10, whiteSpace: "nowrap" }}>Ambiente Protegido</span>
                   </div>
-                  <span style={{ font: "10px ui-monospace, monospace", color: "#8FA9A3", textTransform: "uppercase", letterSpacing: ".1em", whiteSpace: "nowrap" }}>
+                  <span style={{ font: "11px ui-monospace, monospace", color: "#8FA9A3", textTransform: "uppercase", letterSpacing: ".1em", whiteSpace: "nowrap" }}>
                     {project.gallery ? `${project.gallery.length} telas` : "Sistema"}
                   </span>
                 </div>
@@ -131,7 +131,7 @@ export const CaseCarousel: React.FC<CaseCarouselProps> = ({ projects }) => {
                     {project.keyMetrics.map((metric, mi) => (
                       <div key={mi} style={{ display: "flex", flexDirection: "column", gap: 1, padding: "8px 12px", borderRadius: 10, background: "#F6F8F7", border: "1px solid #E3EAE8", minWidth: 108 }}>
                         <span style={{ fontSize: 15, fontWeight: 700, color: "#143C3C", lineHeight: 1.1 }}>{metric.value}</span>
-                        <span style={{ fontSize: 10, color: "#8A9A97", lineHeight: 1.3 }}>{metric.label}</span>
+                        <span style={{ fontSize: 11, color: "#8A9A97", lineHeight: 1.3 }}>{metric.label}</span>
                       </div>
                     ))}
                   </div>
@@ -155,7 +155,7 @@ export const CaseCarousel: React.FC<CaseCarouselProps> = ({ projects }) => {
 
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
                   {project.techStack.slice(0, 6).map((tech) => (
-                    <span key={tech} style={{ font: "10px ui-monospace, monospace", color: "#4E5F5D", background: "#F6F8F7", border: "1px solid #E3EAE8", padding: "3px 8px", borderRadius: 999 }}>{tech}</span>
+                    <span key={tech} style={{ font: "11px ui-monospace, monospace", color: "#4E5F5D", background: "#F6F8F7", border: "1px solid #E3EAE8", padding: "3px 8px", borderRadius: 999 }}>{tech}</span>
                   ))}
                 </div>
 
@@ -189,7 +189,7 @@ export const CaseCarousel: React.FC<CaseCarouselProps> = ({ projects }) => {
                   transition: "all .3s"
                 }}
               >
-                <span style={{ font: "10px ui-monospace, monospace", color: on ? "#8CD9D9" : "#A7B9B5" }}>{`0${i + 1}`}</span>
+                <span style={{ font: "11px ui-monospace, monospace", color: on ? "#8CD9D9" : "#A7B9B5" }}>{`0${i + 1}`}</span>
                 {project.shortName ?? project.name}
               </button>
             );
