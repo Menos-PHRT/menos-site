@@ -216,7 +216,7 @@ export default function AboutPage() {
               </div>
             </div>
 
-            {/* Samuel Barbosa (sem foto e sem bio por enquanto) */}
+            {/* Samuel Barbosa (sem foto por enquanto) */}
             <div className="flex flex-col gap-6">
               <div className="flex items-center gap-4">
                 <div className="h-20 w-20 md:h-24 md:w-24 rounded-full bg-brand-950 text-white font-bold flex flex-col items-center justify-center border-2 border-slate-200 shadow-sm shrink-0">
@@ -229,6 +229,15 @@ export default function AboutPage() {
                     Equipe MENOS
                   </p>
                 </div>
+              </div>
+
+              <div className="flex flex-col gap-3 text-slate-600 leading-relaxed text-sm">
+                <p>
+                  Formado em Sistemas de Informação pela Universidade de São Paulo (USP), Samuel Barbosa construiu sua experiência em computação a partir de bolsas e da participação em diversos projetos de tecnologia.
+                </p>
+                <p>
+                  Já atuou como funcionário da Oracle, no setor de tecnologia.
+                </p>
               </div>
             </div>
           </div>
